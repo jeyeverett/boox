@@ -91,8 +91,8 @@ app.use(
 
 //MONGOOSE SETUP
 const mongoose = require('mongoose');
-const dbURL = 'mongodb://localhost:27017/westcoastcamping';
-// process.env.MONGO_URL
+const dbURL = process.env.MONGO_URL || 'mongodb://localhost:27017/westcoastcamping';
+
 mongoose.connect(dbURL, 
     {
         useNewUrlParser: true, 
