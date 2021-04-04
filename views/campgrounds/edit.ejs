@@ -1,0 +1,67 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <div class="card shadow mt-1 mb-4">
+    <h1 class="text-center mt-2">Edit Campground</h1>
+        <div class="col-md-6 offset-md-3"> <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side-->
+            <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="mb-2">
+                    <label class="form-label" for="title">Title: </label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" value="<%= campground.title %>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label" for="location">Location: </label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" value="<%= campground.location %>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="price">Campground Price: </label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">$</span>
+                        <input type="text" class="form-control" value="<%= campground.price %>" id="price" name="campground[price]" aria-label="Price" aria-describedby="price-label" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description: </label>
+                    <textarea class="form-control" type="text" id="description" name="campground[description]" required><%= campground.description %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <!-- Below we set up an input for multiple image upload - note the 'multiple' attribute -->
+                <div class="mb-3">
+                    <div class="form-file custom-file">
+                        <input type="file" class="form-file-input" id="image" name="image" multiple>
+                        <label class="form-file-label" for="image">
+                            <span class="form-file-text custom-file-label">Add image(s)...</span>
+                            <span class="form-file-button">Browse</span>
+                        </label>
+                    </div>
+                </div>
+                <!-- The div below describes how we will show existing images and allow for their deletion note that we use the array index to link the label with the input and we use the image.filename as the value for the input to help us delete the image from cloudinary - note that the deleteImages[] in the name field will hold all/any of the deleted image paths in an array which we can then use to delete them from cloudinary, also note that we had to add the deleteImages array to the Joi Schema for campground - Note that image.thumbnail uses a virtual property (defined in the campground model file)-->
+                <div class="mb-3">
+                    <% campground.images.forEach((image, index) => { %> 
+                        <img src="<%= image.thumbnail %> " class="img-thumbnail" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%= index %>" name="deleteImages[]" value="<%= image.filename %>">
+                        </div>
+                        <label for="image-<%= index %>">Delete</label>
+                    <% }) %> 
+                </div>        
+                <div class="mb-3">
+                    <button class="btn btn-info">Update Campground</button>
+                </div>
+                <a class="btn btn-danger mb-3" href="/campgrounds/<%= campground._id %>">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

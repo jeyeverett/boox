@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate') %> <!-- This is an improvement on setting up our EJS templates, it allows us to create one 'boilerplate' template which we can use with all other templates -->
+<style>
+    /* body {
+        background-image: url('/images/leaves.png');
+    } */
+</style>
+
+<div class="indexPage">
+    <h2 class="mb-4">Browse All Campgrounds</h2>
+    
+    <% for (let campground of campgrounds) { %>
+        <div class="card cardHeight mb-3">
+            <div class="row">
+                <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                 <div class="indexImage" style="background-image: url('<%= campground.images[0].url %>')">
+                        <% if (campground.images.length) { %> 
+                            <img class="img-fluid" src="<%= campground.images[0].url %>" alt="Campground Image">
+                        <% } else { %> 
+                            <img class="img-fluid" src="https://res.cloudinary.com/dnpfrwpiq/image/upload/v1605724476/westcoastcamping/j7sdazjervm3vj1ykggn.jpg" alt="Campground Image">
+                        <% } %> 
+                 </div>
+                </div>
+                <div class="col-lg-8 d-flex align-items-center"">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= campground.title %> </h5>
+                        <p class="card-text"><%= campground.description %> </p>
+                        <p><small class="text-muted"><%= campground.location %> </small></p>
+                        <a class="btn btn-dark btn-tertiary" href="/campgrounds/<%= campground._id %>">View: <%= campground.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %> 
+</div>
+
+<div class="backToTop"><a class="link" href="#">🠕</a></div>
+

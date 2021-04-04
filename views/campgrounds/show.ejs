@@ -1,0 +1,115 @@
+<% layout('layouts/boilerplate') %>
+<!-- We should probably put this link tag in the head of the boilerplate, but this will work ok -->
+<link rel="stylesheet" href="/stylesheets/stars.css">
+
+<!-- Note that the default card from bootstrap sets a fixed width, whereas we are using a grid system -->
+<div class="row mb-4">
+    <div class="col-lg-4 offset-lg-2">
+        <!-- Below we insert our mapbox map -->
+        <div id="campgroundCarousel" class="carouselCustom carousel slide" data-ride="carousel" data-interval="false">
+            <div class="carousel-inner">
+                <% campground.images.forEach((image, index) => { %> 
+                <div class="carousel-item <%= index === 0 ? "active" : "" %>">
+                    <img src="<%= image.url %>" class="d-block w-100" alt="">
+                </div>
+                <% }); %> 
+            </div>
+            <% if (campground.images.length > 1) { %>
+                <a class="carousel-control-prev" href="#campgroundCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#campgroundCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+                </a>
+            <% } %>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= campground.title %></h5>
+              <p class="card-text"><%= campground.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item text-muted"><%= campground.location %></li>
+              <li class="list-group-item">$<%= campground.price %>/night</li>
+            </ul>
+            <!--Below we use the .equals method to compare the campground author with the current user-->
+            <% if (currentUser && campground.author.equals(currentUser._id)) { %>
+                <div class="card-body">
+                    <a class="card-link btn btn-dark" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                    <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            <% } %>
+            <div class="card-footer text-muted">
+                Submitted by: <%= campground.author.username %>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div id='map' class="mapShow mb-3"></div>
+
+        <% if (campground.reviews !== []) { %> 
+        <h2 class="mb-2 text-center">Leave a Review</h2>
+            <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-4 needs-validation" novalidate>
+                <fieldset class="starability-basic m-auto" id="rating">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+                <div class="mb-3">
+                    <label class="form-label" for="body">Comments:</label>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="7" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <button class="btn btn-success btn-block">Submit</button>
+            </form>        
+        <% } %>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <% for (let review of campground.reviews) { %> 
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><%= review.author.username %></h5>
+                    <p class="starability-result" data-rating="<%= review.rating %>">
+                        Rated: <%= review.rating %> stars
+                    </p>
+                    <p class="card-text"><%= review.body %></p>
+                </div>
+                <% if (currentUser && review.author.equals(currentUser._id)) { %>
+                    <div class="card-body">
+                        <a class="card-link btn btn-sm btn-dark" href="#">Edit</a>
+                        <form class="d-inline" action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </div>
+                <% } %> 
+            </div>
+        <% } %> 
+    </div>
+</div>
+
+<!-- We need to use the script below so we can access the mapToken in the showPageMap.js file -->
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const campground = <%- JSON.stringify(campground) %>;
+</script>
+<!-- Note, the campground declaration in the script above was causing issues so I had to add the following to the JSON.settings file: "html.validate.scripts": false -->
+
+<script src="/javascripts/showPageMap.js"></script>
+
