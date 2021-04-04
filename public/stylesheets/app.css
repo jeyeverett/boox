@@ -76,7 +76,7 @@
     cursor: pointer;
 }
 
-.link {
+.link, .link:visited {
     color:rgba(0, 0, 0, 0.2);
     text-decoration: none;
     transition: color .2s;
