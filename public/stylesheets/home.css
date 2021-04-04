@@ -19,6 +19,13 @@ body {
     border-bottom: 0.1rem solid transparent;
 }
 
+
+@media only screen and (max-width: 400px) {
+    .nav-link {
+        font-size: .9rem;
+    }
+}
+
 .nav-link:hover{
     color: rgba(255,255,255,0.5);
     border-bottom-color:rgba(255,255,255,0.5);
@@ -49,4 +56,8 @@ body {
     min-height: 100%;
     position: absolute;
     z-index: -1;
+}
+
+.home-button {
+    display: none;
 }

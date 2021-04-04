@@ -11,12 +11,12 @@
 </head>
 
 <body class="d-flex text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" id="header-container">
         <header class="mb-auto">
             <div>
                 <h3 class="float-md-left mb-0">Coast2CoastCamping</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#" id="home-button">Home</a>
                     <a class="nav-link" href="/campgrounds/map">Map</a>
                     <a class="nav-link" href="/campgrounds">Campgrounds</a>
                     <% if(!currentUser) { %>
@@ -48,6 +48,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
         integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
         crossorigin="anonymous"></script>
+    <script>
+        let container = document.getElementById('header-container');
+        let homeButton = document.getElementById('home-button');
+        
+        const resizeFunc = function () {
+            if (window.screen.width < 650) {
+                container.classList.remove('cover-container');
+                homeButton.classList.add('home-button');
+            } else if (window.screen.width >= 650) {
+                container.classList.add('cover-container');
+                homeButton.classList.remove('home-button');
+            }
+        }
+
+        window.addEventListener('resize', resizeFunc);
+
+        if (window.screen.width < 650) {
+            container.classList.remove('cover-container');
+            homeButton.classList.add('home-button');
+        }
+
+    </script>
 </body>
 
 </html>
