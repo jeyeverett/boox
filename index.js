@@ -163,13 +163,6 @@ app.use('/campgrounds/:id/reviews', reviewRoutes);
 const userRoutes = require('./routes/users');
 app.use('/', userRoutes);
 
-//PASSPORT EXAMPLE ROUTES
-// app.get('/fakeUser', async (req, res) => {
-//     const user = new User({email: 'meow@gmail.com', username: 'Meow'});
-//     const newUser = await User.register(user, 'chicken'); //register is a Passport method used to create a new user instance with a given password (checks if user is unique)
-//     res.send(newUser);
-// });
-
 //ERROR HANDLING
 //We add this to the end of our routes to handle unknown routes
 app.use('*', (req, res, next) => {
@@ -182,6 +175,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 });
 
+//We create the port variable because Heroku will use its own determined port, we use 3000 for development
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`WWC Server Initiated on Port ${port}`);
