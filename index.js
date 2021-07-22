@@ -19,7 +19,7 @@ const methodOverride = require('method-override');
 //express-session allows us to set up sessions with our app - this provides statefulness between http requests
 const session = require('express-session');
 //connect-flash lets us setup flash messages - note that it depends on session middleware and will create a field in the session as required
-const MongoDBStore = require('connect-mongo')(session);
+const MongoDBStore = require('connect-mongo');
 const flash = require('connect-flash');
 //Passport provides all the user login support we need - note that Passport doesn't use bcrypt, instead it uses Pbkdf2 which is platform independent
 const passport = require('passport');
@@ -114,8 +114,8 @@ mongoose
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
 //If we are using Mongo for our session store we do the following:
-const store = new MongoDBStore({
-  url: dbURL,
+const store = MongoDBStore.create({
+  mongoUrl: dbURL,
   secret,
   touchAfter: 24 * 60 * 60,
 });
