@@ -25,8 +25,6 @@ module.exports.create = async (req, res, next) => {
 
 //LOGIN FORM
 module.exports.renderLoginForm = (req, res) => {
-    console.log(req.session);
-
     res.render('users/login');
 }
 

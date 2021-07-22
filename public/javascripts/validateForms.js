@@ -11,13 +11,12 @@
     // create any array of form elements and loop over them
     Array.from(forms)
         .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-            }
-
-            form.classList.add('was-validated');
-        }, false)
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false)
         })
     })()

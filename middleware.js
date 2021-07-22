@@ -5,7 +5,7 @@ const ExpressError = require('./utilities/ExpressError');
 
 //This middleware function checks to see if the current user is logged in - if they aren't they are redirect to the /login page before they are redirected back to the page they were trying to access
 module.exports.isLoggedIn = (req, res, next) => {
-    // console.log('req.user is:', req.user); //Passport creates the user field on the req object which allows us to easily check what user is currently logged in / using the website
+    // console.log('req.user is:', req.user); //Passport creates the user field on the req object which allows us to easily check what user is currently logged in
     if (!req.isAuthenticated()) {
         // console.log(req.path, req.originalUrl); //we use this to check where the user is trying to go
         req.session.returnTo = req.originalUrl; //returnTo is a custom field we created to store a url we may need to redirect to (i.e. if a user tries to access a page they need to be logged in for, they will be redirected to that page after logging in)

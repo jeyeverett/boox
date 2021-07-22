@@ -47,7 +47,7 @@ const CampgroundSchema = new Schema({
     ]
 }, opts);
 
-//Below we create a virtual so we can conform to the Mapbox standard and be able to display our campground info on the map - it will look for this information under the properties key, and because this isn't in our model we need to make it specially for this case, but we already have the info we need in our model, we just need to put it under a properties key, therefore we do it as follows
+//Below we create a virtual so we can conform to the Mapbox standard and be able to display our campground info on the map - it will look for this information under the properties key, and because this isn't in our model we need to make it specially for this case. We already have the info we need in our model, we just need to put it under a properties key, therefore we do it as follows
 CampgroundSchema.virtual('properties.mapsPopUp').get(function () {
     let imageSrc;
     if (this.images.length) {

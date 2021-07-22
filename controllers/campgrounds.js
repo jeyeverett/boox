@@ -36,14 +36,12 @@ module.exports.create = async (req, res, next) => {
     }).send();
     //Below we attach the geo info onto our campground.geo field
     req.body.campground.geometry = geoData.body.features[0].geometry;
-    console.log(req.body.campground.geometry);
     // if (!req.body.campground) throw new ExpressError('Invalid campground data.', 400); //this was the first method we used to handle errors, before we created the validateCampground function
     const newCampground = new Campground(req.body.campground);
     //Below we map over the files array using implicit return {} to store objects with key-value pairs (url and filename) in the newCampground images array
     newCampground.images = req.files.map(file => ({url: file.path, filename: file.filename}));
     newCampground.author = req.user._id; //This is how we associate a campground with a user - note that req.user is automatically added by passport
     await newCampground.save();
-    console.log(newCampground);
     req.flash('success', 'Successfully created a new campground!');
     res.redirect(`/campgrounds/${newCampground._id}`);
 }
