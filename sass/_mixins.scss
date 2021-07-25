@@ -1,0 +1,58 @@
+/*
+MEDIA QUERY MANAGER
+0  600px:       Phone               phone
+600 - 900px:    Tablet portrait     tab-port
+900 - 1200px:   Tablet Landscape    tab-land
+1200 - 1800px:  Default             
+1800px+:        XL                  desktopXL
+
+Note that we use ems in media queries, not rems, because rems have unexpected issues when used in media queries
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media only screen and (max-width: 25em) {
+      @content;
+    } //400px
+  }
+
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+
+  @if $breakpoint == phone-xl {
+    @media only screen and (max-width: 43.75em) {
+      @content;
+    } //700px
+  }
+
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 62em) {
+      @content;
+    } //992px
+  }
+
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+
+  @if $breakpoint == custom {
+    @media only screen and (max-width: 85em) {
+      @content;
+    } // < 1360px
+  }
+
+  @if $breakpoint == desktopXL {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800px+
+  }
+}

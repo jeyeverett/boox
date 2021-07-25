@@ -1,20 +1,17 @@
-#custom-navbar {
-  background-color: rgba(26, 74, 160, 0.9);
-}
+/*
+MEDIA QUERY MANAGER
+0  600px:       Phone               phone
+600 - 900px:    Tablet portrait     tab-port
+900 - 1200px:   Tablet Landscape    tab-land
+1200 - 1800px:  Default             
+1800px+:        XL                  desktopXL
 
-#custom-btn {
-  background-color: #1378a9;
-}
+Note that we use ems in media queries, not rems, because rems have unexpected issues when used in media queries
 
-#custom-brand-name {
-  font-family: "Comfortaa", cursive;
-  color: white;
-}
+ORDER: Base + typography > general layout + grid > page layout > components
 
-div a.dropdown-toggle::after {
-  display: none;
-}
-
+1em = 16px
+*/
 #home-page {
   height: 100vh;
   background-image: url("../images/bookstack.jpg");
@@ -66,13 +63,108 @@ div a.dropdown-toggle::after {
   transform: translateY(-1px);
 }
 
-.mapHome {
-  width: 100%;
-  min-height: 100%;
-  position: absolute;
-  z-index: -1;
+.home-button {
+  display: none;
 }
 
-.home-button {
+.mapShow {
+  width: 100%;
+  height: 250px;
+}
+
+.map-cluster {
+  width: 100%;
+  height: calc(100vh - 65px - 56px);
+  position: absolute;
+  top: 65px;
+  left: 0px;
+}
+
+.indexImage {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 278px;
+}
+
+.carouselCustom {
+  display: flex;
+  align-items: bottom;
+  max-height: 250px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .cardHeight {
+    max-height: 100%;
+  }
+}
+@media (max-width: 992px) {
+  .carouselCustom {
+    display: flex;
+    align-items: center;
+    max-height: 340px;
+    overflow: hidden;
+    position: center;
+  }
+}
+.customBackground {
+  background-color: rgba(26, 74, 160, 0.9);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.footer {
+  z-index: 1020;
+}
+
+.btn-tertiary,
+.btn-tertiary:hover {
+  transition: all 0.2s;
+}
+
+.btn-tertiary:hover {
+  transform: translateY(-3px);
+}
+
+.btn-tertiary:active {
+  transform: translateY(-1px);
+}
+
+.backToTop {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.link,
+.link:visited {
+  color: rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+#custom-navbar {
+  background-color: rgba(26, 74, 160, 0.9);
+}
+
+#custom-btn {
+  background-color: #1378a9;
+}
+
+#custom-brand-name {
+  font-family: "Comfortaa", cursive;
+  color: white;
+}
+
+div a.dropdown-toggle::after {
   display: none;
 }
