@@ -111,12 +111,8 @@ ORDER: Base + typography > general layout + grid > page layout > components
     position: center;
   }
 }
-.customBackground {
-  background-color: rgba(26, 74, 160, 0.9);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 .footer {
+  background-color: rgba(26, 74, 160, 0.9);
   z-index: 1020;
 }
 
@@ -162,6 +158,14 @@ ORDER: Base + typography > general layout + grid > page layout > components
 
 #custom-brand-name {
   font-family: "Comfortaa", cursive;
+  color: white;
+}
+
+#custom-pagination li a {
+  color: #1a4aa0;
+}
+#custom-pagination li a.active-page {
+  background-color: rgba(26, 74, 160, 0.5);
   color: white;
 }
 

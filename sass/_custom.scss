@@ -11,6 +11,20 @@
   color: $color-white;
 }
 
+#custom-pagination {
+  li {
+    a {
+      color: $color-primary;
+
+      &.active-page {
+        background-color: rgba($color-primary, 0.5);
+        color: $color-white;
+      }
+    }
+  }
+}
+
+// Hide default bootstrap caret for user dropdown
 div {
   a {
     &.dropdown-toggle {
