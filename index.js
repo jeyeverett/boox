@@ -56,6 +56,7 @@ const scriptSrcUrls = [
 const styleSrcUrls = [
   'https://kit-free.fontawesome.com/',
   'https://stackpath.bootstrapcdn.com/',
+  'https://cdn.jsdelivr.net',
   'https://api.mapbox.com/',
   'https://api.tiles.mapbox.com/',
   'https://fonts.googleapis.com/',
@@ -66,7 +67,10 @@ const connectSrcUrls = [
   'https://*.tiles.mapbox.com/',
   'https://events.mapbox.com/',
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = [
+  'https://fonts.googleapis.com',
+  'https://fonts.gstatic.com',
+];
 
 app.use(
   helmet.contentSecurityPolicy({
@@ -84,6 +88,8 @@ app.use(
         'data:',
         'https://res.cloudinary.com/dnpfrwpiq/',
         'https://images.unsplash.com/',
+        'https://github.com/mdo.png',
+        'https://avatars.githubusercontent.com/u/98681',
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
     },
