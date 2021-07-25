@@ -1,0 +1,22 @@
+#custom-navbar {
+  background-color: rgba($color-primary, 0.9);
+}
+
+#custom-btn {
+  background-color: #1378a9;
+}
+
+#custom-brand-name {
+  font-family: 'Comfortaa', cursive;
+  color: $color-white;
+}
+
+div {
+  a {
+    &.dropdown-toggle {
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
