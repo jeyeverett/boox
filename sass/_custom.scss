@@ -1,12 +1,14 @@
 #custom-navbar {
   background-color: rgba($color-primary, 0.9);
+  &__logo {
+    margin: 0.5rem 0 0 0.5rem;
+    font-family: 'Comfortaa', cursive;
+    color: $color-white;
+  }
 }
 
-#custom-btn {
-  background-color: #1378a9;
-}
-
-#custom-brand-name {
+#homepage-logo {
+  margin: 0.5rem 0 0 0.5rem;
   font-family: 'Comfortaa', cursive;
   color: $color-white;
 }
@@ -25,12 +27,24 @@
 }
 
 // Hide default bootstrap caret for user dropdown
-div {
+#custom-dropdown {
   a {
     &.dropdown-toggle {
       &::after {
         display: none;
       }
+    }
+  }
+
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  z-index: 10000;
+
+  &__caret {
+    margin-left: -2px;
+    g {
+      fill: $color-primary;
     }
   }
 }

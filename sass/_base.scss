@@ -1,0 +1,30 @@
+html {
+  font-size: 100%; //1rem = 10px because 10px/16px = 62.5% (16px is the assumed default font-size)
+
+  @include respond(tab-land) {
+    //screen < 1200px?
+    font-size: 87.5%; //1rem = 9px because 9px/16px = 56.25%;
+  }
+
+  @include respond(tab-port) {
+    //screen 900px?
+    font-size: 75%; //1rem = 8px because 8px/16px = 50%;
+  }
+
+  @include respond(phone) {
+    //screen < 600px?
+    font-size: 68.75%; //1rem = 6px because 6px/16px = 37.5%;
+  }
+
+  @include respond(xs) {
+    //screen < 400px?
+    font-size: 62.5%; //1rem = 4px because 4px/16px = 25%;
+  }
+
+  @include respond(desktopXL) {
+    //screen > 1800px?
+    font-size: 100%; //1rem = 12px because 12px/16px = 75%
+  }
+
+  scroll-behavior: smooth;
+}
