@@ -29,7 +29,7 @@
 }
 
 @media (max-width: 768px) {
-  .cardHeight {
+  .card-height {
     max-height: 100%;
   }
 }
@@ -46,6 +46,7 @@
 
 .footer {
   background-color: rgba(26, 74, 160, 0.9);
+  color: rgba($color-white, 0.5);
   z-index: 1020;
 }
 

@@ -42,6 +42,24 @@ html {
   }
 }
 
+.primary-heading {
+  font-family: "Raleway", sans-serif;
+  font-size: 3rem;
+  color: #313639;
+  font-weight: 300;
+}
+
+.card-body {
+  font-family: "Raleway", sans-serif;
+}
+.card-body .card-heading h5 {
+  color: #313639;
+  font-weight: 600;
+}
+.card-body .card-text {
+  font-size: 0.875rem;
+}
+
 #home-page {
   height: 100vh;
   background-image: url("../images/bookstack.jpg");
@@ -158,7 +176,7 @@ html {
 }
 
 @media (max-width: 768px) {
-  .cardHeight {
+  .card-height {
     max-height: 100%;
   }
 }
@@ -173,6 +191,7 @@ html {
 }
 .footer {
   background-color: rgba(26, 74, 160, 0.9);
+  color: rgba(255, 255, 255, 0.5);
   z-index: 1020;
 }
 
@@ -206,6 +225,21 @@ html {
 
 .link:hover {
   color: rgba(0, 0, 0, 0.8);
+}
+
+.card .card-heading {
+  display: flex;
+  justify-content: space-between;
+}
+.card .card-heading .custom-fav-icon {
+  cursor: pointer;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-color: black;
+  color: transparent;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
 #custom-navbar {
@@ -245,4 +279,26 @@ html {
 }
 #custom-dropdown__caret g {
   fill: #1a4aa0;
+}
+
+.custom-button {
+  background-color: #1a4aa0;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(49, 54, 57, 0.4);
+  transition: all 0.2s;
+}
+.custom-button:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 0.75rem 1.25rem rgba(49, 54, 57, 0.4);
+}
+.custom-button:active, .custom-button:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 0.6rem 1.1rem rgba(49, 54, 57, 0.4);
+}
+
+.profile-head {
+  transform: translateY(5rem);
 }

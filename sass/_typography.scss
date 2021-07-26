@@ -1,0 +1,20 @@
+.primary-heading {
+  font-family: $secondary-font;
+  font-size: 3rem;
+  color: $color-black;
+  font-weight: 300;
+}
+.card-body {
+  font-family: $secondary-font;
+
+  .card-heading {
+    h5 {
+      color: $color-black;
+      font-weight: 600;
+    }
+  }
+
+  .card-text {
+    font-size: 0.875rem;
+  }
+}

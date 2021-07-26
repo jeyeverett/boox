@@ -1,19 +1,73 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const Review = require('./review');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-//We only add email to our schema because passport will automatically deal with the username and password fields
-const userSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    }
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
 });
 
-userSchema.plugin(passportLocalMongoose); //we use this along with the passport methods shown in the index.js file e.g:
-//e.g: passport.use(new localStrategy(User.authenticate())); 
-//e.g: passport.serializeUser(User.serializeUser()); 
+ImageSchema.virtual('thumbnail').get(function () {
+  return this.url.replace('/upload', '/upload/w_200');
+});
+
+//We only add email to our schema because passport will automatically deal with the username and password fields
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  profile: {
+    name: String,
+    bio: String,
+    images: [ImageSchema],
+    messages: [
+      {
+        sender: {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+        content: {
+          type: String,
+        },
+      },
+    ],
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Review',
+      },
+    ],
+    location: String,
+    geometry: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+  },
+});
+
+UserSchema.plugin(passportLocalMongoose); //we use this along with the passport methods shown in the index.js file e.g:
+//e.g: passport.use(new localStrategy(User.authenticate()));
+//e.g: passport.serializeUser(User.serializeUser());
 //e.g: passport.deserializeUser(User.deserializeUser());
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
+
+UserSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
+    await Review.deleteMany({
+      _id: {
+        $in: doc.reviews,
+      },
+    });
+  }
+});

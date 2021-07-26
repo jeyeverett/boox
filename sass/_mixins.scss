@@ -56,3 +56,13 @@ ORDER: Base + typography > general layout + grid > page layout > components
     } //1800px+
   }
 }
+
+@mixin button-animation-hover {
+  transform: translateY(-3px);
+  box-shadow: $box-shadow-grow;
+}
+
+@mixin button-animation-click {
+  transform: translateY(-1px);
+  box-shadow: $box-shadow-shrink;
+}
