@@ -1,9 +1,17 @@
 #custom-navbar {
   background-color: rgba($color-primary, 0.9);
-  &__logo {
-    margin: 0.5rem 0 0 0.5rem;
-    font-family: 'Comfortaa', cursive;
-    color: $color-white;
+  &__brand {
+    &--logo {
+      margin: 0.5rem 0 0 0.5rem;
+      font-family: 'Comfortaa', cursive;
+      color: $color-white;
+    }
+  }
+
+  &__links {
+    @include respond(tab-port) {
+      display: none;
+    }
   }
 }
 
@@ -40,6 +48,16 @@
   right: 1rem;
   top: 1rem;
   z-index: 10000;
+
+  @include respond(tab-port) {
+    right: 1rem;
+    top: 1.5rem;
+  }
+
+  @include respond(phone) {
+    right: 1rem;
+    top: 1.75rem;
+  }
 
   &__caret {
     margin-left: -2px;

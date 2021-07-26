@@ -245,10 +245,15 @@ html {
 #custom-navbar {
   background-color: rgba(26, 74, 160, 0.9);
 }
-#custom-navbar__logo {
+#custom-navbar__brand--logo {
   margin: 0.5rem 0 0 0.5rem;
   font-family: "Comfortaa", cursive;
   color: white;
+}
+@media only screen and (max-width: 62em) {
+  #custom-navbar__links {
+    display: none;
+  }
 }
 
 #homepage-logo {
@@ -273,6 +278,18 @@ html {
 }
 #custom-dropdown a.dropdown-toggle::after {
   display: none;
+}
+@media only screen and (max-width: 62em) {
+  #custom-dropdown {
+    right: 1rem;
+    top: 1.5rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  #custom-dropdown {
+    right: 1rem;
+    top: 1.75rem;
+  }
 }
 #custom-dropdown__caret {
   margin-left: -2px;

@@ -7,7 +7,7 @@ html {
   }
 
   @include respond(tab-port) {
-    //screen 900px?
+    //screen 992px?
     font-size: 75%; //1rem = 8px because 8px/16px = 50%;
   }
 
