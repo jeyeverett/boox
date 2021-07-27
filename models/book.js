@@ -29,8 +29,6 @@ const BookSchema = new Schema(
     language: String,
     genres: [String],
     pages: Number,
-    publisher: String,
-    firstPublishDate: String,
     coverImg: String,
     images: [ImageSchema],
     owner: {
@@ -69,10 +67,14 @@ BookSchema.virtual('properties.mapsPopUp').get(function () {
     imageSrc = this.coverImg ? this.coverImg : '';
   }
 
-  return `<img class="img-thumbnail" src=${imageSrc}>
-            <strong><a class="mx-auto" href="/books/${this._id}">${this.title}</a></strong>
-            <br>
-            <p class="mb-0 text-muted">${this.location}</p>`;
+  return `
+  <div class="d-flex flex-column">
+    <img class="img-thumbnail" style="height: 150px; width: auto;" src=${imageSrc}>
+    <strong>
+      <a class="mx-auto text-decoration-none mt-1" href="/books/${this._id}">${this.title}</a>
+    </strong>
+    <p class="mb-0 text-muted">${this.location}</p>
+  </div>`;
 });
 
 //Below we are going to set up middleware to delete all reviews associated with a book when we delete the book - note that we look up 'findByIdAndDelete' in the mongoose docs and it tells us that the middleware 'findOneAndDelete' will be triggered when we call it - since this is a 'post' middleware, we are doing something after the book has been deleted, but we still have access to the deleted book (doc)

@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="card">
-    <h1 class="text-center mt-2">Create A New Book</h1>
+    <h1 class="text-center mt-2 mb-4 primary-heading">Create A New Book</h1>
     <div class="col-md-6 offset-md-3">
       <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side - Note we've added the enctype="multipart/form-data" to allow for image uploads-->
       <form
@@ -13,7 +13,7 @@
         enctype="multipart/form-data"
       >
         <div class="mb-2">
-          <label class="form-label" for="title">Title: </label>
+          <label class="form-label" for="title">*Title: </label>
           <input
             class="form-control"
             type="text"
@@ -26,7 +26,20 @@
         </div>
 
         <div class="mb-2">
-          <label class="form-label" for="location">Location: </label>
+          <label class="form-label" for="author">*Author: </label>
+          <input
+            class="form-control"
+            type="text"
+            id="author"
+            name="book[author]"
+            placeholder="Book Author"
+            required
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="location">*Location: </label>
           <input
             class="form-control"
             type="text"
@@ -37,42 +50,64 @@
           />
           <div class="valid-feedback">Looks good!</div>
         </div>
-        <!-- <div class="mb-3">
-                    <label class="form-label" for="image">Image URL: </label>
-                    <input class="form-control" type="text" id="image" name="book[image]" placeholder="Book Image" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div> -->
+
         <div class="mb-2">
-          <label class="form-label" for="price">Book Price: </label>
-          <div class="input-group">
-            <span class="input-group-text" id="basic-addon1">$</span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="0.00"
-              id="price"
-              name="book[price]"
-              aria-label="Price"
-              aria-describedby="price-label"
-              required
-            />
-            <div class="valid-feedback">Looks good!</div>
-          </div>
+          <label class="form-label" for="genres">Genres: </label>
+          <input
+            class="form-control"
+            type="text"
+            id="genres"
+            name="book[genres]"
+            placeholder="e.g. fantasy, science-fiction, adventure, etc."
+          />
+          <div class="valid-feedback">Looks good!</div>
         </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="language">Language: </label>
+          <input
+            class="form-control"
+            type="text"
+            id="language"
+            name="book[language]"
+            placeholder="English"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label" for="pages">Number of Pages: </label>
+          <input
+            class="form-control"
+            type="number"
+            id="pages"
+            name="book[pages]"
+            placeholder="250"
+          />
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+                
         <div class="mb-3">
-          <label class="form-label" for="description">Description: </label>
+          <label class="form-label" for="description">*Summary: </label>
           <textarea
             class="form-control"
             type="text"
             id="description"
             name="book[description]"
-            placeholder="Description..."
+            placeholder="This single volume brings together all of Poe's stories and poems, and illuminates the diverse and multifaceted genius of one of the greatest and most influential figures in American literary history..."
             required
           ></textarea>
           <div class="valid-feedback">Looks good!</div>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="imageUrl">Cover Image URL: </label>
+          <input class="form-control" type="text" id="imageUrl" name="book[imageUrl]" placeholder="Enter a valid cover image url or upload multiple custom images below">
+          <div class="valid-feedback">
+              Looks good!
+          </div>
+        </div>
+
         <!-- Below we set up an input for multiple image upload - note the 'multiple' attribute -->
         <div class="mb-3">
           <div class="form-file custom-file">
