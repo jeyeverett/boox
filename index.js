@@ -90,6 +90,7 @@ app.use(
         'https://images.unsplash.com/',
         'https://github.com/mdo.png',
         'https://avatars.githubusercontent.com/u/98681',
+        'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/',
       ],
       fontSrc: ["'self'", ...fontSrcUrls],
     },
@@ -99,7 +100,7 @@ app.use(
 //MONGOOSE SETUP
 const mongoose = require('mongoose');
 //  process.env.MONGO_URL ||
-const dbURL = 'mongodb://localhost:27017/westcoastcamping';
+const dbURL = 'mongodb://localhost:27017/boox';
 
 mongoose
   .connect(dbURL, {
@@ -164,10 +165,10 @@ app.use((req, res, next) => {
 });
 
 //ROUTES SETUP
-const campgroundRoutes = require('./routes/campgrounds');
-app.use('/', campgroundRoutes);
+const bookRoutes = require('./routes/books');
+app.use('/', bookRoutes);
 const reviewRoutes = require('./routes/reviews');
-app.use('/campgrounds/:id/reviews', reviewRoutes);
+app.use('/books/:id/reviews', reviewRoutes);
 const userRoutes = require('./routes/users');
 app.use('/', userRoutes);
 

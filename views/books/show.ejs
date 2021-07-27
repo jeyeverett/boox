@@ -6,55 +6,63 @@
 <div class="row mb-4">
     <div class="col-lg-4 offset-lg-2">
         <!-- Below we insert our mapbox map -->
-        <div id="campgroundCarousel" class="carouselCustom carousel slide" data-ride="carousel" data-interval="false">
+        <div id="bookCarousel" class="carouselCustom carousel slide" data-ride="carousel" data-interval="false">
+            <% if (book.images.length) { %> 
             <div class="carousel-inner">
-                <% campground.images.forEach((image, index) => { %> 
+                <% book.images.forEach((image, index) => { %> 
                 <div class="carousel-item <%= index === 0 ? "active" : "" %>">
                     <img src="<%= image.url %>" class="d-block w-100" alt="">
                 </div>
                 <% }); %> 
             </div>
-            <% if (campground.images.length > 1) { %>
-                <a class="carousel-control-prev" href="#campgroundCarousel" role="button" data-slide="prev">
+            <% if (book.images.length > 1) { %>
+                <a class="carousel-control-prev" href="#bookCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#campgroundCarousel" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#bookCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
                 </a>
             <% } %>
+            <% } else { %> 
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="<%= book.coverImg %>" class="index-image" alt="">
+                    </div>
+                </div>
+            <% } %> 
         </div>
 
         <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"><%= campground.title %></h5>
-              <p class="card-text"><%= campground.description %></p>
+              <h5 class="card-title"><%= book.title %></h5>
+              <p class="card-text"><%= book.description %></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted"><%= campground.location %></li>
-              <li class="list-group-item">$<%= campground.price %>/night</li>
+              <li class="list-group-item text-muted"><%= book.location %></li>
+              <li class="list-group-item">$<%= book.price %>/night</li>
             </ul>
-            <!--Below we use the .equals method to compare the campground author with the current user-->
-            <% if (currentUser && campground.author.equals(currentUser._id)) { %>
+            <!--Below we use the .equals method to compare the book author with the current user-->
+            <% if (currentUser && book.owner.equals(currentUser._id)) { %>
                 <div class="card-body">
-                    <a class="card-link btn btn-dark" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-                    <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                    <a class="card-link btn btn-dark" href="/books/<%= book._id %>/edit">Edit</a>
+                    <form class="d-inline" action="/books/<%= book._id %>?_method=DELETE" method="POST">
                         <button class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             <% } %>
             <div class="card-footer text-muted">
-                Submitted by: <%= campground.author.username %>
+                Submitted by: <%= book.author.username %>
             </div>
         </div>
     </div>
     <div class="col-lg-4">
         <div id='map' class="mapShow mb-3"></div>
 
-        <% if (campground.reviews !== []) { %> 
+        <% if (book.reviews !== []) { %> 
         <h2 class="mb-2 text-center">Leave a Review</h2>
-            <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="mb-4 needs-validation" novalidate>
+            <form action="/books/<%= book._id %>/reviews" method="POST" class="mb-4 needs-validation" novalidate>
                 <fieldset class="starability-basic m-auto" id="rating">
                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -82,7 +90,7 @@
 </div>
 <div class="row">
     <div class="col-lg-8 offset-lg-2">
-        <% for (let review of campground.reviews) { %> 
+        <% for (let review of book.reviews) { %> 
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title"><%= review.author.username %></h5>
@@ -94,7 +102,7 @@
                 <% if (currentUser && review.author.equals(currentUser._id)) { %>
                     <div class="card-body">
                         <!-- <a class="card-link btn btn-sm btn-dark" href="#">Edit</a> -->
-                        <form class="d-inline" action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                        <form class="d-inline" action="/books/<%= book._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-sm btn-danger">Delete</button>
                         </form>
                     </div>
@@ -107,9 +115,9 @@
 <!-- We need to use the script below so we can access the mapToken in the showPageMap.js file -->
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-    const campground = <%- JSON.stringify(campground) %>;
+    const book = <%- JSON.stringify(book) %>;
 </script>
-<!-- Note, the campground declaration in the script above was causing issues so I had to add the following to the JSON.settings file: "html.validate.scripts": false -->
+<!-- Note, the book declaration in the script above was causing issues so I had to add the following to the JSON.settings file: "html.validate.scripts": false -->
 
 <script src="/javascripts/showPageMap.js"></script>
 

@@ -2,11 +2,11 @@
 
 <div class="row">
   <div class="card">
-    <h1 class="text-center mt-2">Create A New Campground</h1>
+    <h1 class="text-center mt-2">Create A New Book</h1>
     <div class="col-md-6 offset-md-3">
       <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side - Note we've added the enctype="multipart/form-data" to allow for image uploads-->
       <form
-        action="/campgrounds"
+        action="/books"
         method="POST"
         class="needs-validation"
         novalidate
@@ -18,8 +18,8 @@
             class="form-control"
             type="text"
             id="title"
-            name="campground[title]"
-            placeholder="Campsite Name"
+            name="book[title]"
+            placeholder="Book Title"
             required
           />
           <div class="valid-feedback">Looks good!</div>
@@ -31,7 +31,7 @@
             class="form-control"
             type="text"
             id="location"
-            name="campground[location]"
+            name="book[location]"
             placeholder="e.g. Los Angeles, California"
             required
           />
@@ -39,13 +39,13 @@
         </div>
         <!-- <div class="mb-3">
                     <label class="form-label" for="image">Image URL: </label>
-                    <input class="form-control" type="text" id="image" name="campground[image]" placeholder="Campsite Image" required>
+                    <input class="form-control" type="text" id="image" name="book[image]" placeholder="Book Image" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div> -->
         <div class="mb-2">
-          <label class="form-label" for="price">Campground Price: </label>
+          <label class="form-label" for="price">Book Price: </label>
           <div class="input-group">
             <span class="input-group-text" id="basic-addon1">$</span>
             <input
@@ -53,7 +53,7 @@
               class="form-control"
               placeholder="0.00"
               id="price"
-              name="campground[price]"
+              name="book[price]"
               aria-label="Price"
               aria-describedby="price-label"
               required
@@ -67,7 +67,7 @@
             class="form-control"
             type="text"
             id="description"
-            name="campground[description]"
+            name="book[description]"
             placeholder="Description..."
             required
           ></textarea>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="mb-3">
-          <button class="btn btn-success btn-block">Add Campground</button>
+          <button class="btn btn-success btn-block">Add Book</button>
         </div>
       </form>
     </div>

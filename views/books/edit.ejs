@@ -2,12 +2,12 @@
 
 <div class="row">
     <div class="card shadow mt-1 mb-4">
-    <h1 class="text-center mt-2">Edit Campground</h1>
+    <h1 class="text-center mt-2">Edit Book</h1>
         <div class="col-md-6 offset-md-3"> <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side-->
-            <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+            <form action="/books/<%= book._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-2">
                     <label class="form-label" for="title">Title: </label>
-                    <input class="form-control" type="text" id="title" name="campground[title]" value="<%= campground.title %>" required>
+                    <input class="form-control" type="text" id="title" name="book[title]" value="<%= book.title %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -15,16 +15,16 @@
 
                 <div class="mb-2">
                     <label class="form-label" for="location">Location: </label>
-                    <input class="form-control" type="text" id="location" name="campground[location]" value="<%= campground.location %>" required>
+                    <input class="form-control" type="text" id="location" name="book[location]" value="<%= book.location %>" required>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
                 <div class="mb-2">
-                    <label class="form-label" for="price">Campground Price: </label>
+                    <label class="form-label" for="price">Book Price: </label>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">$</span>
-                        <input type="text" class="form-control" value="<%= campground.price %>" id="price" name="campground[price]" aria-label="Price" aria-describedby="price-label" required>
+                        <input type="text" class="form-control" value="<%= book.price %>" id="price" name="book[price]" aria-label="Price" aria-describedby="price-label" required>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Description: </label>
-                    <textarea class="form-control" type="text" id="description" name="campground[description]" required><%= campground.description %></textarea>
+                    <textarea class="form-control" type="text" id="description" name="book[description]" required><%= book.description %></textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -47,20 +47,22 @@
                         </label>
                     </div>
                 </div>
-                <!-- The div below describes how we will show existing images and allow for their deletion note that we use the array index to link the label with the input and we use the image.filename as the value for the input to help us delete the image from cloudinary - note that the deleteImages[] in the name field will hold all/any of the deleted image paths in an array which we can then use to delete them from cloudinary, also note that we had to add the deleteImages array to the Joi Schema for campground - Note that image.thumbnail uses a virtual property (defined in the campground model file)-->
+                <!-- The div below describes how we will show existing images and allow for their deletion note that we use the array index to link the label with the input and we use the image.filename as the value for the input to help us delete the image from cloudinary - note that the deleteImages[] in the name field will hold all/any of the deleted image paths in an array which we can then use to delete them from cloudinary, also note that we had to add the deleteImages array to the Joi Schema for book - Note that image.thumbnail uses a virtual property (defined in the book model file)-->
                 <div class="mb-3">
-                    <% campground.images.forEach((image, index) => { %> 
+                    <% if (book.images) { %> 
+                    <% book.images.forEach((image, index) => { %> 
                         <img src="<%= image.thumbnail %> " class="img-thumbnail" alt="">
                         <div class="form-check-inline">
                             <input type="checkbox" id="image-<%= index %>" name="deleteImages[]" value="<%= image.filename %>">
                         </div>
                         <label for="image-<%= index %>">Delete</label>
                     <% }) %> 
+                    <% } %> 
                 </div>        
                 <div class="mb-3">
-                    <button class="btn btn-info">Update Campground</button>
+                    <button class="btn btn-info">Update Book</button>
                 </div>
-                <a class="btn btn-danger mb-3" href="/campgrounds/<%= campground._id %>">Cancel</a>
+                <a class="btn btn-danger mb-3" href="/books/<%= book._id %>">Cancel</a>
             </form>
         </div>
     </div>

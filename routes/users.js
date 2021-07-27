@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-//Here we import the campgrounds controller file
 const users = require('../controllers/users');
 const catchAsync = require('../utilities/catchAsync');
 

@@ -16,7 +16,7 @@ module.exports.create = async (req, res, next) => {
       if (err) return next(err);
     });
     // req.flash('success', `Welcome to Yelp Came ${username}!`);
-    res.redirect('/campgrounds');
+    res.redirect('/books');
   } catch (e) {
     req.flash('error', e.message);
     res.redirect('/register');
@@ -31,7 +31,7 @@ module.exports.renderLoginForm = (req, res) => {
 //LOGIN AUTHENTICATE
 module.exports.authenticateUser = (req, res) => {
   // req.flash('success', 'Welcome back!');
-  const redirectURL = req.session.returnTo || '/campgrounds';
+  const redirectURL = req.session.returnTo || '/books';
   delete req.session.returnTo; //this is how we delete something from an object - we don't need it after the line above so we delete it
   res.redirect(redirectURL);
 };
@@ -40,7 +40,7 @@ module.exports.authenticateUser = (req, res) => {
 module.exports.logout = (req, res) => {
   req.logout();
   // req.flash('success', 'Logged out.');
-  res.redirect('/campgrounds');
+  res.redirect('/books');
 };
 
 // Profile

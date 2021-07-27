@@ -1,0 +1,11 @@
+<% layout('layouts/boilerplate') %> <!-- This is an improvement on setting up our EJS templates, it allows us to create one 'boilerplate' template which we can use with all other templates -->
+
+<div id="map" class="map-cluster mt-0"></div>
+
+<script>
+    var mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    //We need to pass books to the clusterMap.js file but note that to conform with the Mapbox data format we need to stringify books and store it under the features field of an object - IMPORTANT Mongoose will not by default include virtuals when we use JSON.stringify, we need to explicitly tell it to by passing in the option (const opts = { toJSON: { virtuals: true }}) to the BookSchema declaration
+    const books = {features: <%- JSON.stringify(books) %>};
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>

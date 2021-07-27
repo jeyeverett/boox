@@ -1,56 +1,66 @@
 const mongoose = require('mongoose');
-const cities = require('./cities');
-const images = require('./images');
-const { places, descriptors } = require('./seedHelpers');
-const Campground = require('../models/campground');
+const cities = require('./canadacities');
+const books = require('./book-data');
+const Book = require('../models/book');
 
-const dbURL = process.env.MONGO_URL || 'mongodb://localhost:27017/westcoastcamping';
+const dbURL = process.env.MONGO_URL || 'mongodb://localhost:27017/boox';
 
-mongoose.connect('mongodb+srv://administrator:rq3SbLmHDXmnVLAH@coast2coastcamping.unfy8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
-    .then(() => {
-        console.log('Mongo connection established.');
-    })
-    .catch((err) => {
-        console.log('Mongo connection failed.');
-        console.log(err);
-    });
+mongoose
+  .connect('mongodb://localhost:27017/boox', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log('Mongo connection established.');
+  })
+  .catch((err) => {
+    console.log('Mongo connection failed.');
+    console.log(err);
+  });
 
-    //the sample function takes an array and returns a random item from it
+//the sample function takes an array and returns a random item from it
 const sample = (array) => array[Math.floor(Math.random() * array.length)];
 
 //This async functions deletes the collections and then
 const seedDB = async () => {
-    await Campground.deleteMany({});
-    for (let i = 0; i < 200; i++) {
-        const random1000 = Math.floor(Math.random() * 1000);
-        const price = Math.floor(Math.random() * 20 + 10);
-        const campground = new Campground({
-            author: "60691c552bda620015920b38",
-            location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            title: `${sample(descriptors)} ${sample(places)}`,
-            description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dicta a aliquid nam aliquam consectetur ducimus quisquam, fuga reiciendis tenetur iure assumenda numquam placeat rerum. Voluptatum enim ab doloribus voluptas?',
-            price,
-            images: [
-                {
-                    url: `${sample(images)}`,
-                    filename: 'westcoastcamping/sample1'
-                  },
-                  {
-                    url: `${sample(images)}`,
-                    filename: 'westcoastcamping/sample2'
-                  }
-              ],
-            geometry: 
-                {   //Note that geoJSON expects longitude first
-                    coordinates: [cities[random1000].longitude, cities[random1000].latitude], 
-                    type: "Point" 
-                }
-        })
-        await campground.save();
-    }
-}
+  await Book.deleteMany({});
+  for (let i = 0; i < 200; i++) {
+    const randomLocation = Math.floor(Math.random() * 1000);
+    const randomBook = Math.floor(Math.random() * 1000);
+    const random100 = Math.floor(Math.random() * 100);
+
+    const book = new Book({
+      title: books[randomBook].title,
+      description: books[randomBook].description,
+      author: books[randomBook].author,
+      ratingInfo: {
+        rating: books[randomBook].rating,
+        numRatings: random100,
+        sumRatings: random100 * books[randomBook].rating
+      },
+      language: books[randomBook].language,
+      genres: books[randomBook].genres,
+      pages: books[randomBook].pages,
+      publisher: books[randomBook].publisher,
+      firstPublishDate: books[randomBook].firstPublishDate,
+      coverImg: books[randomBook].coverImg,
+      owner: '61001db4d11bee3770db125c',
+      location: `${cities[randomLocation].city}, ${cities[randomLocation].province_id}`,
+      geometry: {
+        coordinates: [
+          cities[randomLocation].lng,
+          cities[randomLocation].lat,
+        ],
+        type: 'Point',
+      },
+    });
+
+    await book.save();
+  }
+};
 
 //Call the seedDB async function and when it completes close the connection to Mongo
-seedDB().then( () => {
-    mongoose.connection.close();
+seedDB().then(() => {
+  mongoose.connection.close();
 });
