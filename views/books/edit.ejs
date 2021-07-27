@@ -20,16 +20,57 @@
                         Looks good!
                     </div>
                 </div>
-                <div class="mb-2">
-                    <label class="form-label" for="price">Book Price: </label>
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1">$</span>
-                        <input type="text" class="form-control" value="<%= book.price %>" id="price" name="book[price]" aria-label="Price" aria-describedby="price-label" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                </div>
+                <!--  -->
+               
+                  <div class="mb-2">
+                    <label class="form-label" for="author">*Author: </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="author"
+                      name="book[author]"
+                      value="<%= book.author %>"
+                      required
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                   
+                  <div class="mb-2">
+                    <label class="form-label" for="genres">Genres: </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="genres"
+                      name="book[genres]"
+                      value="<%= book.genres.join(', ') %>"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+          
+                  <div class="mb-2">
+                    <label class="form-label" for="language">Language: </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="language"
+                      name="book[language]"
+                      value="<%= book.language %>"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+          
+                  <div class="mb-2">
+                    <label class="form-label" for="pages">Number of Pages: </label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      id="pages"
+                      name="book[pages]"
+                      value="<%= book.pages %>"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+    
                 <div class="mb-3">
                     <label class="form-label" for="description">Description: </label>
                     <textarea class="form-control" type="text" id="description" name="book[description]" required><%= book.description %></textarea>
