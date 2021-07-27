@@ -2,12 +2,11 @@ const express = require('express');
 const router = express.Router();
 const books = require('../controllers/books');
 const { isLoggedIn, isAuthor, validateBook } = require('../middleware');
+const catchAsync = require('../utilities/catchAsync');
 
 const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
-
-const catchAsync = require('../utilities/catchAsync');
 
 router.route('/').get(catchAsync(books.home));
 

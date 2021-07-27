@@ -1,36 +1,3 @@
-<!-- <nav class="navbar sticky-top navbar-expand-lg navbar-dark customBackground">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Coast2CoastCamping</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" aria-current="page" href="/">Home</a>
-        <a class="nav-link" href="/books/map">Map</a>
-        <a class="nav-link" href="/books">Books</a>
-        <a class="nav-link" href="/books/new">New Book</a>
-      </div>
-      <div class="navbar-nav ml-auto">
-        <% if (!currentUser) { %>
-        <a class="nav-link" href="/login">Login</a>
-        <a class="nav-link" href="/register">Register</a>
-        <% } else { %>
-        <a class="nav-link" href="/logout">Logout</a>
-        <% } %>
-      </div>
-    </div>
-  </div>
-</nav> -->
-
 <header class="p-2 mb-3 border-bottom" id="custom-navbar">
   <div class="container">
     <div class="d-flex align-items-center justify-content-lg-start">
@@ -45,10 +12,9 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto ms-lg-auto me-lg-5 mb-2 justify-content-end mb-md-0 pe-2" id="custom-navbar__links">
-        <li><a href="/" class="nav-link px-2 link-light">Home</a></li>
         <li><a href="/books/map" class="nav-link px-2 link-light">Map</a></li>
         <li><a href="/books" class="nav-link px-2 link-light">Borrow</a></li>
-        <li><a href="/books/new" class="nav-link px-2 link-light">Lend</a></li>
+        <li><a href="/books/new" class="nav-link px-2 link-light">Create book</a></li>
         <% if (!currentUser) { %>
           <a class="nav-link px-2 link-light" href="/login">Login</a>
           <a class="nav-link px-2 link-light" href="/register">Register</a>
@@ -67,9 +33,9 @@
           viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M53.24609,68.08333l-10.75,10.75l43.50391,43.5039l43.5039,-43.5039l-10.75,-10.75l-32.7539,32.7539z"></path></g></g></svg>
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="/books/new">Create book</a></li>
           <li><a class="dropdown-item" href="/profile/<%= currentUser._id %> ">Profile</a></li>
+          <li><a class="dropdown-item" href="/books/map">Map</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="/logout">Sign out</a></li>
         </ul>

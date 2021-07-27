@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const Review = require('./review');
+const Book = require('./book');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const ImageSchema = new Schema({
@@ -32,6 +33,12 @@ const UserSchema = new Schema({
         content: {
           type: String,
         },
+      },
+    ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
       },
     ],
     reviews: [

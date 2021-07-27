@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const users = require('../controllers/users');
 const catchAsync = require('../utilities/catchAsync');
+const { isLoggedIn } = require('../middleware');
 
 //Here we use the router.route method to group our routes
 router
@@ -24,5 +25,7 @@ router
 router.get('/logout', users.logout);
 
 router.get('/profile/:id', users.getProfile);
+
+router.post('/favorite/:id', isLoggedIn, users.favorite);
 
 module.exports = router;

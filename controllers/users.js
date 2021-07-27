@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Book = require('../models/book');
+const { isValidObjectId } = require('mongoose');
 
 //NEW FORM
 module.exports.renderNewForm = (req, res) => {
@@ -47,6 +49,44 @@ module.exports.logout = (req, res) => {
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
-  console.log(typeof user._id);
   res.render('users/profile', { user });
+};
+
+// Favorite
+module.exports.favorite = async (req, res) => {
+  const { id } = req.params;
+  const { page } = req.query;
+
+  if (!isValidObjectId(id)) {
+    req.flash('error', 'Invalid book ID.');
+    res.redirect('/books');
+  }
+
+  const book = await Book.findById(req.params.id)
+    .populate({
+      path: 'reviews',
+      populate: {
+        path: 'owner',
+      },
+    })
+    .populate('owner');
+
+  if (!book) {
+    req.flash('error', 'No book found with this id.');
+    res.status(404).redirect('/books');
+  }
+
+  const user = await User.findById(req.user._id);
+  if (user.profile.favorites.includes(id)) {
+    user.profile.favorites.pull(id);
+  } else {
+    user.profile.favorites.push(id);
+  }
+  await user.save();
+
+  if (page) {
+    res.status(200).redirect(`/books?page=${page}`);
+  } else {
+    res.status(200).redirect(`/books/${id}`);
+  }
 };
