@@ -68,32 +68,16 @@
 }
 
 .custom-button {
-  background-color: $color-primary;
-  color: $color-white;
-  border: none;
+  color: $color-primary;
+  border: 1px solid $color-primary;
+  font-size: 0.75rem;
+  font-weight: 600;
   padding: 0.5rem 1rem;
   // box-shadow: $box-shadow;
   transition: all 0.2s;
   &:hover {
     color: $color-white;
-    @include button-animation-hover;
-  }
-  &:active,
-  &:focus {
-    @include button-animation-click;
-  }
-
-  &--border {
-    background-color: none;
-    border: 1px solid $color-primary;
-    transition: all 0.2s;
-    &:hover {
-      @include button-animation-hover;
-    }
-    &:active,
-    &:focus {
-      @include button-animation-click;
-    }
+    background-color: $color-primary;
   }
 }
 

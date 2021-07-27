@@ -2,16 +2,18 @@
   .card-heading {
     display: flex;
     justify-content: space-between;
+  }
+  .custom-fav-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
 
-    .custom-fav-icon {
-      cursor: pointer;
-      background-clip: text;
-      -webkit-background-clip: text;
-      background-color: black;
-      color: transparent;
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-    }
+  .custom-rating {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: $color-primary;
   }
 }

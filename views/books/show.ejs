@@ -36,13 +36,14 @@
 
         <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"><%= book.title %></h5>
+              <h5 class="card-title tertiary-heading"><%= book.title %></h5>
               <p class="card-text"><%= book.description %></p>
               <p class="card-text text-muted mb-0">Author: <%= book.author %></p>
               <p class="card-text text-muted mb-0">Pages: <%= book.pages %></p>
+              <p class="card-text text-muted mb-0" style="text-align: right;">&#9733; <%= book.ratingInfo.rating %></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted">Current Location: <%= book.location %></li>
+              <li class="list-group-item text-muted"><strong>Location:</strong> <%= book.location %></li>
             </ul>
             <div class="card-footer text-muted">
                 Owned by: <%= book.owner.username %>
@@ -86,7 +87,7 @@
                     <label for="first-rate5" title="Amazing">5 stars</label>
                 </fieldset>
                 <div class="mb-3">
-                    <label class="form-label" for="body">Comments:</label>
+                    <label class="form-label text-muted" for="body">Comments:</label>
                     <textarea class="form-control" name="review[body]" id="body" cols="30" rows="7" required></textarea>
                     <div class="valid-feedback">
                         Looks good!
