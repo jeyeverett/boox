@@ -54,6 +54,7 @@ module.exports.create = async (req, res, next) => {
     .send();
 
   req.body.book.geometry = geoData.body.features[0].geometry;
+  req.body.book.genres = req.body.book.genres.toLowerCase().split(', ');
 
   const newBook = new Book(req.body.book);
 

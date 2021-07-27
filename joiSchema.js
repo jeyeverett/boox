@@ -16,8 +16,9 @@ const extension = (joi) => ({
           allowedTags: [],
           allowedAttributes: {},
         });
-        if (clean !== value)
+        if (clean !== value) {
           return helpers.error('string.escapeHTML', { value });
+        }
         return clean;
       },
     },
@@ -31,9 +32,12 @@ const Joi = BaseJoi.extend(extension);
 module.exports.bookSchema = Joi.object({
   book: Joi.object({
     title: Joi.string().required().escapeHTML(),
-    price: Joi.number().required().min(0),
+    author: Joi.string().required().escapeHTML(),
     location: Joi.string().required().escapeHTML(),
-    description: Joi.string().required().max(230).escapeHTML(),
+    genres: Joi.string().escapeHTML(),
+    language: Joi.string().escapeHTML(),
+    pages: Joi.number(),
+    description: Joi.string().required().max(1000).escapeHTML(),
   }).required(),
   deleteImages: Joi.array(),
 });

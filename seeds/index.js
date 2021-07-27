@@ -29,6 +29,7 @@ const seedDB = async () => {
     const randomLocation = Math.floor(Math.random() * 1000);
     const randomBook = Math.floor(Math.random() * 1000);
     const random100 = Math.floor(Math.random() * 100);
+    const genres = books[randomBook].genres.replace(/'/g, '"');
 
     const book = new Book({
       title: books[randomBook].title,
@@ -40,10 +41,8 @@ const seedDB = async () => {
         sumRatings: random100 * books[randomBook].rating
       },
       language: books[randomBook].language,
-      genres: books[randomBook].genres,
+      genres: JSON.parse(genres.toLowerCase()),
       pages: books[randomBook].pages,
-      publisher: books[randomBook].publisher,
-      firstPublishDate: books[randomBook].firstPublishDate,
       coverImg: books[randomBook].coverImg,
       owner: '61001db4d11bee3770db125c',
       location: `${cities[randomLocation].city}, ${cities[randomLocation].province_id}`,
