@@ -21,13 +21,6 @@
   min-height: 250px;
 }
 
-.carouselCustom {
-  display: flex;
-  align-items: bottom;
-  max-height: 250px;
-  overflow: hidden;
-}
-
 @media (max-width: 768px) {
   .card-height {
     max-height: 100%;

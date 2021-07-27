@@ -6,12 +6,12 @@
 <div class="row mb-4">
     <div class="col-lg-4 offset-lg-2">
         <!-- Below we insert our mapbox map -->
-        <div id="bookCarousel" class="carouselCustom carousel slide" data-ride="carousel" data-interval="false">
+        <div id="bookCarousel" class="carousel carousel-dark slide" data-ride="carousel" data-interval="false">
             <% if (book.images.length) { %> 
-            <div class="carousel-inner">
+            <div class="carousel-inner pb-3">
                 <% book.images.forEach((image, index) => { %> 
                 <div class="carousel-item <%= index === 0 ? "active" : "" %>">
-                    <div style="background-image: url('<%= image.url %>'); background-color: lightgray;" class="index-image" alt=""></div>
+                    <div style="background-image: url('<%= image.url %>');" class="index-image" alt=""></div>
                 </div>
                 <% }); %> 
             </div>
@@ -21,14 +21,14 @@
                 <span class="visually-hidden">Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#bookCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="carousel-control-next-icon" aria-hidden="true" style=""></span>
                 <span class="visually-hidden">Next</span>
                 </a>
             <% } %>
             <% } else { %> 
-                <div class="carousel-inner">
+                <div class="carousel-inner pb-3">
                     <div class="carousel-item active">
-                        <div style="background-image: url('<%= book.coverImg %>'); background-color: grey;" class="index-image" alt=""></div>
+                        <div style="background-image: url('<%= book.coverImg %>');" class="index-image" alt=""></div>
                     </div>
                 </div>
             <% } %> 
@@ -38,30 +38,39 @@
             <div class="card-body">
               <h5 class="card-title"><%= book.title %></h5>
               <p class="card-text"><%= book.description %></p>
+              <p class="card-text text-muted mb-0">Author: <%= book.author %></p>
+              <p class="card-text text-muted mb-0">Pages: <%= book.pages %></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted"><%= book.location %></li>
-              <li class="list-group-item">$<%= book.price %>/night</li>
+              <li class="list-group-item text-muted">Current Location: <%= book.location %></li>
             </ul>
+            <div class="card-footer text-muted">
+                Owned by: <%= book.owner.username %>
+            </div>
             <!--Below we use the .equals method to compare the book author with the current user-->
             <% if (currentUser && book.owner.equals(currentUser._id)) { %>
-                <div class="card-body">
-                    <a class="card-link btn btn-dark" href="/books/<%= book._id %>/edit">Edit</a>
+                <div class="card-body d-flex justify-content-between">
                     <form class="d-inline" action="/books/<%= book._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                        <button class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" 
+                            y="0px" width="30" height="30" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#f50009"><path d="M72.24,6.88c-5.65719,0 -10.32,4.66281 -10.32,10.32v6.88h-34.4c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h3.44v123.84c0,5.68406 4.63594,10.32 10.32,10.32h89.44c5.68406,0 10.32,-4.63594 10.32,-10.32v-123.84h3.44c1.23625,0.01344 2.39188,-0.63156 3.02344,-1.70656c0.61813,-1.075 0.61813,-2.39187 0,-3.46687c-0.63156,-1.075 -1.78719,-1.72 -3.02344,-1.70656h-34.4v-6.88c0,-5.65719 -4.66281,-10.32 -10.32,-10.32zM72.24,13.76h27.52c1.90813,0 3.44,1.53188 3.44,3.44v6.88h-34.4v-6.88c0,-1.90812 1.53188,-3.44 3.44,-3.44zM61.92,68.8c0.87344,0 1.76031,0.33594 2.43219,1.00781l21.64781,21.64781l21.64781,-21.64781c1.34375,-1.34375 3.52062,-1.34375 4.86437,0c1.34375,1.34375 1.34375,3.52062 0,4.86437l-21.64781,21.64781l21.64781,21.64781c1.34375,1.34375 1.34375,3.52062 0,4.86437c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781l-21.64781,-21.64781l-21.64781,21.64781c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437l21.64781,-21.64781l-21.64781,-21.64781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437c0.67187,-0.67188 1.55875,-1.00781 2.43219,-1.00781z"></path></g></g>
+                        </svg>
+                    </button>
+                </form>
+                <a class="card-link btn" href="/books/<%= book._id %>/edit" aria-label="edit">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                        width="30" height="30" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#1a4aa0"><path d="M130.88125,17.2c-2.93403,0 -5.86843,1.12051 -8.10729,3.35938l-13.84062,13.84063l28.66667,28.66667l13.84062,-13.84063c4.47773,-4.47773 4.47773,-11.73685 0,-16.21458l-12.45208,-12.45208c-2.23887,-2.23887 -5.17326,-3.35937 -8.10729,-3.35937zM97.46667,45.86667l-67.31068,67.31067c0,0 5.26186,-0.47147 7.22266,1.48933c1.9608,1.9608 0.34669,14.792 2.75469,17.2c2.408,2.408 15.15831,0.71299 16.98724,2.54192c1.82894,1.82893 1.70209,7.43542 1.70209,7.43542l67.31067,-67.31067zM22.93333,131.86667l-5.40859,15.31875c-0.21262,0.60453 -0.32239,1.24042 -0.32474,1.88125c0,3.16643 2.5669,5.73333 5.73333,5.73333c0.64083,-0.00235 1.27672,-0.11212 1.88125,-0.32474c0.0187,-0.00737 0.03737,-0.01483 0.05599,-0.02239l0.14557,-0.04479c0.01122,-0.00743 0.02242,-0.01489 0.03359,-0.0224l15.08359,-5.31901l-8.6,-8.6z"></path></g></g>
+                    </svg>
+                </a>
                 </div>
             <% } %>
-            <div class="card-footer text-muted">
-                Submitted by: <%= book.author.username %>
-            </div>
         </div>
     </div>
     <div class="col-lg-4">
         <div id='map' class="mapShow mb-3"></div>
-
+        <hr>
         <% if (book.reviews !== []) { %> 
-        <h2 class="mb-2 text-center">Leave a Review</h2>
+        <h2 class="mb-2 text-center secondary-heading">Leave a Review</h2>
             <form action="/books/<%= book._id %>/reviews" method="POST" class="mb-4 needs-validation" novalidate>
                 <fieldset class="starability-basic m-auto" id="rating">
                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
