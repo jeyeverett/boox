@@ -259,6 +259,14 @@ html {
   color: #1a4aa0;
 }
 
+.custom-edit-button g {
+  fill: rgba(49, 54, 57, 0.75);
+}
+
+.custom-delete-button g {
+  fill: rgba(49, 54, 57, 0.75);
+}
+
 #custom-navbar {
   background-color: rgba(26, 74, 160, 0.9);
 }
