@@ -304,6 +304,15 @@ html {
 #custom-dropdown a.dropdown-toggle::after {
   display: none;
 }
+#custom-dropdown ul {
+  background-color: rgba(49, 54, 57, 0.75);
+}
+#custom-dropdown ul li a {
+  color: white;
+}
+#custom-dropdown ul li a:hover {
+  color: rgba(49, 54, 57, 0.75);
+}
 @media only screen and (max-width: 62em) {
   #custom-dropdown {
     right: 1rem;
@@ -334,6 +343,11 @@ html {
 .custom-button:hover {
   color: white;
   background-color: #1a4aa0;
+}
+
+.custom-footer {
+  font-family: "Comfortaa", sans-serif;
+  letter-spacing: 0.05rem;
 }
 
 .profile-head {

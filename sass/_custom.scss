@@ -44,6 +44,16 @@
     }
   }
 
+  ul {
+    background-color: $color-black;
+    li a {
+      color: $color-white;
+      &:hover {
+        color: $color-black;
+      }
+    }
+  }
+
   position: fixed;
   right: 1rem;
   top: 1.05rem;
@@ -79,6 +89,11 @@
     color: $color-white;
     background-color: $color-primary;
   }
+}
+
+.custom-footer {
+  font-family: $primary-font;
+  letter-spacing: 0.05rem;
 }
 
 // #carousel-custom {
