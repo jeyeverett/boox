@@ -1,15 +1,14 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="row">
-    <div class="col-6 offset-3">
-        <div class="alert alert-danger" role="alert">
+<div class="row d-flex justify-content-center align-items-center vh-50">
+    <div class="col-6">
+        <div class="alert text-center" role="alert">
             <h4 class="alert-heading">Error <%= err.statusCode %></h4>
             <p><%= err.message %></p>
-            <% //If we are in development mode we want to see the stack trace, otherwise don't display it %> 
-            <% if (process.env.NODE_ENV !== 'production') { %> 
+            <!-- <% if (process.env.NODE_ENV !== 'production') { %> 
                 <hr>
                 <p class="mb-0"><%= err.stack %></p>
-            <% } %> 
+            <% } %>  -->
         </div>
     </div>
 </div>

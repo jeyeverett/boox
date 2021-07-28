@@ -43,11 +43,12 @@
 }
 
 .nav-link {
-  padding: 0.25rem 0;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.75);
-  margin-left: 1rem;
-  border-bottom: 0.1rem solid transparent;
+  font-family: $primary-font;
+  color: rgba($color-white, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  transition: background-color 0.3s;
 }
 
 @media only screen and (max-width: 400px) {
@@ -57,14 +58,12 @@
 }
 
 .nav-link:hover {
-  color: rgba(255, 255, 255, 0.5);
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba($color-white, 0.5);
 }
 
-.nav-link.active {
-  color: white;
-  border-bottom-color: white;
-}
+// .nav-link.active {
+//   color: white;
+// }
 
 .btn-secondary,
 .btn-secondary:hover {
@@ -79,8 +78,4 @@
 
 .btn-secondary:active {
   transform: translateY(-1px);
-}
-
-.home-button {
-  display: none;
 }

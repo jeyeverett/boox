@@ -2,9 +2,23 @@
   background-color: rgba($color-primary, 0.9);
   &__brand {
     &--logo {
-      margin: 0.5rem 0 0 0.5rem;
       font-family: 'Comfortaa', cursive;
       color: $color-white;
+      margin: 0.25rem 0 0 0.5rem;
+      @include respond(tab-port) {
+        margin: 0.25rem 0 0 0.25rem;
+      }
+      @include respond(xs) {
+        margin: 0.125rem 0 0 0.125rem;
+      }
+    }
+    svg {
+      @include respond(tab-port) {
+        height: 24px;
+      }
+      @include respond(xs) {
+        height: 18px;
+      }
     }
   }
 
@@ -16,7 +30,7 @@
 }
 
 #homepage-logo {
-  margin: 0.5rem 0 0 0.5rem;
+  margin: 0.25rem 0 0 0.5rem;
   font-family: 'Comfortaa', cursive;
   color: $color-white;
 }
@@ -61,12 +75,17 @@
 
   @include respond(tab-port) {
     right: 1rem;
-    top: 1.5rem;
+    top: 0.5rem;
   }
 
   @include respond(phone) {
     right: 1rem;
-    top: 1.75rem;
+    top: 0.25rem;
+  }
+
+  @include respond(xs) {
+    right: 1rem;
+    top: 0.1rem;
   }
 
   &__caret {
@@ -113,4 +132,8 @@
       transform: scale(0.6);
     }
   }
+}
+
+.vh-50 {
+  height: 50vh;
 }

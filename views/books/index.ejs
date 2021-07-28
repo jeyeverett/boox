@@ -16,11 +16,11 @@
                             
                         </div>
                         <p class="card-text mb-0"><%= book.description.length > 300 ? book.description.slice(0, 300) + '...' : book.description %></p>
-                        <p class="d-flex justify-content-end"><small class="text-muted text-right"><%= book.location %></small></p>
+                        <p class="d-flex justify-content-end mt-2"><small class="text-muted text-right"><%= book.location %></small></p>
                         <a class="btn custom-button" href="/books/<%= book._id %>"><%= book.title %></a>
                     </div>
                 </div>
-                <a class="custom-fav-icon custom-fav-button">
+                <a class="custom-fav-icon custom-fav-button" title="favorite" aria-label="favorite">
                     <input type="hidden" value="<%= book._id %>">
                 </a>
             </div>
@@ -39,7 +39,7 @@
 </div>
 
 <script>
-    const favArray = "<%= currentUser.profile.favorites %>".split(',');
+    const favArray = "<%= currentUser ? currentUser.profile.favorites : 'no user' %>".split(',');
 </script>
 
 <script src="/javascripts/favoriteButton.js"></script>
