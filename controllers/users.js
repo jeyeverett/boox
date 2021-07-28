@@ -79,14 +79,16 @@ module.exports.favorite = async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user.profile.favorites.includes(id)) {
     user.profile.favorites.pull(id);
+    res.status(200).json({ message: 'success', removed: true });
   } else {
     user.profile.favorites.push(id);
+    res.status(200).json({ message: 'success', removed: false });
   }
   await user.save();
 
-  if (page) {
-    res.status(200).redirect(`/books?page=${page}`);
-  } else {
-    res.status(200).redirect(`/books/${id}`);
-  }
+  // if (page) {
+  //   res.status(200).redirect(`/books?page=${page}`);
+  // } else {
+  //   res.status(200).redirect(`/books/${id}`);
+  // }
 };

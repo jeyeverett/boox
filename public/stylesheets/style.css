@@ -45,14 +45,14 @@ html {
 .primary-heading {
   font-family: "Raleway", sans-serif;
   font-size: 3rem;
-  color: rgba(49, 54, 57, 0.75);
+  color: rgba(49, 54, 57, 0.8);
   font-weight: 300;
 }
 
 .secondary-heading {
   font-family: "Raleway", sans-serif;
   font-size: 2rem;
-  color: rgba(49, 54, 57, 0.75);
+  color: rgba(49, 54, 57, 0.8);
   font-weight: 300;
 }
 
@@ -60,14 +60,14 @@ html {
   font-family: "Raleway", sans-serif;
   font-size: 1.25rem;
   text-transform: uppercase;
-  color: rgba(49, 54, 57, 0.75) !important;
+  color: rgba(49, 54, 57, 0.8) !important;
 }
 
 .card-body {
   font-family: "Raleway", sans-serif;
 }
 .card-body .card-heading h5 {
-  color: rgba(49, 54, 57, 0.75);
+  color: rgba(49, 54, 57, 0.8);
   font-weight: 600;
 }
 .card-body .card-text {
@@ -258,13 +258,11 @@ html {
   right: 1rem;
   color: #1a4aa0;
 }
-
-.custom-edit-button g {
-  fill: rgba(49, 54, 57, 0.75);
+.card .custom-edit-button g {
+  fill: rgba(49, 54, 57, 0.8);
 }
-
-.custom-delete-button g {
-  fill: rgba(49, 54, 57, 0.75);
+.card .custom-delete-button g {
+  fill: rgba(49, 54, 57, 0.8);
 }
 
 #custom-navbar {
@@ -305,13 +303,13 @@ html {
   display: none;
 }
 #custom-dropdown ul {
-  background-color: rgba(49, 54, 57, 0.75);
+  background-color: rgba(49, 54, 57, 0.8);
 }
 #custom-dropdown ul li a {
   color: white;
 }
 #custom-dropdown ul li a:hover {
-  color: rgba(49, 54, 57, 0.75);
+  color: rgba(49, 54, 57, 0.8);
 }
 @media only screen and (max-width: 62em) {
   #custom-dropdown {
