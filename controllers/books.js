@@ -11,13 +11,13 @@ const geocoder = mbxStyles({ accessToken: mapBoxToken });
 
 const ITEMS_PER_PAGE = 10;
 
-//home
+// HOME
 module.exports.home = async (req, res) => {
   const books = await Book.find({});
   res.render('home', { books });
 };
 
-//map
+// MAP
 module.exports.map = async (req, res) => {
   const books = await Book.find({});
   res.render('books/map', { books });
@@ -53,6 +53,12 @@ module.exports.create = async (req, res, next) => {
     })
     .send();
 
+  if (!geoData.body.features.length) {
+    res.locals.error = 'Please enter a valid location, e.g. Vancouver, BC';
+    const { book } = req.body;
+    return res.status(400).render(`books/new`, { book });
+  }
+
   req.body.book.geometry = geoData.body.features[0].geometry;
   req.body.book.genres = req.body.book.genres.toLowerCase().split(', ');
 
@@ -71,7 +77,7 @@ module.exports.create = async (req, res, next) => {
 
 //NEW FORM
 module.exports.renderNewForm = (req, res) => {
-  res.render('books/new');
+  res.render('books/new', { book: null });
 };
 
 //EDIT FORM

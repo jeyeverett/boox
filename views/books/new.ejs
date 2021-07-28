@@ -20,8 +20,9 @@
             id="title"
             name="book[title]"
             placeholder="Book Title"
+            value="<%= book && book.title %>"
             required
-          ><%= book ? book.title : '' %></input>
+          />
           <div class="valid-feedback">Looks good!</div>
         </div>
 
@@ -33,6 +34,7 @@
             id="author"
             name="book[author]"
             placeholder="Book Author"
+            value="<%= book && book.author %>"
             required
           />
           <div class="valid-feedback">Looks good!</div>
@@ -46,6 +48,7 @@
             id="location"
             name="book[location]"
             placeholder="e.g. Los Angeles, California"
+            value="<%= book && book.location %>"
             required
           />
           <div class="valid-feedback">Looks good!</div>
@@ -59,6 +62,7 @@
             id="genres"
             name="book[genres]"
             placeholder="e.g. fantasy, science-fiction, adventure, etc."
+            value="<%= book && (typeof book.genres === 'string' ? book.genres : book.genres.join(', ')) %>"
           />
           <div class="valid-feedback">Looks good!</div>
         </div>
@@ -71,6 +75,7 @@
             id="language"
             name="book[language]"
             placeholder="English"
+            value="<%= book && book.language %>"
           />
           <div class="valid-feedback">Looks good!</div>
         </div>
@@ -83,6 +88,7 @@
             id="pages"
             name="book[pages]"
             placeholder="250"
+            value="<%= book && book.pages %>"
           />
           <div class="valid-feedback">Looks good!</div>
         </div>
@@ -96,7 +102,7 @@
             name="book[description]"
             placeholder="This single volume brings together all of Poe's stories and poems, and illuminates the diverse and multifaceted genius of one of the greatest and most influential figures in American literary history..."
             required
-          ></textarea>
+          ><%= book && book.description %></textarea>
           <div class="valid-feedback">Looks good!</div>
         </div>
 

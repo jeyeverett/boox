@@ -14,7 +14,7 @@
       <ul class="nav col-12 col-lg-auto ms-lg-auto me-lg-5 mb-2 justify-content-end mb-md-0 pe-2" id="custom-navbar__links">
         <li><a href="/books/map" class="nav-link link-light">Map</a></li>
         <li><a href="/books" class="nav-link link-light">Borrow</a></li>
-        <li><a href="/books/new" class="nav-link link-light">Create book</a></li>
+        <li><a href="/books/new" class="nav-link link-light">Offer</a></li>
         <% if (!currentUser) { %>
           <a class="nav-link link-light" href="/login">Login</a>
           <a class="nav-link link-light" href="/register">Register</a>
@@ -39,7 +39,7 @@
           viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M53.24609,68.08333l-10.75,10.75l43.50391,43.5039l43.5039,-43.5039l-10.75,-10.75l-32.7539,32.7539z"></path></g></g></svg>
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="/books/new">Create book</a></li>
+          <li><a class="dropdown-item" href="/books/new">Offer</a></li>
           <li><a class="dropdown-item" href="/profile/<%= currentUser._id %> ">Profile</a></li>
           <li><a class="dropdown-item" href="/books/map">Map</a></li>
           <li><hr class="dropdown-divider"></li>
