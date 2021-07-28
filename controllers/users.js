@@ -55,7 +55,6 @@ module.exports.getProfile = async (req, res) => {
 // Favorite
 module.exports.favorite = async (req, res) => {
   const { id } = req.params;
-  const { page } = req.query;
 
   if (!isValidObjectId(id)) {
     req.flash('error', 'Invalid book ID.');
@@ -85,10 +84,4 @@ module.exports.favorite = async (req, res) => {
     res.status(200).json({ message: 'success', removed: false });
   }
   await user.save();
-
-  // if (page) {
-  //   res.status(200).redirect(`/books?page=${page}`);
-  // } else {
-  //   res.status(200).redirect(`/books/${id}`);
-  // }
 };

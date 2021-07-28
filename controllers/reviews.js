@@ -13,10 +13,18 @@ module.exports.create = async (req, res) => {
     return res.redirect(`/books/${req.params.id}`);
   }
 
-  const book = await Book.findById(req.params.id); //find the book we are leaving a review for
-  const review = new Review(req.body.review); //create a new review model with the data from the form
-  review.author = req.user._id; //we set the author of the review to the user that created it
-  book.reviews.push(review); //add the review to the book
+  const book = await Book.findById(req.params.id);
+  const review = new Review(req.body.review);
+  review.author = req.user._id;
+
+  book.reviews.push(review);
+  book.ratingInfo.numRatings = Number(book.ratingInfo.numRatings) + 1;
+  book.ratingInfo.sumRatings =
+    Number(book.ratingInfo.sumRatings) + Number(req.body.review.rating);
+  book.ratingInfo.rating = (
+    Number(book.ratingInfo.sumRatings) / Number(book.ratingInfo.numRatings)
+  ).toFixed(2);
+
   await review.save();
   await book.save();
   req.flash('success', 'Review successfully created!');
@@ -26,10 +34,22 @@ module.exports.create = async (req, res) => {
 //DELETE
 module.exports.delete = async (req, res) => {
   const { id, reviewID } = req.params;
-  //We want to delete a review but we also want to remove the review from the reference in the book array
+
+  const review = await Review.findById(reviewID);
+  const book = await Book.findById(id);
+
+  await book.reviews.pull(reviewID);
+
+  book.ratingInfo.numRatings = Number(book.ratingInfo.numRatings) - 1;
+  book.ratingInfo.sumRatings =
+    Number(book.ratingInfo.sumRatings) - Number(review.rating);
+  book.ratingInfo.rating = (
+    Number(book.ratingInfo.sumRatings) / Number(book.ratingInfo.numRatings)
+  ).toFixed(2);
+
+  await book.save();
   await Review.findByIdAndDelete(reviewID);
-  //Below is how we use mongoose to find a book and remove a specific review from its reviews array
-  await Book.findByIdAndUpdate(id, { $pull: { reviews: reviewID } });
+
   req.flash('success', 'Review successfully deleted.');
   res.redirect(`/books/${id}`);
 };
