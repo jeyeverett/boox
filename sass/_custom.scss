@@ -102,3 +102,15 @@
 //   max-height: 250px;
 //   overflow: hidden;
 // }
+
+.custom-starability {
+  @include respond(phone) {
+    transform: scale(0.75);
+  }
+  &--comment {
+    transform: scale(0.75);
+    @include respond(phone) {
+      transform: scale(0.6);
+    }
+  }
+}

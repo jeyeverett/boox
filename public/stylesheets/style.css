@@ -348,6 +348,20 @@ html {
   letter-spacing: 0.05rem;
 }
 
+@media only screen and (max-width: 37.5em) {
+  .custom-starability {
+    transform: scale(0.75);
+  }
+}
+.custom-starability--comment {
+  transform: scale(0.75);
+}
+@media only screen and (max-width: 37.5em) {
+  .custom-starability--comment {
+    transform: scale(0.6);
+  }
+}
+
 .profile-head {
   transform: translateY(5rem);
 }

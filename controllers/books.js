@@ -128,7 +128,7 @@ module.exports.show = async (req, res) => {
     .populate({
       path: 'reviews',
       populate: {
-        path: 'owner',
+        path: 'author',
       },
     })
     .populate('owner');
