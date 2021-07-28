@@ -206,12 +206,20 @@ html {
   transform: translateY(-1px);
 }
 
-.backToTop {
+.back-to-top {
   position: fixed;
   right: 2rem;
   bottom: 2.5rem;
   font-size: 3rem;
   cursor: pointer;
+  z-index: 10000;
+}
+@media only screen and (max-width: 37.5em) {
+  .back-to-top {
+    font-size: 2rem;
+    height: 2rem;
+    bottom: 1.25rem;
+  }
 }
 
 .link,
