@@ -87,11 +87,10 @@ module.exports.renderEditForm = async (req, res, next) => {
 
 //UPDATE
 module.exports.update = async (req, res) => {
-  // if (!req.body.book) throw new ExpressError('Invalid book data.', 400);
   const { id } = req.params;
   req.body.book.genres = req.body.book.genres.split(', ');
 
-  const book = await Book.findByIdAndUpdate(req.params.id, req.body.book, {
+  const book = await Book.findByIdAndUpdate(id, req.body.book, {
     runValidators: true,
     new: true,
   });

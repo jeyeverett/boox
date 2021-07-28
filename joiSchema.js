@@ -34,9 +34,9 @@ module.exports.bookSchema = Joi.object({
     title: Joi.string().required().escapeHTML(),
     author: Joi.string().required().escapeHTML(),
     location: Joi.string().required().escapeHTML(),
-    genres: Joi.string().escapeHTML(),
-    language: Joi.string().escapeHTML(),
-    pages: Joi.number(),
+    genres: Joi.string().allow('').escapeHTML(),
+    language: Joi.string().allow('').escapeHTML(),
+    pages: Joi.number().allow(''),
     description: Joi.string().required().max(1000).escapeHTML(),
   }).required(),
   deleteImages: Joi.array(),
@@ -47,4 +47,13 @@ module.exports.reviewSchema = Joi.object({
     rating: Joi.number().required().min(0).max(5),
     body: Joi.string().required().escapeHTML(),
   }).required(),
+});
+
+module.exports.profileSchema = Joi.object({
+  profile: Joi.object({
+    name: Joi.string().required().escapeHTML(),
+    bio: Joi.string().required().min(0).max(500).escapeHTML(),
+    location: Joi.string().required().escapeHTML(),
+  }).required(),
+  deleteImages: Joi.array(),
 });

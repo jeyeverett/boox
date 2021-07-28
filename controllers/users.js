@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Book = require('../models/book');
 const { isValidObjectId } = require('mongoose');
+const { cloudinary } = require('../cloudinary');
 
 //NEW FORM
 module.exports.renderNewForm = (req, res) => {
@@ -11,7 +12,7 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.create = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
-    const user = new User({ email, username }); //note that if the variable shares the same name as the model field then we can do it like this (as opposed to: {email: email, username: username})
+    const user = new User({ email, username });
     const newUser = await User.register(user, password); //register is a Passport method used to create a new user instance with a given password (checks if user is unique)
     //Passport provides the login() function which allows use to login the user after they are registered
     req.login(newUser, (err) => {
@@ -45,14 +46,51 @@ module.exports.logout = (req, res) => {
   res.redirect('/books');
 };
 
-// Profile
+// PROFILE
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id);
   res.render('users/profile', { user });
 };
 
-// Favorite
+module.exports.getEditProfile = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  res.render('users/edit-profile', { user });
+};
+
+module.exports.editProfile = async (req, res) => {
+  const { id } = req.params;
+  const { name, bio, location } = req.body.profile;
+
+  const user = await User.findById(id);
+  user.profile.name = name;
+  user.profile.bio = bio;
+  user.profile.location = location;
+
+  const images = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
+
+  user.profile.images.push(...images);
+
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await user.updateOne({
+      $pull: {
+        'profile.images': { filename: { $in: req.body.deleteImages } },
+      },
+    });
+  }
+  await user.save();
+  req.flash('success', 'Profile updated successfully!');
+  res.redirect(`/profile/${id}`);
+};
+
+// FAVORITE
 module.exports.favorite = async (req, res) => {
   const { id } = req.params;
 

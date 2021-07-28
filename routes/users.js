@@ -3,7 +3,15 @@ const router = express.Router();
 const passport = require('passport');
 const users = require('../controllers/users');
 const catchAsync = require('../utilities/catchAsync');
-const { isLoggedIn } = require('../middleware');
+const {
+  isLoggedIn,
+  isProfileOwner,
+  validateProfile,
+} = require('../middleware');
+
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 //Here we use the router.route method to group our routes
 router
@@ -24,8 +32,19 @@ router
 
 router.get('/logout', users.logout);
 
-router.get('/profile/:id', users.getProfile);
+router
+  .route('/profile/:id/edit')
+  .get(isLoggedIn, isProfileOwner, users.getEditProfile)
+  .put(
+    isLoggedIn,
+    isProfileOwner,
+    upload.array('image'),
+    validateProfile,
+    catchAsync(users.editProfile)
+  );
 
-router.post('/favorite/:id', isLoggedIn, users.favorite);
+router.route('/profile/:id').get(users.getProfile);
+
+router.post('/favorite/:id', isLoggedIn, catchAsync(users.favorite));
 
 module.exports = router;
