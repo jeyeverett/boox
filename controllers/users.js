@@ -49,7 +49,7 @@ module.exports.logout = (req, res) => {
 // PROFILE
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate('profile.favorites').exec();
   res.render('users/profile', { user });
 };
 
