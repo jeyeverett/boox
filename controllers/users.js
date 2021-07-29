@@ -49,14 +49,22 @@ module.exports.logout = (req, res) => {
 // PROFILE
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
+  if (!isValidObjectId(id)) {
+    req.flash('error', 'Invalid user ID.');
+    res.redirect('/books');
+  }
   const user = await User.findById(id).populate('profile.favorites').exec();
-  const booksOffered = await Book.find({ owner: id }).count();
+  const booksOffered = await Book.find({ owner: id }).countDocuments();
   const books = await Book.find({ owner: id }).limit(5);
   res.render('users/profile', { user, books, booksOffered });
 };
 
 module.exports.getEditProfile = async (req, res) => {
   const { id } = req.params;
+  if (!isValidObjectId(id)) {
+    req.flash('error', 'Invalid user ID.');
+    res.redirect('/books');
+  }
   const user = await User.findById(id);
   res.render('users/edit-profile', { user });
 };

@@ -63,6 +63,20 @@ html {
   color: rgba(49, 54, 57, 0.8) !important;
 }
 
+.quaternary-heading {
+  font-family: "Raleway", sans-serif;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.subheading {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  text-align: right;
+  font-size: 1rem;
+}
+
 .card-body {
   font-family: "Raleway", sans-serif;
 }
@@ -365,7 +379,7 @@ html {
   margin-left: -2px;
 }
 #custom-dropdown__caret g {
-  fill: #1a4aa0;
+  fill: rgba(49, 54, 57, 0.8);
 }
 
 .custom-button {

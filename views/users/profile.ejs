@@ -19,8 +19,8 @@
                         <% } %> 
                     </div>
                     <div class="media-body mb-5 ms-2">
-                        <h4 class="mt-0 mb-0"><%= user.profile.name ? user.profile.name : 'Name not set.' %></h4>
-                        <p class="small mb-4"><%= user.profile.location ? user.profile.location : 'Location not set.' %></p>
+                        <h4 class="mt-0 mb-0 tertiary-heading"><%= user.profile.name ? user.profile.name : 'Name not set.' %></h4>
+                        <p class="small mb-4 subheading"><%= user.profile.location ? user.profile.location : 'Location not set.' %></p>
                     </div>
                 </div>
             </div>
@@ -35,14 +35,14 @@
                 </ul>
             </div>
             <div class="px-4 py-3">
-                <h5 class="mb-0">About</h5>
+                <h5 class="mb-0 tertiary-heading">About</h5>
                 <div class="p-4 rounded shadow-sm bg-light">
                     <p class="font-italic mb-0"><%= user.profile.bio || "Write your bio here..."%></p>
                 </div>
             </div>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Recent favorites</h5>
+                    <h5 class="mb-0 tertiary-heading">Recent favorites</h5>
                 </div>
                 <div  class="d-flex mb-2 flex-wrap justify-content-center">
                     <% if (user.profile.favorites.length) { %> 
@@ -50,13 +50,13 @@
                             <a href="/books/<%= favorite._id %>" class="mb-3 me-3"><img src="<%= favorite.coverImg %> " alt="" class="img-fluid rounded shadow-sm" style="height:200px; width: auto;"></a>
                         <% } %> 
                     <% } else { %> 
-                        <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
+                        <div class="d-flex justify-content-between align-items-center my-3"><a class="quaternary-heading" href="/books">Browse books</a></div>
                     <% } %> 
                 </div>
             </div>
             <div class="py-4 px-4">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h5 class="mb-0">Recently offered</h5>
+                    <h5 class="mb-0 tertiary-heading">Recently offered</h5>
                 </div>
                 <div  class="d-flex mb-2 flex-wrap justify-content-center">
                     <% if (books.length) { %> 
@@ -64,7 +64,7 @@
                             <a href="/books/<%= book._id %>" class="mb-3 me-3"><img src="<%= book.coverImg %> " alt="" class="img-fluid rounded shadow-sm" style="height:200px; width: auto;"></a>
                         <% } %> 
                     <% } else { %> 
-                        <div class="col-lg-6 mb-2 pr-lg-1"><img src="https://images.unsplash.com/photo-1469594292607-7bd90f8d3ba4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="" class="img-fluid rounded shadow-sm"></div>
+                        <div class="d-flex justify-content-between align-items-center my-3"><a class="quaternary-heading" href="/books/new">Offer books</a></div>
                     <% } %> 
                 </div>
             </div>
