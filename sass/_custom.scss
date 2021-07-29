@@ -80,12 +80,18 @@
 
   @include respond(phone) {
     right: 1rem;
-    top: 0.25rem;
+    top: 0.35rem;
   }
 
   @include respond(xs) {
-    right: 1rem;
-    top: 0.1rem;
+    right: 0.5rem;
+  }
+
+  &-toggle {
+    @include respond(xs) {
+      height: 28px;
+      width: 28px;
+    }
   }
 
   &__caret {

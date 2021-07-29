@@ -17,8 +17,10 @@
                         </div>
                         <p class="card-text mb-0"><%= book.description.length > 300 ? book.description.slice(0, 300) + '...' : book.description %></p>
                         <p class="mt-2 mb-0"><small class="text-muted"><%= book.genres.slice(0, 8).join(' - ') %></small></p>          
-                        <a class="btn custom-button mt-3 mb-1" href="/books/<%= book._id %>"><%= book.title %></a>
-                        <p class="d-flex justify-content-end pb-2"><small class="text-muted"><%= book.location %></small></p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <a class="btn custom-button mt-3 mb-1" href="/books/<%= book._id %>"><%= book.title %></a>
+                            <small class="text-muted"><%= book.location %></small>
+                        </div>
                     </div>
                 </div>
                 <a class="custom-fav-icon custom-fav-button" title="favorite" aria-label="favorite">

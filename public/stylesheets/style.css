@@ -251,6 +251,14 @@ html {
   top: 0.5rem;
   right: 0.5rem;
 }
+@media only screen and (max-width: 37.5em) {
+  .card .custom-fav-icon {
+    top: 0.4rem;
+    right: 0.4rem;
+    height: 20px;
+    width: 20px;
+  }
+}
 .card .custom-rating {
   position: absolute;
   bottom: 1rem;
@@ -339,13 +347,18 @@ html {
 @media only screen and (max-width: 37.5em) {
   #custom-dropdown {
     right: 1rem;
-    top: 0.25rem;
+    top: 0.35rem;
   }
 }
 @media only screen and (max-width: 25em) {
   #custom-dropdown {
-    right: 1rem;
-    top: 0.1rem;
+    right: 0.5rem;
+  }
+}
+@media only screen and (max-width: 25em) {
+  #custom-dropdown-toggle {
+    height: 28px;
+    width: 28px;
   }
 }
 #custom-dropdown__caret {

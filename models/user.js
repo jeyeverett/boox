@@ -41,6 +41,12 @@ const UserSchema = new Schema({
         ref: 'Book',
       },
     ],
+    borrowed: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Book',
+      },
+    ],
     reviews: [
       {
         type: Schema.Types.ObjectId,

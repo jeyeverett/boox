@@ -50,7 +50,9 @@ module.exports.logout = (req, res) => {
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).populate('profile.favorites').exec();
-  res.render('users/profile', { user });
+  const booksOffered = await Book.find({ owner: id }).count();
+  const books = await Book.find({ owner: id }).limit(5);
+  res.render('users/profile', { user, books, booksOffered });
 };
 
 module.exports.getEditProfile = async (req, res) => {

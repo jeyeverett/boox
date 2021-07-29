@@ -17,6 +17,12 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+    @include respond(phone) {
+      top: 0.4rem;
+      right: 0.4rem;
+      height: 20px;
+      width: 20px;
+    }
   }
 
   .custom-rating {
