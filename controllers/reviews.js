@@ -8,12 +8,14 @@ module.exports.create = async (req, res) => {
     res.redirect(`/books/${req.params.id}`);
   }
 
+  const book = await Book.findById(req.params.id);
+
   if (req.body.review.body.length < 50) {
-    req.flash('error', 'Please leave a more detailed review.');
-    return res.redirect(`/books/${req.params.id}`);
+    res.locals.error =
+      'Please leave a more detailed review - minimum 50 characters.';
+    return res.render('books/show', { book, review: req.body.review });
   }
 
-  const book = await Book.findById(req.params.id);
   const review = new Review(req.body.review);
   review.author = req.user._id;
 

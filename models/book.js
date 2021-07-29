@@ -22,9 +22,18 @@ const BookSchema = new Schema(
     description: String,
     author: String,
     ratingInfo: {
-      rating: Number,
-      numRatings: Number,
-      sumRatings: Number,
+      rating: {
+        type: Number,
+        default: 5,
+      },
+      numRatings: {
+        type: Number,
+        default: 1,
+      },
+      sumRatings: {
+        type: Number,
+        default: 5,
+      },
     },
     language: String,
     genres: [String],

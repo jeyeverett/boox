@@ -60,11 +60,37 @@
                         </svg>
                     </a>
                     <form class="d-inline" action="/books/<%= book._id %>?_method=DELETE" method="POST">
-                        <button class="btn p-0" title="delete">
+                        <a class="btn p-0" title="delete" data-toggle="modal" data-target="#deleteModal">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" class="custom-edit-button
                             y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#f50009"><path d="M72.24,6.88c-5.65719,0 -10.32,4.66281 -10.32,10.32v6.88h-34.4c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h3.44v123.84c0,5.68406 4.63594,10.32 10.32,10.32h89.44c5.68406,0 10.32,-4.63594 10.32,-10.32v-123.84h3.44c1.23625,0.01344 2.39188,-0.63156 3.02344,-1.70656c0.61813,-1.075 0.61813,-2.39187 0,-3.46687c-0.63156,-1.075 -1.78719,-1.72 -3.02344,-1.70656h-34.4v-6.88c0,-5.65719 -4.66281,-10.32 -10.32,-10.32zM72.24,13.76h27.52c1.90813,0 3.44,1.53188 3.44,3.44v6.88h-34.4v-6.88c0,-1.90812 1.53188,-3.44 3.44,-3.44zM61.92,68.8c0.87344,0 1.76031,0.33594 2.43219,1.00781l21.64781,21.64781l21.64781,-21.64781c1.34375,-1.34375 3.52062,-1.34375 4.86437,0c1.34375,1.34375 1.34375,3.52062 0,4.86437l-21.64781,21.64781l21.64781,21.64781c1.34375,1.34375 1.34375,3.52062 0,4.86437c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781l-21.64781,-21.64781l-21.64781,21.64781c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437l21.64781,-21.64781l-21.64781,-21.64781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437c0.67187,-0.67188 1.55875,-1.00781 2.43219,-1.00781z"></path></g></g>
                         </svg>
-                    </button>
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Confirm</h5>
+                            <button type="button" class="custom-delete-button close" data-dismiss="modal" aria-label="Close" style="border: none; background-color: transparent; font-size: 2rem;">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                            Are you sure you want to delete this book?
+                            </div>
+                            <div class="modal-footer d-flex justify-content-between">
+                                <button type="submit" class="btn" title="delete">                            
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28"
+                                    viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#008a22"><path d="M86,21.5c-35.55872,0 -64.5,28.9413 -64.5,64.5c0,35.55869 28.94128,64.5 64.5,64.5c35.55872,0 64.5,-28.94131 64.5,-64.5c0,-35.5587 -28.94128,-64.5 -64.5,-64.5zM86,32.25c29.749,0 53.75,24.00103 53.75,53.75c0,29.74897 -24.001,53.75 -53.75,53.75c-29.749,0 -53.75,-24.00103 -53.75,-53.75c0,-29.74897 24.001,-53.75 53.75,-53.75zM112.60205,64.5l-33.59375,33.59375l-17.46875,-17.46875l-7.5166,7.5271l24.98535,24.99585l41.12085,-41.12085z"></path></g></g></svg>
+                                </button>
+                                <button type="button" class="btn" data-dismiss="modal" title="cancel">                   
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" 
+                                        viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#f50009"><path d="M86,14.33333c-39.63167,0 -71.66667,32.035 -71.66667,71.66667c0,39.63167 32.035,71.66667 71.66667,71.66667c39.63167,0 71.66667,-32.035 71.66667,-71.66667c0,-39.63167 -32.035,-71.66667 -71.66667,-71.66667zM119.7335,109.59983c2.80217,2.80217 2.80217,7.3315 0,10.13367c-1.3975,1.3975 -3.23217,2.09983 -5.06683,2.09983c-1.83467,0 -3.66933,-0.70233 -5.06683,-2.09983l-23.59983,-23.59983l-23.59983,23.59983c-1.3975,1.3975 -3.23217,2.09983 -5.06683,2.09983c-1.83467,0 -3.66933,-0.70233 -5.06683,-2.09983c-2.80217,-2.80217 -2.80217,-7.3315 0,-10.13367l23.59983,-23.59983l-23.59983,-23.59983c-2.80217,-2.80217 -2.80217,-7.3315 0,-10.13367c2.80217,-2.80217 7.3315,-2.80217 10.13367,0l23.59983,23.59983l23.59983,-23.59983c2.80217,-2.80217 7.3315,-2.80217 10.13367,0c2.80217,2.80217 2.80217,7.3315 0,10.13367l-23.59983,23.59983z"></path></g></g></svg>
+                                </button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                 </form>
                 </div>
             <% } %>
@@ -91,7 +117,7 @@
                 </fieldset>
                 <div class="mb-3">
                     <label class="form-label text-muted" for="body">Comments:</label>
-                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="7" required></textarea>
+                    <textarea class="form-control" name="review[body]" id="body" cols="30" rows="7" required><%= review ? review.body : '' %></textarea>
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -118,11 +144,37 @@
                     <div class="card-body pt-0 d-flex justify-content-end">
                         <!-- <a class="card-link btn btn-sm btn-dark" href="#">Edit</a> -->
                         <form class="d-inline" action="/books/<%= book._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                            <button class="btn p-0">                 
+                            <a class="btn p-0" data-toggle="modal" data-target="#deleteReviewModal">                 
                                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" class="custom-delete-button
                                     y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#f50009"><path d="M72.24,6.88c-5.65719,0 -10.32,4.66281 -10.32,10.32v6.88h-34.4c-1.23625,-0.01344 -2.39187,0.63156 -3.02344,1.70656c-0.61813,1.075 -0.61813,2.39187 0,3.46687c0.63156,1.075 1.78719,1.72 3.02344,1.70656h3.44v123.84c0,5.68406 4.63594,10.32 10.32,10.32h89.44c5.68406,0 10.32,-4.63594 10.32,-10.32v-123.84h3.44c1.23625,0.01344 2.39188,-0.63156 3.02344,-1.70656c0.61813,-1.075 0.61813,-2.39187 0,-3.46687c-0.63156,-1.075 -1.78719,-1.72 -3.02344,-1.70656h-34.4v-6.88c0,-5.65719 -4.66281,-10.32 -10.32,-10.32zM72.24,13.76h27.52c1.90813,0 3.44,1.53188 3.44,3.44v6.88h-34.4v-6.88c0,-1.90812 1.53188,-3.44 3.44,-3.44zM61.92,68.8c0.87344,0 1.76031,0.33594 2.43219,1.00781l21.64781,21.64781l21.64781,-21.64781c1.34375,-1.34375 3.52062,-1.34375 4.86437,0c1.34375,1.34375 1.34375,3.52062 0,4.86437l-21.64781,21.64781l21.64781,21.64781c1.34375,1.34375 1.34375,3.52062 0,4.86437c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781l-21.64781,-21.64781l-21.64781,21.64781c-0.67187,0.67188 -1.54531,1.00781 -2.43219,1.00781c-0.88687,0 -1.76031,-0.33594 -2.43219,-1.00781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437l21.64781,-21.64781l-21.64781,-21.64781c-1.34375,-1.34375 -1.34375,-3.52062 0,-4.86437c0.67187,-0.67188 1.55875,-1.00781 2.43219,-1.00781z"></path></g></g>
                                 </svg>
-                            </button>
+                            </a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Confirm</h5>
+                                    <button type="button" class="custom-delete-button close" data-dismiss="modal" aria-label="Close" style="border: none; background-color: transparent; font-size: 2rem;">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Are you sure you want to delete this review?
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-between">
+                                        <button type="submit" class="btn" title="delete">                            
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="28" height="28"
+                                                viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#008a22"><path d="M86,21.5c-35.55872,0 -64.5,28.9413 -64.5,64.5c0,35.55869 28.94128,64.5 64.5,64.5c35.55872,0 64.5,-28.94131 64.5,-64.5c0,-35.5587 -28.94128,-64.5 -64.5,-64.5zM86,32.25c29.749,0 53.75,24.00103 53.75,53.75c0,29.74897 -24.001,53.75 -53.75,53.75c-29.749,0 -53.75,-24.00103 -53.75,-53.75c0,-29.74897 24.001,-53.75 53.75,-53.75zM112.60205,64.5l-33.59375,33.59375l-17.46875,-17.46875l-7.5166,7.5271l24.98535,24.99585l41.12085,-41.12085z"></path></g></g></svg>
+                                        </button>
+                                        <button type="button" class="btn" data-dismiss="modal" title="cancel">                   
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" 
+                                                viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#f50009"><path d="M86,14.33333c-39.63167,0 -71.66667,32.035 -71.66667,71.66667c0,39.63167 32.035,71.66667 71.66667,71.66667c39.63167,0 71.66667,-32.035 71.66667,-71.66667c0,-39.63167 -32.035,-71.66667 -71.66667,-71.66667zM119.7335,109.59983c2.80217,2.80217 2.80217,7.3315 0,10.13367c-1.3975,1.3975 -3.23217,2.09983 -5.06683,2.09983c-1.83467,0 -3.66933,-0.70233 -5.06683,-2.09983l-23.59983,-23.59983l-23.59983,23.59983c-1.3975,1.3975 -3.23217,2.09983 -5.06683,2.09983c-1.83467,0 -3.66933,-0.70233 -5.06683,-2.09983c-2.80217,-2.80217 -2.80217,-7.3315 0,-10.13367l23.59983,-23.59983l-23.59983,-23.59983c-2.80217,-2.80217 -2.80217,-7.3315 0,-10.13367c2.80217,-2.80217 7.3315,-2.80217 10.13367,0l23.59983,23.59983l23.59983,-23.59983c2.80217,-2.80217 7.3315,-2.80217 10.13367,0c2.80217,2.80217 2.80217,7.3315 0,10.13367l-23.59983,23.59983z"></path></g></g></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 <% } %> 
@@ -130,6 +182,8 @@
         <% } %> 
     </div>
 </div>
+
+
 
 <!-- We need to use the script below so we can access the mapToken in the showPageMap.js file -->
 <script>

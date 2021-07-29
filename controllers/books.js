@@ -142,7 +142,7 @@ module.exports.show = async (req, res) => {
     req.flash('error', 'Book not found.');
     res.redirect('/books');
   }
-  res.render('books/show', { book });
+  res.render('books/show', { book, review: null });
 };
 
 //DELETE
