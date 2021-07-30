@@ -98,7 +98,6 @@ module.exports.isProfileOwner = async (req, res, next) => {
 
 module.exports.validateMessage = (req, res, next) => {
   const { error } = messageSchema.validate(req.body);
-
   if (error) {
     let msg = error.details.map((el) => el.message).join('');
     msg = msg.replace(/\./g, ' ').replace(/\"/g, '');

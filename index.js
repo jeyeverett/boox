@@ -37,7 +37,8 @@ app.set('views', path.join(__dirname, 'views')); //sets the path to the views fo
 
 //DEPENDENCIES SETUP
 //Note that app.use(function) tells express to use function on every request that comes in - this is middleware - we are doing something after we get a request, but before a response is sent
-app.use(express.urlencoded({ extended: true })); //This tells express to parse POST requests into JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(methodOverride('_method')); //Recall this is how we can call methods other than POST from a form
 app.use(morgan('dev')); //morgan is a development tool that logs to the console information about incoming requests/responses
 //setting up the default directory for static assets

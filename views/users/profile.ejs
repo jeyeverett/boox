@@ -109,32 +109,161 @@
       </div>
     </div>
   </div>
-<!-- Inbox -->
 
-  <div class="modal fade d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" id="inboxModal" tabindex="-1" role="inbox" aria-labelledby="inboxModalLabel" aria-hidden="true">
+<!-- Inbox -->
+<div class="modal fade d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" id="inboxModal" tabindex="-1" role="inbox" aria-labelledby="inboxModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <div class="modal-content">
-          <div class="modal-header">
+            <div class="modal-header">
             <h5 class="modal-title" id="sendMessageModalLabel">Inbox</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
         </div>
-      </div>
-     <div class="list-group list-group-flush border-bottom scrollarea">
-      <% if (user.profile.inbox.length) { %>  
+        </div>
+        </div>
+        <div class="list-group list-group-flush border-bottom scrollarea" id="inboxMessages">
+        <% if (user.profile.inbox.length) { %>  
         <% for (let item of user.profile.inbox) { %>     
-            <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+            <a class="btn list-group-item list-group-item-action py-3 lh-tight pointer" aria-current="true">
                 <div class="d-flex w-100 align-items-center justify-content-between">
                     <strong class="mb-1"><%= item.messages[0].username %> </strong>
                     <small><%= `${item.messages[0].timestamp.getDay()}/${item.messages[0].timestamp.getMonth() + 1}/${item.messages[0].timestamp.getFullYear()}`%></small>
                 </div>
-                <div class="col-10 mb-1 small"><%= item.messages[0].message %> </div>
+                <div class="col-10 mb-1 small"><%= item.messages[0].message %></div>
+                <input type="hidden" value="<%= item._id %>">
             </a>
         <% } %> 
-      <% } else { %> 
-        No messages
-      <% } %> 
+        <% } else { %> 
+        No messages - go to a user's profile and send them a message to start a conversation
+        <% } %> 
+    </div>
+</div>
+
+<!-- Messages Modal -->
+<button type="button" class="btn custom-button" data-toggle="modal" data-target="#messagesModal" style="display: none;" id="messageModalButton">messages</button>
+
+<div class="modal fade" id="messagesModal" tabindex="-1" role="dialog" aria-labelledby="messagesLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chat</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+            <div class="modal-body">
+                <div class="form-group" id="messagesModal__chatContainer"></div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Message:</label>
+                    <textarea class="form-control" id="messagesModal__messageText"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="sendMessageButton">Send message</button>
+            </div>
+      </div>
     </div>
   </div>
+
+  <script>
+    // GET MESSAGES
+      const inbox = document.getElementById('inboxMessages');
+      const inboxChildren = inbox.children;
+
+      for (let message of inboxChildren) {
+          message.addEventListener('click', openMessage);
+      }
+
+      async function openMessage(event) {
+        let id = event.target.closest('a').lastElementChild.value;
+
+        let htmlTemplate = '';
+
+        let htmlObj = document.createElement('div');
+        htmlObj.className = 'overflow-auto px-2';
+        htmlObj.style = 'height: 200px;';
+        htmlObj.id = 'messagesModal__chatContainer--body';
+
+        const messageModalButton = document.getElementById('messageModalButton');
+
+        try {
+            const data = await fetch(`http://localhost:3000/message/${id}`, {
+                method: 'GET'
+            });
+            const result = await data.json();
+
+            result.messages.forEach(message => {
+                htmlTemplate += getTemplate(message);
+            });
+
+            htmlTemplate += `<input type="hidden" value="${id}" />`;
+            htmlObj.innerHTML = htmlTemplate;
+
+            const chatContainer = document.getElementById('messagesModal__chatContainer');
+            if (chatContainer.children.length) chatContainer.removeChild(chatContainer.firstElementChild);
+            chatContainer.appendChild(htmlObj);
+            messageModalButton.click();
+
+            setTimeout(() => {
+                chatContainer.firstElementChild.scrollTop = chatContainer.firstElementChild.scrollHeight;
+            }, 200);
+        } catch (err) {
+            console.log(err);
+        }
+      }
+
+      function getTemplate(message) {
+            return `
+                <span>
+                <div class="d-flex w-100 align-items-center justify-content-between mt-2">
+                    <strong class="mb-1">${message.username}</strong>
+                    <small>${message.timestamp.slice(0, 19).replace('T', ' ')}</small>
+                </div>
+                <div class="col-10 mb-2 small">${message.message}</div>
+                </span>
+            `;
+        }
+
+    //   SEND MESSAGES
+      const sendMsgBtn = document.getElementById('sendMessageButton');
+      sendMsgBtn.addEventListener('click', sendMessage);
+
+      async function sendMessage(event) {
+        const textarea = document.getElementById('messagesModal__messageText'); 
+        const content = textarea.value;
+        if (content === '') return;
+
+        const lastChild = document.getElementById('messagesModal__chatContainer--body').lastElementChild;
+        const id = lastChild.value;
+        try {
+            const data = await fetch(`http://localhost:3000/message/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: {
+                        content,
+                        async: true
+                    }
+                })
+            });
+    
+            const result = await data.json();
+            console.log(result);
+            
+            if (result.success) {
+                const parent = document.getElementById('messagesModal__chatContainer--body');
+                let htmlObj = document.createElement('div');
+                htmlObj.innerHTML = getTemplate(result.message);
+                parent.insertBefore(htmlObj.children[0], lastChild);
+                textarea.value = '';
+                parent.scrollTop = parent.scrollHeight;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+      }
+  </script>

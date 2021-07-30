@@ -150,11 +150,30 @@ module.exports.favorite = async (req, res) => {
 
 // MESSAGES
 
-module.exports.getMessage = (req, res) => {};
+module.exports.getMessage = async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    req.flash('error', 'User not found.');
+    res.status(404).redirect('/books');
+  }
+
+  let messages;
+
+  if (user.profile.inbox.length) {
+    messages = user.profile.inbox.filter(
+      (item) => String(item._id) === String(id)
+    );
+  }
+
+  res.status(200).json(messages[0]);
+};
 
 module.exports.sendMessage = async (req, res) => {
   const { id } = req.params;
-  const { username, content } = req.body.message;
+  const { content, async = false } = req.body.message;
 
   if (!isValidObjectId(id)) {
     req.flash('error', 'Invalid user ID.');
@@ -175,7 +194,7 @@ module.exports.sendMessage = async (req, res) => {
   );
 
   if (receiverIndex >= 0) {
-    receiver.profile.inbox[receiverIndex].messages.unshift({
+    receiver.profile.inbox[receiverIndex].messages.push({
       ...message,
       username: sender.username,
     });
@@ -191,19 +210,28 @@ module.exports.sendMessage = async (req, res) => {
   );
 
   if (senderIndex >= 0) {
-    sender.profile.inbox[senderIndex].messages.unshift({
+    sender.profile.inbox[senderIndex].messages.push({
       ...message,
-      username: receiver.username,
+      username: sender.username,
     });
   } else {
     sender.profile.inbox.unshift({
       _id: id,
-      messages: [{ ...message, username: receiver.username }],
+      messages: [{ ...message, username: sender.username }],
     });
   }
 
   await receiver.save();
   await sender.save();
 
-  res.redirect(`/profile/${id}`);
+  if (async) {
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: { ...message, username: sender.username },
+      });
+  } else {
+    res.status(200).redirect(`/profile/${id}`);
+  }
 };
