@@ -57,3 +57,10 @@ module.exports.profileSchema = Joi.object({
   }).required(),
   deleteImages: Joi.array(),
 });
+
+module.exports.messageSchema = Joi.object({
+  message: Joi.object({
+    username: Joi.string().required().escapeHTML(),
+    content: Joi.string().required().min(0).max(500).escapeHTML(),
+  }).required(),
+});

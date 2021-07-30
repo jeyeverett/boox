@@ -1,8 +1,12 @@
 const User = require('./models/user');
 const Book = require('./models/book');
 const Review = require('./models/review');
-const { bookSchema, reviewSchema, profileSchema } = require('./joiSchema');
-const ExpressError = require('./utilities/ExpressError');
+const {
+  bookSchema,
+  reviewSchema,
+  profileSchema,
+  messageSchema,
+} = require('./joiSchema');
 
 module.exports.isLoggedIn = (req, res, next) => {
   // console.log('req.user is:', req.user); //Passport creates the user field on the req object which allows us to easily check what user is currently logged in
@@ -52,9 +56,11 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 module.exports.validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
   if (error) {
-    //error.details is formatted as an array so we do the following to make it a string
-    const msg = error.details.map((el) => el.message).join('');
-    throw new ExpressError(msg, 400);
+    let msg = error.details.map((el) => el.message).join('');
+    msg = msg.replace(/\./g, ' ').replace(/\"/g, '');
+    req.flash('error', msg);
+    const id = req.originalUrl.slice(7, 31);
+    return res.status(400).redirect(`/books/${id}`);
   } else {
     next();
   }
@@ -65,9 +71,9 @@ module.exports.validateProfile = (req, res, next) => {
 
   if (error) {
     let msg = error.details.map((el) => el.message).join('');
-    msg = msg.replace(/\./, ' ').replace(/\"/, '');
-    req.flash('error', msg);
-    return res.render('users/edit-profile', {
+    msg = msg.replace(/\./g, ' ').replace(/\"/g, '');
+    res.locals.error = msg;
+    return res.status(400).render('users/edit-profile', {
       user: {
         ...req.user,
         profile: { ...req.body.profile, images: req.user.profile.images },
@@ -88,4 +94,18 @@ module.exports.isProfileOwner = async (req, res, next) => {
     return res.redirect(`/profile/${id}`);
   }
   next();
+};
+
+module.exports.validateMessage = (req, res, next) => {
+  const { error } = messageSchema.validate(req.body);
+
+  if (error) {
+    let msg = error.details.map((el) => el.message).join('');
+    msg = msg.replace(/\./g, ' ').replace(/\"/g, '');
+    const id = req.originalUrl.slice(9, 33);
+    req.flash('error', msg);
+    return res.status(400).redirect(`/profile/${id}`);
+  } else {
+    next();
+  }
 };

@@ -104,7 +104,7 @@
 
 .custom-button {
   color: $color-primary;
-  border: 1px solid $color-primary;
+  border: 1px solid rgba($color-primary, 0.9);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -112,7 +112,22 @@
   transition: all 0.2s;
   &:hover {
     color: $color-white;
-    background-color: $color-primary;
+    background-color: rgba($color-primary, 0.9);
+  }
+
+  &--large {
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1.25rem;
+
+    &-grayscale {
+      border-color: $color-black;
+      color: $color-black;
+      &:hover {
+        color: $color-white;
+        background-color: $color-black;
+      }
+    }
   }
 }
 

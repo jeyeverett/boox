@@ -122,6 +122,7 @@ html {
 #custom-header__content {
   text-align: left;
   font-size: 1rem;
+  font-family: "Raleway", sans-serif;
 }
 #custom-header__button {
   margin-top: 2rem;
@@ -164,7 +165,7 @@ html {
   transform: translateY(-1px);
 }
 
-.mapShow {
+.map-show {
   width: 100%;
   height: 250px;
 }
@@ -175,6 +176,29 @@ html {
   position: absolute;
   top: 65px;
   left: 0px;
+}
+@media only screen and (max-width: 75em) {
+  .map-cluster {
+    height: calc(100vh - 65px - 46px);
+  }
+}
+@media only screen and (max-width: 62em) {
+  .map-cluster {
+    top: 45px;
+    height: calc(100vh - 42px - 46px);
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .map-cluster {
+    top: 40px;
+    height: calc(100vh - 42px - 34px);
+  }
+}
+@media only screen and (max-width: 25em) {
+  .map-cluster {
+    top: 34px;
+    height: calc(100vh - 30px - 34px);
+  }
 }
 
 .index-image {
@@ -192,17 +216,8 @@ html {
     max-height: 100%;
   }
 }
-@media (max-width: 992px) {
-  .carouselCustom {
-    display: flex;
-    align-items: center;
-    max-height: 340px;
-    overflow: hidden;
-    position: center;
-  }
-}
 .footer {
-  background-color: rgba(26, 74, 160, 0.9);
+  background-color: #1a4aa0;
   color: rgba(255, 255, 255, 0.5);
   z-index: 1020;
 }
@@ -384,7 +399,7 @@ html {
 
 .custom-button {
   color: #1a4aa0;
-  border: 1px solid #1a4aa0;
+  border: 1px solid rgba(26, 74, 160, 0.9);
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -392,7 +407,20 @@ html {
 }
 .custom-button:hover {
   color: white;
-  background-color: #1a4aa0;
+  background-color: rgba(26, 74, 160, 0.9);
+}
+.custom-button--large {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+}
+.custom-button--large-grayscale {
+  border-color: rgba(49, 54, 57, 0.8);
+  color: rgba(49, 54, 57, 0.8);
+}
+.custom-button--large-grayscale:hover {
+  color: white;
+  background-color: rgba(49, 54, 57, 0.8);
 }
 
 .custom-footer {

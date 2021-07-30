@@ -43,7 +43,7 @@ module.exports.authenticateUser = (req, res) => {
 module.exports.logout = (req, res) => {
   req.logout();
   // req.flash('success', 'Logged out.');
-  res.redirect('/books');
+  res.redirect('/');
 };
 
 // PROFILE
@@ -53,7 +53,14 @@ module.exports.getProfile = async (req, res) => {
     req.flash('error', 'Invalid user ID.');
     res.redirect('/books');
   }
+
   const user = await User.findById(id).populate('profile.favorites').exec();
+
+  if (!user) {
+    req.flash('error', 'User not found.');
+    res.status(404).redirect('/books');
+  }
+
   const booksOffered = await Book.find({ owner: id }).countDocuments();
   const books = await Book.find({ owner: id }).limit(5);
   res.render('users/profile', { user, books, booksOffered });
@@ -61,11 +68,18 @@ module.exports.getProfile = async (req, res) => {
 
 module.exports.getEditProfile = async (req, res) => {
   const { id } = req.params;
+
   if (!isValidObjectId(id)) {
     req.flash('error', 'Invalid user ID.');
-    res.redirect('/books');
+    res.status(400).redirect('/books');
   }
   const user = await User.findById(id);
+
+  if (!user) {
+    req.flash('error', 'User not found.');
+    res.status(404).redirect('/books');
+  }
+
   res.render('users/edit-profile', { user });
 };
 
@@ -132,4 +146,52 @@ module.exports.favorite = async (req, res) => {
     res.status(200).json({ message: 'success', removed: false });
   }
   await user.save();
+};
+
+// MESSAGES
+
+module.exports.getMessage = (req, res) => {};
+
+module.exports.sendMessage = async (req, res) => {
+  const { id } = req.params;
+  const { username, content } = req.body.message;
+
+  if (!isValidObjectId(id)) {
+    req.flash('error', 'Invalid user ID.');
+    res.redirect(`/profile/${id}`);
+  }
+
+  const receiver = await User.findById(id);
+  const sender = await User.findById(req.user._id);
+
+  const message = {
+    message: content,
+    timestamp: new Date(),
+    _id: req.user._id,
+  };
+
+  const receiverIndex = receiver.profile.inbox.findIndex(
+    (item) => String(item._id) === String(req.user._id)
+  );
+
+  if (receiverIndex >= 0) {
+    receiver.profile.inbox[receiverIndex].messages.unshift(message);
+  } else {
+    receiver.profile.inbox.unshift({ _id: req.user._id, messages: [message] });
+  }
+
+  const senderIndex = sender.profile.inbox.findIndex(
+    (item) => String(item._id) === String(id)
+  );
+
+  if (senderIndex >= 0) {
+    sender.profile.inbox[senderIndex].messages.unshift(message);
+  } else {
+    sender.profile.inbox.unshift({ _id: id, messages: [message] });
+  }
+
+  await receiver.save();
+  await sender.save();
+
+  res.redirect(`/profile/${id}`);
 };

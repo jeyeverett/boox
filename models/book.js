@@ -11,7 +11,7 @@ const ImageSchema = new Schema({
 
 //Next we setup a virtual on the ImageSchema to replace the url with a modified one that will shrink the image to thumbnail size
 ImageSchema.virtual('thumbnail').get(function () {
-  return this.url.replace('/upload', '/upload/w_200');
+  return this.url.replace('/upload', '/upload/w_100');
 });
 
 const opts = { toJSON: { virtuals: true } };

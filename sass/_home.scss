@@ -25,13 +25,14 @@
     text-align: left;
     font-size: 1.75rem;
     line-height: 1.75rem;
-    font-family: 'Raleway', sans-serif;
+    font-family: $secondary-font;
     font-weight: 300;
   }
 
   &__content {
     text-align: left;
     font-size: 1rem;
+    font-family: $secondary-font;
   }
   &__button {
     margin-top: 2rem;

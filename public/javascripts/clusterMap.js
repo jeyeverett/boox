@@ -34,11 +34,11 @@ map.on('load', function () {
       'circle-color': [
         'step',
         ['get', 'point_count'],
-        '#4CAF50',
+        '#f84d52',
         10,
-        '#388E3C',
+        '#f50008',
         50,
-        '#1B5E20',
+        '#ac0006',
       ],
       'circle-radius': ['step', ['get', 'point_count'], 15, 10, 20, 50, 25],
     },
@@ -62,7 +62,7 @@ map.on('load', function () {
     source: 'books',
     filter: ['!', ['has', 'point_count']],
     paint: {
-      'circle-color': '#81C784',
+      'circle-color': '#f50008',
       'circle-radius': 4,
       'circle-stroke-width': 1,
       'circle-stroke-color': '#fff',

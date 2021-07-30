@@ -1,4 +1,4 @@
-.mapShow {
+.map-show {
   width: 100%;
   height: 250px;
 }
@@ -9,6 +9,21 @@
   position: absolute;
   top: 65px;
   left: 0px;
+  @include respond(tab-land) {
+    height: calc(100vh - 65px - 46px);
+  }
+  @include respond(tab-port) {
+    top: 45px;
+    height: calc(100vh - 42px - 46px);
+  }
+  @include respond(phone) {
+    top: 40px;
+    height: calc(100vh - 42px - 34px);
+  }
+  @include respond(xs) {
+    top: 34px;
+    height: calc(100vh - 30px - 34px);
+  }
 }
 
 .index-image {
@@ -27,18 +42,8 @@
   }
 }
 
-@media (max-width: 992px) {
-  .carouselCustom {
-    display: flex;
-    align-items: center;
-    max-height: 340px;
-    overflow: hidden;
-    position: center;
-  }
-}
-
 .footer {
-  background-color: rgba(26, 74, 160, 0.9);
+  background-color: $color-primary;
   color: rgba($color-white, 0.5);
   z-index: 1020;
 }

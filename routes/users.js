@@ -7,6 +7,7 @@ const {
   isLoggedIn,
   isProfileOwner,
   validateProfile,
+  validateMessage,
 } = require('../middleware');
 
 const multer = require('multer');
@@ -46,5 +47,14 @@ router
 router.route('/profile/:id').get(users.getProfile);
 
 router.post('/favorite/:id', isLoggedIn, catchAsync(users.favorite));
+
+router
+  .get('/message/:id', isLoggedIn, catchAsync(users.getMessage))
+  .post(
+    '/message/:id',
+    isLoggedIn,
+    validateMessage,
+    catchAsync(users.sendMessage)
+  );
 
 module.exports = router;

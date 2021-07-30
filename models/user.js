@@ -24,15 +24,14 @@ const UserSchema = new Schema({
     name: String,
     bio: String,
     images: [ImageSchema],
-    messages: [
+    inbox: [
       {
-        sender: {
-          type: Schema.Types.ObjectId,
-          ref: 'User',
-        },
-        content: {
-          type: String,
-        },
+        messages: [
+          {
+            message: String,
+            timestamp: Date,
+          },
+        ],
       },
     ],
     favorites: [
