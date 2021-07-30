@@ -44,7 +44,7 @@ const seedDB = async () => {
       genres: JSON.parse(genres.toLowerCase()),
       pages: books[randomBook].pages,
       coverImg: books[randomBook].coverImg,
-      owner: '610442f837421d38f86b7c06',
+      owner: '61044b5add43380ac84e0801',
       location: `${cities[randomLocation].city}, ${cities[randomLocation].province_id}`,
       geometry: {
         coordinates: [

@@ -175,9 +175,15 @@ module.exports.sendMessage = async (req, res) => {
   );
 
   if (receiverIndex >= 0) {
-    receiver.profile.inbox[receiverIndex].messages.unshift(message);
+    receiver.profile.inbox[receiverIndex].messages.unshift({
+      ...message,
+      username: sender.username,
+    });
   } else {
-    receiver.profile.inbox.unshift({ _id: req.user._id, messages: [message] });
+    receiver.profile.inbox.unshift({
+      _id: req.user._id,
+      messages: [{ ...message, username: sender.username }],
+    });
   }
 
   const senderIndex = sender.profile.inbox.findIndex(
@@ -185,9 +191,15 @@ module.exports.sendMessage = async (req, res) => {
   );
 
   if (senderIndex >= 0) {
-    sender.profile.inbox[senderIndex].messages.unshift(message);
+    sender.profile.inbox[senderIndex].messages.unshift({
+      ...message,
+      username: receiver.username,
+    });
   } else {
-    sender.profile.inbox.unshift({ _id: id, messages: [message] });
+    sender.profile.inbox.unshift({
+      _id: id,
+      messages: [{ ...message, username: receiver.username }],
+    });
   }
 
   await receiver.save();

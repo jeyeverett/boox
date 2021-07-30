@@ -28,6 +28,7 @@ const UserSchema = new Schema({
       {
         messages: [
           {
+            username: String,
             message: String,
             timestamp: Date,
           },
