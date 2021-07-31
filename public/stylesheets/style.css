@@ -455,6 +455,15 @@ html {
   height: 50vh;
 }
 
+.custom-close-button {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  border: none;
+  background-color: transparent;
+  font-size: 2rem;
+}
+
 .profile-head {
   transform: translateY(5rem);
 }
