@@ -262,6 +262,15 @@ html {
   color: rgba(0, 0, 0, 0.8);
 }
 
+.hide {
+  transform: translateX(-380px);
+  transition: transform 0.3s;
+}
+
+.show {
+  transform: translateX(0);
+}
+
 .card .card-heading {
   display: flex;
   justify-content: space-between;

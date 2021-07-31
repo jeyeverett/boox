@@ -225,12 +225,10 @@ module.exports.sendMessage = async (req, res) => {
   await sender.save();
 
   if (async) {
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: { ...message, username: sender.username },
-      });
+    res.status(200).json({
+      success: true,
+      message: { ...message, username: sender.username },
+    });
   } else {
     res.status(200).redirect(`/profile/${id}`);
   }

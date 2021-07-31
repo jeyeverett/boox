@@ -60,6 +60,7 @@ module.exports.profileSchema = Joi.object({
 
 module.exports.messageSchema = Joi.object({
   message: Joi.object({
+    username: Joi.string().required().escapeHTML(),
     content: Joi.string().required().min(0).max(500).escapeHTML(),
     async: Joi.boolean(),
   }).required(),

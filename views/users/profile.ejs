@@ -25,13 +25,18 @@
                 </div>
             </div>
             <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0">
+                <ul class="list-inline mb-0 d-flex justify-content-between w-100 ps-5">
                     <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block"><%= booksOffered ? booksOffered : 0 %> </h5><small class="text-muted">Offered</small>
+                        <h5 class="font-weight-bold mb-0 d-block" id="username">@<%= user.username %></h5>
                     </li>
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted">Borrowed</small>
-                    </li>
+                    <span>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block"><%= booksOffered ? booksOffered : 0 %> </h5><small class="text-muted">Offered</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted">Borrowed</small>
+                        </li>
+                    </span>
                 </ul>
             </div>
             <!-- send message modal button -->
@@ -111,7 +116,7 @@
   </div>
 
 <!-- Inbox -->
-<div class="modal fade d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" id="inboxModal" tabindex="-1" role="inbox" aria-labelledby="inboxModalLabel" aria-hidden="true">
+<div class="modal fade d-flex flex-column align-items-stretch flex-shrink-0 bg-white hide" style="width: 380px;" id="inboxModal" tabindex="-1" role="inbox" aria-labelledby="inboxModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -169,6 +174,7 @@
 
   <script>
     // GET MESSAGES
+      const username = document.getElementById('username').textContent.slice(1);
       const inbox = document.getElementById('inboxMessages');
       const inboxChildren = inbox.children;
 
@@ -246,13 +252,13 @@
                 body: JSON.stringify({
                     message: {
                         content,
-                        async: true
+                        async: true,
+                        username: username
                     }
                 })
             });
     
             const result = await data.json();
-            console.log(result);
             
             if (result.success) {
                 const parent = document.getElementById('messagesModal__chatContainer--body');
