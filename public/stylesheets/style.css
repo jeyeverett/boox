@@ -14,6 +14,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
 */
 html {
   font-size: 100%;
+  font-family: "Comfortaa", sans-serif;
   scroll-behavior: smooth;
 }
 @media only screen and (max-width: 75em) {
@@ -40,6 +41,13 @@ html {
   html {
     font-size: 100%;
   }
+}
+
+a:hover {
+  color: white;
+}
+a.active {
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .primary-heading {
@@ -102,11 +110,11 @@ html {
   flex-direction: column;
   width: 27.5rem;
   justify-content: flex-start;
-  font-family: "Comfortaa";
+  font-family: "Comfortaa", sans-serif;
 }
 #custom-header__title {
   text-align: left;
-  font-family: "Comfortaa";
+  font-family: "Comfortaa", sans-serif;
   font-size: 6rem;
   margin-bottom: 0;
   margin-left: -0.5rem;
@@ -271,6 +279,12 @@ html {
   transform: translateX(0);
 }
 
+.card {
+  transition: box-shadow 0.2s;
+}
+.card--hover:hover {
+  box-shadow: 0 1rem 2rem rgba(49, 54, 57, 0.45);
+}
 .card .card-heading {
   display: flex;
   justify-content: space-between;

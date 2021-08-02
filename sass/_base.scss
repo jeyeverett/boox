@@ -1,5 +1,6 @@
 html {
   font-size: 100%; //1rem = 10px because 10px/16px = 62.5% (16px is the assumed default font-size)
+  font-family: $primary-font;
 
   @include respond(tab-land) {
     //screen < 1200px?
@@ -27,4 +28,13 @@ html {
   }
 
   scroll-behavior: smooth;
+}
+
+a {
+  &:hover {
+    color: $color-white;
+  }
+  &.active {
+    background-color: rgba($color-white, 0.4);
+  }
 }

@@ -25,11 +25,14 @@
                 </div>
             </div>
             <div class="bg-light p-4 d-flex justify-content-end text-center">
-                <ul class="list-inline mb-0 d-flex justify-content-between w-100 ps-5">
-                    <li class="list-inline-item">
-                        <h5 class="font-weight-bold mb-0 d-block" id="username">@<%= user.username %></h5>
-                    </li>
+                <ul class="list-inline mb-0 w-100 d-flex justify-content-between ps-5">
                     <span>
+                        <br>
+                        <li class="list-inline-item mt-1">
+                            <h5 class="font-weight-bold mb-0 d-block" id="username">@<%= user.username ? user.username : '' %></h5>
+                        </li>
+                    </span>
+                    <span class="mt-1">
                         <li class="list-inline-item">
                             <h5 class="font-weight-bold mb-0 d-block"><%= booksOffered ? booksOffered : 0 %> </h5><small class="text-muted">Offered</small>
                         </li>
@@ -141,7 +144,7 @@
         </a>
     <% } %> 
     <% } else { %> 
-    No messages - go to a user's profile and send them a message to start a conversation
+    <p class="d-flex justify-content-between align-items-center">No messages - go to a user's profile and send them a message to start a conversation</p>
     <% } %> 
     </div>
 </div>

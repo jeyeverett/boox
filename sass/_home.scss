@@ -12,10 +12,10 @@
   flex-direction: column;
   width: 27.5rem;
   justify-content: flex-start;
-  font-family: 'Comfortaa';
+  font-family: $primary-font;
   &__title {
     text-align: left;
-    font-family: 'Comfortaa';
+    font-family: $primary-font;
     font-size: 6rem;
     margin-bottom: 0;
     margin-left: -0.5rem;

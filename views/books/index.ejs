@@ -4,15 +4,15 @@
     <h1 class="mb-4 primary-heading">Books</h2>
     
     <% for (let book of books) { %>
-        <div class="card card-height mb-3">
-            <div class="row">
+        <div class="card card--hover card-height mb-3">
+            <div class="row py-3">
                 <div class="col-lg-4 d-flex justify-content-center align-items-center">
-                 <div class="index-image" style="background-image: url('<%= book.images[0] ? book.images[0].url : book.coverImg %>')"></div>
+                 <div class="index-image" style="background-image: url('<%= book.images[0] ? book.images[0].url : book.coverImg %>');"></div>
                 </div>
-                <div class="col-lg-8 d-flex align-items-center"">
+                <div class="col-lg-8 d-flex align-items-center">
                     <div class="card-body">
                         <div class="card-heading">
-                            <h5 class="card-title mb-3 pe-5 tertiary-heading"><%= book.title %></h5>
+                            <h5 class="card-title mb-3 tertiary-heading"><%= book.title %></h5>
                             
                         </div>
                         <p class="card-text mb-0"><%= book.description.length > 300 ? book.description.slice(0, 300) + '...' : book.description %></p>

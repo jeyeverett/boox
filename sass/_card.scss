@@ -1,4 +1,8 @@
 .card {
+  transition: box-shadow 0.2s;
+  &--hover:hover {
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.45);
+  }
   .card-heading {
     display: flex;
     justify-content: space-between;
