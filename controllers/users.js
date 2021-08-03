@@ -64,8 +64,6 @@ module.exports.getProfile = async (req, res) => {
   const booksOffered = await Book.find({ owner: id }).countDocuments();
   const books = await Book.find({ owner: id }).limit(5);
 
-  console.log(user._doc);
-
   const returnedUser = {
     ...user._doc,
     profile: {
@@ -162,7 +160,6 @@ module.exports.favorite = async (req, res) => {
 };
 
 // MESSAGES
-
 module.exports.getMessage = async (req, res) => {
   const { id } = req.params;
 
@@ -176,19 +173,20 @@ module.exports.getMessage = async (req, res) => {
   let messages;
 
   if (user.profile.inbox.length) {
-    messages = user.profile.inbox.filter(
+    let index = user.profile.inbox.findIndex(
       (partnerId) => String(partnerId._id) === String(id)
     );
+    messages = user.profile.inbox[index];
+    user.profile.inbox[index].isUnreadMsg = false;
+    await user.save();
   }
 
-  res.status(200).json(messages[0]);
+  res.status(200).json(messages);
 };
 
 module.exports.sendMessage = async (req, res) => {
   const { id } = req.params;
   const { content, async = false } = req.body.message;
-
-  console.log(req.body.message);
 
   if (!isValidObjectId(id)) {
     req.flash('error', 'Invalid user ID.');
@@ -214,11 +212,13 @@ module.exports.sendMessage = async (req, res) => {
       username: sender.username,
     });
     receiver.profile.inbox[receiverIndex].timestamp = new Date();
+    receiver.profile.inbox[receiverIndex].isUnreadMsg = true;
   } else {
     receiver.profile.inbox.unshift({
       _id: req.user._id,
       partnerUsername: sender.username,
       timestamp: new Date(),
+      isUnreadMsg: true,
       messages: [{ ...message, username: sender.username }],
     });
   }
@@ -233,11 +233,13 @@ module.exports.sendMessage = async (req, res) => {
       username: sender.username,
     });
     sender.profile.inbox[senderIndex].timestamp = new Date();
+    sender.profile.inbox[senderIndex].isUnreadMsg = false;
   } else {
     sender.profile.inbox.unshift({
       _id: id,
       partnerUsername: receiver.username,
       timestamp: new Date(),
+      isUnreadMsg: false,
       messages: [{ ...message, username: sender.username }],
     });
   }

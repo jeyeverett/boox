@@ -13,9 +13,7 @@
                         <% if (user.profile.images.length) { %> 
                         <img src="<%= user.profile.images[0].url %> " alt="user selfie" width="130" class="rounded mb-2 img-thumbnail">
                         <% } else { %> 
-                            <svg xmlns="http://www.w3.org/2000/svg" style="opacity: 0.75;" x="0px" y="0px" width="130" height="130" 
-                                width="130" class="rounded mb-2 img-thumbnail"
-                                viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M169.34609,86c0,-46.02344 -37.32266,-83.34609 -83.34609,-83.34609c-46.02344,0 -83.34609,37.32266 -83.34609,83.34609c0,46.02344 37.32266,83.34609 83.34609,83.34609c46.02344,0 83.34609,-37.32266 83.34609,-83.34609z" fill="#1a4aa0"></path><path d="M49.08047,60.97266c0,-4.66953 1.51172,-9.40625 4.50156,-14.21016c2.98984,-4.80391 7.39063,-8.76797 13.13516,-11.92578c5.74453,-3.15781 12.46328,-4.73672 20.15625,-4.73672c7.12187,0 13.4375,1.31016 18.87969,3.96406c5.47578,2.62031 9.675,6.21484 12.66484,10.75c2.98984,4.53516 4.46797,9.43984 4.46797,14.74766c0,4.19922 -0.83984,7.86094 -2.55312,10.98516c-1.71328,3.15781 -3.72891,5.87891 -6.04687,8.16328c-2.35156,2.28438 -6.51719,6.14766 -12.59766,11.55625c-1.67969,1.51172 -3.02344,2.85547 -4.03125,4.03125c-1.00781,1.14219 -1.74688,2.21719 -2.25078,3.15781c-0.50391,0.97422 -0.87344,1.91484 -1.14219,2.88906c-0.26875,0.97422 -0.67187,2.65391 -1.20938,5.07266c-0.94062,5.10625 -3.86328,7.69297 -8.76797,7.69297c-2.55313,0 -4.70312,-0.83984 -6.45,-2.51953c-1.74687,-1.67969 -2.62031,-4.16563 -2.62031,-7.45781c0,-4.13203 0.63828,-7.72656 1.91484,-10.75c1.27656,-3.02344 2.98984,-5.67734 5.10625,-7.96172c2.11641,-2.28437 4.97187,-5.00547 8.56641,-8.16328c3.15781,-2.75469 5.40859,-4.8375 6.81953,-6.24844c1.41094,-1.41094 2.58672,-2.95625 3.52734,-4.70312c0.97422,-1.71328 1.44453,-3.59453 1.44453,-5.61016c0,-3.93047 -1.47812,-7.25625 -4.40078,-9.97734c-2.92266,-2.72109 -6.71875,-4.06484 -11.32109,-4.06484c-5.40859,0 -9.40625,1.37734 -11.95938,4.09844c-2.55312,2.72109 -4.73672,6.75234 -6.48359,12.06016c-1.67969,5.57656 -4.8375,8.33125 -9.50703,8.33125c-2.75469,0 -5.07266,-0.97422 -6.9875,-2.92266c-1.88125,-1.88125 -2.85547,-3.96406 -2.85547,-6.24844zM85.12656,141.86641c-2.98984,0 -5.61016,-0.97422 -7.86094,-2.92266c-2.25078,-1.94844 -3.35937,-4.66953 -3.35937,-8.16328c0,-3.09063 1.075,-5.71094 3.25859,-7.82734c2.15,-2.11641 4.8375,-3.15781 7.96172,-3.15781c3.09063,0 5.71094,1.075 7.82734,3.15781c2.11641,2.11641 3.15781,4.73672 3.15781,7.82734c0,3.46016 -1.10859,6.14766 -3.32578,8.12969c-2.21719,1.98203 -4.77031,2.95625 -7.65937,2.95625z" fill="#ffffff"></path></g></g></svg>
+                            <%- include('../partials/svg/unknown-avatar') %>
                         <% } %> 
                     </div>
                     <div class="media-body mb-5 ms-2">
@@ -135,20 +133,22 @@
     <% if (user.profile.inbox.length) { %>  
     <% for (let chatPartner of user.profile.inbox) { %> 
         <% const newestMsg = chatPartner.messages.length - 1 %>     
-        <a class="btn list-group-item list-group-item-action py-3 lh-tight pointer" aria-current="true">
+        <a class="btn list-group-item list-group-item-action py-3 lh-tight pointer" aria-current="true" 
+        id="<%= chatPartner._id %>">
             <div class="d-flex w-100 align-items-center justify-content-between">
-                <strong class="mb-1"><%= chatPartner.partnerUsername %></strong>
-                <small>
+                <strong class="mb-1" id="<%= chatPartner.partnerUsername %>"><%=chatPartner.partnerUsername%><% if (chatPartner.isUnreadMsg) { %><span class="badge badge-secondary custom-badge ms-2">New</span><% } %></strong>
+                <small id="<%= chatPartner._id %>-date">
                     <%= 
                         `${chatPartner.messages[newestMsg].timestamp.toISOString().slice(0, 10).replace('T', ' ')}`
                     %>
                 </small>
             </div>
             <div class="col-10 mb-1 small mt-2">
-                <strong class="mb-1"><%= chatPartner.messages[newestMsg].username %>:</strong>
-                <%= chatPartner.messages[newestMsg].message.slice(0, 50) %> ...
+                <strong class="mb-1" id="<%= chatPartner.partnerUsername %>-username"><%= chatPartner.messages[newestMsg].username %>:</strong>
+                <span id="<%= chatPartner.partnerUsername %>-message">
+                    <%= chatPartner.messages[newestMsg].message.length > 51 ? `${chatPartner.messages[newestMsg].message.slice(0, 50)} ...` : chatPartner.messages[newestMsg].message %>
+                </span>
             </div>
-            <input type="hidden" value="<%= chatPartner._id %>">
         </a>
     <% } %> 
     <% } else { %> 
@@ -170,7 +170,7 @@
           </button>
         </div>
             <div class="modal-body">
-                <div class="form-group" id="messagesModal__chatContainer"></div>
+                <div class="form-group px-2" id="messagesModal__chatContainer"></div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">Message:</label>
                     <textarea class="form-control" id="messagesModal__messageText"></textarea>
@@ -197,7 +197,7 @@
       });
   
       socket.on('private message', ({ content, from }) => {
-          if (document.getElementById('messagesModal__chatContainer--body')) {
+          if (document.getElementById('messagesModal__chatContainer')) {
               pushMessage(content, from);
           }
       });
@@ -209,30 +209,91 @@
         }
       });
 
-      function pushMessage(content, from) {
-        const lastChild = document.getElementById('messagesModal__chatContainer--body').lastElementChild;
-        const partnerId = lastChild.value;
-        // If the chat is open append the message
-        if (connectedUsers[String(partnerId)] === String(from) || from === 'self') {
-            const parent = document.getElementById('messagesModal__chatContainer--body');
-            let htmlObj = document.createElement('div');
-            htmlObj.innerHTML = getMessageTemplate(content);
-            parent.insertBefore(htmlObj.children[0], lastChild);
-            parent.scrollTop = parent.scrollHeight;
+      function pushMessage(message, from, to) {
+        const inbox = document.getElementById('inboxMessages');
+        const chatContainer = document.getElementById('messagesModal__chatContainer');
+        const ids = [];
+
+        for (let i = 0; i < inbox.children.length; i++) {
+            ids.push(String(inbox.children[i].id));
         }
+
+        if (!ids.includes(String(message._id)) && message._id !== currentUserId) {
+            let htmlObj = document.createElement('div');
+            htmlObj.innerHTML = getInboxMessageTemplate(message);
+            if (inbox.children[0].tagName === 'P') inbox.removeChild(inbox.children[0]);
+            inbox.appendChild(htmlObj.children[0]);
+            inbox.lastElementChild.addEventListener('click', openMessage);
+            return;
+        } else if (chatContainer.childElementCount) {
+            const parent = chatContainer.firstElementChild;
+            const lastChild = parent.lastElementChild;
+            const partnerId = lastChild.value;
+            // If the chat is open append the message
+            if (connectedUsers[String(partnerId)] === String(from) || from === currentUsername) {
+                let htmlObj = document.createElement('div');
+                htmlObj.innerHTML = getMessageTemplate(message);
+                parent.insertBefore(htmlObj.children[0], lastChild);
+                parent.scrollTop = parent.scrollHeight;
+            }
+            return updateInbox(message, from, to);
+        } 
+
+        // if the inbox is open update it
+      }
+
+      function getInboxMessageTemplate(message) {
+          return `<a class="btn list-group-item list-group-item-action py-3 lh-tight pointer" aria-current="true" id="${message._id}">
+            <div class="d-flex w-100 align-items-center justify-content-between">
+                <strong class="mb-1" id="${message.username.trim()}">${message.username.trim()}<span class="badge badge-secondary custom-badge ms-2">New</span></strong>
+                <small id="${message._id}-date">
+                    ${message.timestamp.slice(0, 10).replace('T', ' ')}
+                </small>
+            </div>
+            <div class="col-10 mb-1 small mt-2">
+                <strong class="mb-1" id="${message.username.trim()}-username">${message.username.trim()}:</strong>
+                <span id="${message.username.trim()}-message">
+                    ${message.message.length > 51 ? message.message.slice(0, 50) + '...' : message.message}
+                </span>
+            </div>
+        </a>`;
+      }
+
+      function updateInbox(message, from, to) {
+          let username, newMessage, newBadgeContainer;
+        if (from === currentUsername) {
+            username = document.getElementById(`${to}-username`);
+            newMessage = document.getElementById(`${to}-message`);
+            newBadgeContainer = document.getElementById(to);
+        } else {
+            username = document.getElementById(`${message.username}-username`);
+            newMessage = document.getElementById(`${message.username}-message`);
+            newBadgeContainer = document.getElementById(message.username);
+            if (newBadgeContainer.childElementCount === 0) {
+                const htmlObj = document.createElement('div');
+                htmlObj.innerHTML = '<span class="badge badge-secondary custom-badge ms-2">New</span>';
+                newBadgeContainer.appendChild(htmlObj.children[0]);
+            }
+        }
+
+        username.textContent = message.username + ':';
+        newMessage.textContent = message.message.length > 51 ? `${message.message.slice(0, 50)}...` : message.message;
+        return;
       }
 
   </script>
   
   <script>
     // GET MESSAGES
-      const username = document.getElementById('username').textContent.slice(1);
+      const currentUsername = "<%= currentUser.username %>";
+      const currentUserId = "<%= currentUser._id %>";
 
       const inbox = document.getElementById('inboxMessages');
       const inboxChildren = inbox.children;
 
       const sendMsgBtn = document.getElementById('sendMessageButton');
       sendMsgBtn.addEventListener('click', sendMessage);
+
       if (inbox.children[0].textContent.slice(0, 11) !== 'No messages') {
           for (let message of inboxChildren) {
               message.addEventListener('click', openMessage);
@@ -252,16 +313,17 @@
       }
 
       async function openMessage(event) {
-        let partnerId = event.target.closest('a').lastElementChild.value;
+        const messageModalButton = document.getElementById('messageModalButton');
+        const chatBox = event.target.closest('a');
+        const partnerId = chatBox.id;
+        const partnerUsername = chatBox.children[0].children[0].textContent.replace('New', '');
+        const newBadge = document.getElementById(partnerUsername).lastElementChild;
 
         let htmlTemplate = '';
 
-        let htmlObj = document.createElement('div');
-        htmlObj.className = 'overflow-auto px-2';
-        htmlObj.style = 'height: 200px;';
-        htmlObj.id = 'messagesModal__chatContainer--body';
-
-        const messageModalButton = document.getElementById('messageModalButton');
+        const htmlObj = document.createElement('div');
+        htmlObj.className = 'overflow-auto';
+        htmlObj. style = 'height: 200px;'
 
         try {
             const data = await fetch(`http://localhost:3000/message/${partnerId}`, {
@@ -274,13 +336,16 @@
                 htmlTemplate += getMessageTemplate(message);
             });
 
-            htmlTemplate += `<input type="hidden" value="${partnerId}" />`;
+            htmlTemplate += `<input type="hidden" name="${partnerUsername}" value="${partnerId}" />`;
+
             htmlObj.innerHTML = htmlTemplate;
 
             const chatContainer = document.getElementById('messagesModal__chatContainer');
             if (chatContainer.children.length) chatContainer.removeChild(chatContainer.firstElementChild);
             chatContainer.appendChild(htmlObj);
+
             messageModalButton.click();
+            if (newBadge) newBadge.parentElement.removeChild(newBadge);
 
             setTimeout(() => {
                 chatContainer.firstElementChild.scrollTop = chatContainer.firstElementChild.scrollHeight;
@@ -296,8 +361,9 @@
 
         if (content === '') return;
 
-        const lastChild = document.getElementById('messagesModal__chatContainer--body').lastElementChild;
+        const lastChild = document.getElementById('messagesModal__chatContainer').firstElementChild.lastElementChild;
         const partnerId = lastChild.value;
+        const partnerUsername = lastChild.name;
 
         try {
             const data = await fetch(`http://localhost:3000/message/${partnerId}`, {
@@ -309,7 +375,7 @@
                     message: {
                         content,
                         async: true,
-                        username: username
+                        username: currentUsername
                     }
                 })
             });
@@ -321,12 +387,12 @@
                 if (connectedUsers[String(partnerId)]) {
                     socket.emit('private message', {
                         content: result.message,
-                        to: connectedUsers[String(partnerId)]
+                        to: connectedUsers[String(partnerId)],
                     })
                 }
-                pushMessage(result.message, 'self');
+                pushMessage(result.message, currentUsername, partnerUsername);
                 textarea.value = '';
-                parent.scrollTop = parent.scrollHeight;
+                lastChild.parentElement.scrollTop = lastChild.parentElement.scrollHeight;
             }
 
         } catch (err) {

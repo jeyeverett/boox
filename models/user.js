@@ -28,6 +28,7 @@ const UserSchema = new Schema({
       {
         partnerUsername: String,
         timestamp: Date,
+        isUnreadMsg: Boolean,
         messages: [
           {
             username: String,
