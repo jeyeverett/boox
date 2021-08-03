@@ -9,7 +9,6 @@ const {
 } = require('./joiSchema');
 
 module.exports.isLoggedIn = (req, res, next) => {
-  // console.log('req.user is:', req.user); //Passport creates the user field on the req object which allows us to easily check what user is currently logged in
   if (!req.isAuthenticated()) {
     req.session.returnTo = req.originalUrl; //returnTo is a custom field we created to store a url we may need to redirect to (i.e. if a user tries to access a page they need to be logged in for, they will be redirected to that page after logging in)
     req.flash('error', 'You need to be signed in to do this.');
@@ -98,7 +97,6 @@ module.exports.isProfileOwner = async (req, res, next) => {
 
 module.exports.validateMessage = (req, res, next) => {
   const { error } = messageSchema.validate(req.body);
-  console.log(error);
   if (error) {
     let msg = error.details.map((el) => el.message).join('');
     msg = msg.replace(/\./g, ' ').replace(/\"/g, '');

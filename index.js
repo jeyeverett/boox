@@ -188,6 +188,39 @@ app.use((err, req, res, next) => {
 
 //We create the port variable because Heroku will use its own determined port, we use 3000 for development
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`WWC Server Initiated on Port ${port}`);
+});
+
+const io = require('./socket').init(server);
+
+io.use((socket, next) => {
+  socket.userId = socket.handshake.auth.userId;
+
+  if (!socket.userId) {
+    return next(new ExpressError('User must be logged in.', 400));
+  }
+
+  socket.on('private message', ({ to, content }) => {
+    socket.to(to).emit('private message', {
+      content,
+      from: socket.id,
+    });
+  });
+  next();
+});
+
+io.on('connection', (socket) => {
+  console.log('Client Connected');
+  console.log(socket.id);
+  const users = {};
+  for (let [id, socket] of io.of('/').sockets) {
+    users[socket.userId] = id;
+  }
+  io.emit('users', users);
+});
+
+io.on('error', (err) => {
+  console.log('error');
+  console.log(err);
 });

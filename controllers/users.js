@@ -63,7 +63,20 @@ module.exports.getProfile = async (req, res) => {
 
   const booksOffered = await Book.find({ owner: id }).countDocuments();
   const books = await Book.find({ owner: id }).limit(5);
-  res.render('users/profile', { user, books, booksOffered });
+
+  console.log(user._doc);
+
+  const returnedUser = {
+    ...user._doc,
+    profile: {
+      ...user._doc.profile,
+      inbox: user._doc.profile.inbox.sort((a, b) => b.timestamp - a.timestamp),
+    },
+  };
+
+  console.log(returnedUser);
+
+  res.render('users/profile', { user: returnedUser, books, booksOffered });
 };
 
 module.exports.getEditProfile = async (req, res) => {
@@ -164,7 +177,7 @@ module.exports.getMessage = async (req, res) => {
 
   if (user.profile.inbox.length) {
     messages = user.profile.inbox.filter(
-      (item) => String(item._id) === String(id)
+      (partnerId) => String(partnerId._id) === String(id)
     );
   }
 
@@ -174,6 +187,8 @@ module.exports.getMessage = async (req, res) => {
 module.exports.sendMessage = async (req, res) => {
   const { id } = req.params;
   const { content, async = false } = req.body.message;
+
+  console.log(req.body.message);
 
   if (!isValidObjectId(id)) {
     req.flash('error', 'Invalid user ID.');
@@ -198,9 +213,12 @@ module.exports.sendMessage = async (req, res) => {
       ...message,
       username: sender.username,
     });
+    receiver.profile.inbox[receiverIndex].timestamp = new Date();
   } else {
     receiver.profile.inbox.unshift({
       _id: req.user._id,
+      partnerUsername: sender.username,
+      timestamp: new Date(),
       messages: [{ ...message, username: sender.username }],
     });
   }
@@ -214,9 +232,12 @@ module.exports.sendMessage = async (req, res) => {
       ...message,
       username: sender.username,
     });
+    sender.profile.inbox[senderIndex].timestamp = new Date();
   } else {
     sender.profile.inbox.unshift({
       _id: id,
+      partnerUsername: receiver.username,
+      timestamp: new Date(),
       messages: [{ ...message, username: sender.username }],
     });
   }

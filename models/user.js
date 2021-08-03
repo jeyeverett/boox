@@ -26,6 +26,8 @@ const UserSchema = new Schema({
     images: [ImageSchema],
     inbox: [
       {
+        partnerUsername: String,
+        timestamp: Date,
         messages: [
           {
             username: String,
