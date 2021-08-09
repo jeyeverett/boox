@@ -283,7 +283,7 @@ a.active {
   transition: box-shadow 0.2s;
 }
 .card--hover:hover {
-  box-shadow: 0 1rem 2rem rgba(49, 54, 57, 0.45);
+  box-shadow: 0 0 0.5rem rgba(49, 54, 57, 0.45);
 }
 .card .card-heading {
   display: flex;
@@ -322,6 +322,9 @@ a.active {
 }
 .card .custom-delete-button g {
   fill: rgba(49, 54, 57, 0.8);
+}
+.card__img-top {
+  width: 100%;
 }
 
 #custom-navbar {
@@ -389,6 +392,7 @@ a.active {
 }
 #custom-dropdown ul li a:hover {
   color: rgba(49, 54, 57, 0.8);
+  border: 1px solid rgba(49, 54, 57, 0.8);
 }
 @media only screen and (max-width: 62em) {
   #custom-dropdown {
@@ -482,7 +486,24 @@ a.active {
   color: #1a4aa0;
   border: 1px solid #1a4aa0;
 }
+.custom-badge--white {
+  color: white;
+  border: 1px solid white;
+}
 
 .profile-head {
   transform: translateY(5rem);
+}
+
+.message__chatPartner {
+  background-color: rgba(49, 54, 57, 0.25);
+  max-width: 75%;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+.message__user {
+  background-color: rgba(26, 74, 160, 0.25);
+  max-width: 75%;
+  padding: 1rem 2rem;
+  border-radius: 10px;
 }

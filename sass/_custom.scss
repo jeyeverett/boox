@@ -64,6 +64,7 @@
       color: $color-white;
       &:hover {
         color: $color-black;
+        border: 1px solid $color-black;
       }
     }
   }
@@ -171,4 +172,9 @@
 .custom-badge {
   color: $color-primary;
   border: 1px solid $color-primary;
+
+  &--white {
+    color: $color-white;
+    border: 1px solid $color-white;
+  }
 }

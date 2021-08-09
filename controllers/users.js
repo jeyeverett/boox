@@ -19,6 +19,7 @@ module.exports.create = async (req, res, next) => {
       if (err) return next(err);
     });
     // req.flash('success', `Welcome to Yelp Came ${username}!`);
+    req.flash('success', 'Welcome to boox!');
     res.redirect('/books');
   } catch (e) {
     req.flash('error', e.message);

@@ -7,3 +7,18 @@
 //     background-size: cover;
 //     background-repeat: no-repeat
 // }
+
+.message {
+  &__chatPartner {
+    background-color: $color-chatPartner;
+    max-width: 75%;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+  }
+  &__user {
+    background-color: $color-user;
+    max-width: 75%;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+  }
+}

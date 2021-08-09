@@ -1,7 +1,7 @@
 .card {
   transition: box-shadow 0.2s;
   &--hover:hover {
-    box-shadow: 0 1rem 2rem rgba($color-black, 0.45);
+    box-shadow: 0 0 0.5rem rgba($color-black, 0.45);
   }
   .card-heading {
     display: flex;
@@ -46,5 +46,9 @@
     g {
       fill: $color-black;
     }
+  }
+
+  &__img-top {
+    width: 100%;
   }
 }
