@@ -1,9 +1,10 @@
 <% layout('layouts/boilerplate') %>
 
-<div class="row mb-5">
+<div class="row mb-5 px-4 bg-white">
   <div class="card">
-    <h1 class="text-center mt-2 mb-4 primary-heading">Create A New Book</h1>
-    <div class="col-md-6 offset-md-3">
+    <h1 class="text-center mt-4 mb-2 primary-heading">Create a Book Offer</h1>
+    <h5 class="text-center mt-2 mb-5 secondary-heading">Share your favorite book with someone</h5>
+    <div class="col-md-6 offset-md-3 mt-3">
       <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side - Note we've added the enctype="multipart/form-data" to allow for image uploads-->
       <form
         action="/books"
@@ -12,98 +13,92 @@
         novalidate
         enctype="multipart/form-data"
       >
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="title">*Title: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="text"
-            id="title"
-            name="book[title]"
-            placeholder="Book Title"
-            value="<%= book && book.title %>"
-            required
+          class="form-control form-control__input"
+          type="text"
+          id="title"
+          name="book[title]"
+          placeholder="Title"
+          value="<%= book && book.title %>"
+          required
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="title">Title</label>
         </div>
 
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="author">*Author: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="text"
-            id="author"
-            name="book[author]"
-            placeholder="Book Author"
-            value="<%= book && book.author %>"
-            required
+          class="form-control form-control__input"
+          type="text"
+          id="author"
+          name="book[author]"
+          placeholder="Author"
+          value="<%= book && book.author %>"
+          required
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="author">Author</label>
         </div>
 
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="location">*Location: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="text"
-            id="location"
-            name="book[location]"
-            placeholder="e.g. Los Angeles, California"
-            value="<%= book && book.location %>"
-            required
+          class="form-control form-control__input"
+          type="text"
+          id="location"
+          name="book[location]"
+          placeholder="Location e.g. Los Angeles, California"
+          value="<%= book && book.location %>"
+          required
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="location">Location</label>
         </div>
 
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="genres">Genres: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="text"
-            id="genres"
-            name="book[genres]"
-            placeholder="e.g. fantasy, science-fiction, adventure, etc."
-            value="<%= book && (typeof book.genres === 'string' ? book.genres : book.genres.join(', ')) %>"
+          class="form-control form-control__input"
+          type="text"
+          id="genres"
+          name="book[genres]"
+          placeholder="Genres e.g. fantasy, science-fiction, adventure"
+          value="<%= book && (typeof book.genres === 'string' ? book.genres : book.genres.join(', ')) %>"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="genres">Genres</label>
         </div>
 
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="language">Language: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="text"
-            id="language"
-            name="book[language]"
-            placeholder="English"
-            value="<%= book && book.language %>"
+          class="form-control form-control__input"
+          type="text"
+          id="language"
+          name="book[language]"
+          placeholder="Language"
+          value="<%= book && book.language %>"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="language">Language</label>
         </div>
 
-        <div class="mb-2">
-          <label class="form-label tertiary-heading" for="pages">Number of Pages: </label>
+        <div class="mb-4">
           <input
-            class="form-control"
-            type="number"
-            id="pages"
-            name="book[pages]"
-            placeholder="250"
-            value="<%= book && book.pages %>"
+          class="form-control form-control__input"
+          type="number"
+          id="pages"
+          name="book[pages]"
+          placeholder="Number of pages"
+          value="<%= book && book.pages %>"
           />
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="pages">Number of Pages</label>
         </div>
                 
-        <div class="mb-3">
-          <label class="form-label tertiary-heading" for="description">*Description: </label>
+        <div class="mb-4">
           <textarea
-            class="form-control"
-            type="text"
-            id="description"
-            name="book[description]"
-            placeholder="This single volume brings together all of Poe's stories and poems, and illuminates the diverse and multifaceted genius of one of the greatest and most influential figures in American literary history..."
-            required
+          class="form-control form-control__input"
+          type="text"
+          id="description"
+          name="book[description]"
+          placeholder="Tell us about the book"
+          style="height: 12rem; resize: none;"
+          required
           ><%= book && book.description %></textarea>
-          <div class="valid-feedback">Looks good!</div>
+          <label class="form-control__label" for="description">Description</label>
         </div>
 
         <!-- <div class="mb-3">
@@ -115,20 +110,19 @@
         </div> -->
 
         <!-- Below we set up an input for multiple image upload - note the 'multiple' attribute -->
-        <div class="mb-3">
+        <div class="mb-4 mt-2" style="border: 1px solid #ced4da; border-bottom: 2px solid #ced4da; padding: 1rem;">
           <div class="form-file custom-file">
             <input
               type="file"
-              class="form-file-input"
+              class="form-file-input mb-3"
               id="image"
               name="image"
               multiple
             />
             <label class="form-file-label" for="image">
               <span class="form-file-text custom-file-label"
-                >Choose image(s)...</span
+                >Upload your image(s) here</span
               >
-              <span class="form-file-button">Browse</span>
             </label>
           </div>
         </div>

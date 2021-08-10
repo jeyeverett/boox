@@ -95,3 +95,53 @@
 .show {
   transform: translateX(0);
 }
+
+// FORMS
+.form-control {
+  &__input {
+    font-size: 1.2rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    border-bottom: 2px solid #ced4da;
+    width: 100%;
+    display: block;
+    transition: all 0.3s;
+
+    @include respond(tab-port) {
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &:focus:invalid {
+      border-bottom: 2px solid $color-red;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-left: 1rem;
+    display: block;
+    color: $color-black;
+    transition: all 0.3s;
+  }
+
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(2rem);
+  }
+}
+
+.form-file {
+  &-input {
+    background-color: transparent;
+  }
+}

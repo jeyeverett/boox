@@ -167,9 +167,9 @@
           </button>
         </div>
             <div class="modal-body">
-                <div class="form-group px-2" id="messagesModal__chatContainer"></div>
+                <div class="form-group px-2 custom-scrollbar" id="messagesModal__chatContainer"></div>
                 <div class="form-group py-3 d-flex">
-                    <textarea class="form-control" id="messagesModal__messageText" style="resize: none;"></textarea>
+                    <textarea class="form-control custom-scrollbar--small" id="messagesModal__messageText" style="resize: none;"></textarea>
                     <button type="button" class="btn custom-button w-25" id="sendMessageButton">Send</button>
                 </div>
             </div>
@@ -346,7 +346,7 @@
         let htmlTemplate = '';
 
         const htmlObj = document.createElement('div');
-        htmlObj.className = 'overflow-auto';
+        htmlObj.className = 'overflow-auto custom-scrollbar--medium';
         htmlObj.style = 'height: 200px;'
         htmlObj.id = `${partnerId}-chatbox`;
         htmlObj.setAttribute('name', `${partnerUsername}-chatbox`);
