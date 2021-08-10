@@ -178,3 +178,15 @@
     border: 1px solid $color-white;
   }
 }
+
+.custom-scrollbar {
+  &--small {
+    @include custom-scrollbar(5px);
+  }
+  &--medium {
+    @include custom-scrollbar(7px);
+  }
+  &--large {
+    @include custom-scrollbar(15px);
+  }
+}

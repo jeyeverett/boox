@@ -2,6 +2,8 @@ html {
   font-size: 100%; //1rem = 10px because 10px/16px = 62.5% (16px is the assumed default font-size)
   font-family: $primary-font;
 
+  @include custom-scrollbar(8px);
+
   @include respond(tab-land) {
     //screen < 1200px?
     font-size: 87.5%; //1rem = 9px because 9px/16px = 56.25%;
