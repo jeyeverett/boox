@@ -102,7 +102,7 @@ app.use(
 //MONGOOSE SETUP
 const mongoose = require('mongoose');
 //  process.env.MONGO_URL ||
-const dbURL = 'mongodb://localhost:27017/boox';
+const dbURL = process.env.MONGO_URL || 'mongodb://localhost:27017/boox';
 
 mongoose
   .connect(dbURL, {

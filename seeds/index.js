@@ -6,7 +6,7 @@ const Book = require('../models/book');
 const dbURL = process.env.MONGO_URL || 'mongodb://localhost:27017/boox';
 
 mongoose
-  .connect('mongodb://localhost:27017/boox', {
+  .connect('mongodb+srv://admin:xZtzv99t6gB639E1@cluster0.3cano.mongodb.net/boox?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
