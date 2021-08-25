@@ -1,7 +1,12 @@
 <% layout('layouts/boilerplate') %> <!-- This is an improvement on setting up our EJS templates, it allows us to create one 'boilerplate' template which we can use with all other templates -->
 
 <div class="indexPage">
-    <h1 class="mb-4 primary-heading">Books</h2>
+    <h1 class="mb-2 primary-heading">Books</h2>
+    <h5 class="secondary-heading">Find a book near you or browse and read reviews</h5>
+    <p>
+        You can rate and review lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima, vero obcaecati sint non, nisi dolores provident doloremque perferendis dolore expedita fugiat! Accusantium nihil ad velit quis rem perspiciatis, vel nisi.
+    </p>
+
     
     <% for (let book of books) { %>
         <div class="card card--hover card-height mb-3">

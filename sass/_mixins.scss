@@ -77,12 +77,12 @@ ORDER: Base + typography > general layout + grid > page layout > components
   &::-webkit-scrollbar {
     width: $width !important;
     background-color: #f5f5f5 !important;
-    border-radius: 2px !important;
+    border-radius: 0.25rem !important;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: rgba($color-black, 0.5) !important;
     border: 1px solid rgba($color-black, 0.75) !important;
-    border-radius: 1px !important;
+    border-radius: 0.25rem !important;
   }
 }

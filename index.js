@@ -211,8 +211,6 @@ io.use((socket, next) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('Client Connected');
-  console.log(socket.id);
   const users = {};
   for (let [id, socket] of io.of('/').sockets) {
     users[socket.userId] = id;
@@ -221,6 +219,5 @@ io.on('connection', (socket) => {
 });
 
 io.on('error', (err) => {
-  console.log('error');
   console.log(err);
 });

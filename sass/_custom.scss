@@ -102,6 +102,11 @@
   }
 }
 
+.nav-link {
+  display: flex;
+  align-items: center;
+}
+
 .custom-button {
   color: $color-primary;
   border: 1px solid rgba($color-primary, 0.9);

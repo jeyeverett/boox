@@ -25,12 +25,12 @@ html::-webkit-scrollbar-track {
 html::-webkit-scrollbar {
   width: 8px !important;
   background-color: #f5f5f5 !important;
-  border-radius: 2px !important;
+  border-radius: 0.25rem !important;
 }
 html::-webkit-scrollbar-thumb {
   background-color: rgba(49, 54, 57, 0.5) !important;
   border: 1px solid rgba(49, 54, 57, 0.75) !important;
-  border-radius: 1px !important;
+  border-radius: 0.25rem !important;
 }
 @media only screen and (max-width: 75em) {
   html {
@@ -295,7 +295,7 @@ a.active {
 }
 
 .form-control__input {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: inherit;
   color: inherit;
   padding: 0.5rem 1rem;
@@ -315,7 +315,7 @@ a.active {
   border-bottom: 2px solid #dc181f;
 }
 .form-control__label {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 400;
   margin-left: 1rem;
   display: block;
@@ -325,10 +325,16 @@ a.active {
 .form-control__input:placeholder-shown + .form-control__label {
   opacity: 0;
   visibility: hidden;
-  transform: translateY(2rem);
+  transform: translateY(-2rem);
 }
 
-.form-file-input {
+.form-file-container {
+  border: 1px solid #ced4da;
+  border-bottom: 2px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+.form-file-container .form-file-input {
   background-color: transparent;
 }
 
@@ -476,6 +482,11 @@ a.active {
   fill: rgba(49, 54, 57, 0.8);
 }
 
+.nav-link {
+  display: flex;
+  align-items: center;
+}
+
 .custom-button {
   color: #1a4aa0;
   border: 1px solid rgba(26, 74, 160, 0.9);
@@ -551,12 +562,12 @@ a.active {
 .custom-scrollbar--small::-webkit-scrollbar {
   width: 5px !important;
   background-color: #f5f5f5 !important;
-  border-radius: 2px !important;
+  border-radius: 0.25rem !important;
 }
 .custom-scrollbar--small::-webkit-scrollbar-thumb {
   background-color: rgba(49, 54, 57, 0.5) !important;
   border: 1px solid rgba(49, 54, 57, 0.75) !important;
-  border-radius: 1px !important;
+  border-radius: 0.25rem !important;
 }
 .custom-scrollbar--medium::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 2px rgba(49, 54, 57, 0.1) !important;
@@ -566,12 +577,12 @@ a.active {
 .custom-scrollbar--medium::-webkit-scrollbar {
   width: 7px !important;
   background-color: #f5f5f5 !important;
-  border-radius: 2px !important;
+  border-radius: 0.25rem !important;
 }
 .custom-scrollbar--medium::-webkit-scrollbar-thumb {
   background-color: rgba(49, 54, 57, 0.5) !important;
   border: 1px solid rgba(49, 54, 57, 0.75) !important;
-  border-radius: 1px !important;
+  border-radius: 0.25rem !important;
 }
 .custom-scrollbar--large::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 2px rgba(49, 54, 57, 0.1) !important;
@@ -581,12 +592,12 @@ a.active {
 .custom-scrollbar--large::-webkit-scrollbar {
   width: 15px !important;
   background-color: #f5f5f5 !important;
-  border-radius: 2px !important;
+  border-radius: 0.25rem !important;
 }
 .custom-scrollbar--large::-webkit-scrollbar-thumb {
   background-color: rgba(49, 54, 57, 0.5) !important;
   border: 1px solid rgba(49, 54, 57, 0.75) !important;
-  border-radius: 1px !important;
+  border-radius: 0.25rem !important;
 }
 
 .profile-head {

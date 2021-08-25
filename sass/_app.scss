@@ -99,7 +99,7 @@
 // FORMS
 .form-control {
   &__input {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-family: inherit;
     color: inherit;
     padding: 0.5rem 1rem;
@@ -125,7 +125,7 @@
   }
 
   &__label {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 400;
     margin-left: 1rem;
     display: block;
@@ -136,12 +136,18 @@
   &__input:placeholder-shown + &__label {
     opacity: 0;
     visibility: hidden;
-    transform: translateY(2rem);
+    transform: translateY(-2rem);
   }
 }
 
-.form-file {
-  &-input {
-    background-color: transparent;
+.form-file-container {
+  border: 1px solid #ced4da;
+  border-bottom: 2px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  .form-file {
+    &-input {
+      background-color: transparent;
+    }
   }
 }

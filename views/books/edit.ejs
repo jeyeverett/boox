@@ -2,92 +2,114 @@
 
 <div class="row">
     <div class="card shadow mt-1 mb-4">
-    <h1 class="text-center mt-2 secondary-heading">Edit Book</h1>
+    <h1 class="text-center mt-4 mb-2 primary-heading">Edit Book</h1>
+    <h5 class="text-center mt-2 mb-5 secondary-heading">Update the details of your book</h5>
         <div class="col-md-6 offset-md-3"> <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side-->
             <form action="/books/<%= book._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
-                <div class="mb-2">
-                    <label class="form-label" for="title">Title: </label>
-                    <input class="form-control" type="text" id="title" name="book[title]" value="<%= book.title %>" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-
-                <div class="mb-2">
-                    <label class="form-label" for="location">Location: </label>
-                    <input class="form-control" type="text" id="location" name="book[location]" value="<%= book.location %>" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <!--  -->
-               
-                  <div class="mb-2">
-                    <label class="form-label" for="author">*Author: </label>
+                <div class="mb-4">
                     <input
-                      class="form-control"
-                      type="text"
-                      id="author"
-                      name="book[author]"
-                      value="<%= book.author %>"
-                      required
+                    class="form-control form-control__input"
+                    type="text"
+                    id="title"
+                    name="book[title]"
+                    placeholder="Title"
+                    value="<%= book.title %>"
+                    required
                     />
-                    <div class="valid-feedback">Looks good!</div>
-                  </div>
-                   
-                  <div class="mb-2">
-                    <label class="form-label" for="genres">Genres: </label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      id="genres"
-                      name="book[genres]"
-                      value="<%= book.genres.length ? book.genres.join(', ') : '' %>"
-                    />
-                    <div class="valid-feedback">Looks good!</div>
+                    <label class="form-control__label" for="title">Title</label>
                   </div>
           
-                  <div class="mb-2">
-                    <label class="form-label" for="language">Language: </label>
+                  <div class="mb-4">
                     <input
-                      class="form-control"
-                      type="text"
-                      id="language"
-                      name="book[language]"
-                      value="<%= book.language %>"
+                    class="form-control form-control__input"
+                    type="text"
+                    id="author"
+                    name="book[author]"
+                    placeholder="Author"
+                    value="<%= book.author %>"
+                    required
                     />
-                    <div class="valid-feedback">Looks good!</div>
+                    <label class="form-control__label" for="author">Author</label>
                   </div>
           
-                  <div class="mb-2">
-                    <label class="form-label" for="pages">Number of Pages: </label>
+                  <div class="mb-4">
                     <input
-                      class="form-control"
-                      type="number"
-                      id="pages"
-                      name="book[pages]"
-                      value="<%= book.pages %>"
+                    class="form-control form-control__input"
+                    type="text"
+                    id="location"
+                    name="book[location]"
+                    placeholder="Location e.g. Los Angeles, California"
+                    value="<%= book.location %>"
+                    required
                     />
-                    <div class="valid-feedback">Looks good!</div>
+                    <label class="form-control__label" for="location">Location</label>
                   </div>
-    
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description: </label>
-                    <textarea class="form-control" type="text" id="description" name="book[description]" required><%= book.description %></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
+          
+                  <div class="mb-4">
+                    <input
+                    class="form-control form-control__input"
+                    type="text"
+                    id="genres"
+                    name="book[genres]"
+                    placeholder="Genres e.g. fantasy, science-fiction, adventure"
+                    value="<%= book.genres.length ? book.genres.join(', ') : '' %>"
+                    />
+                    <label class="form-control__label" for="genres">Genres</label>
+                  </div>
+          
+                  <div class="mb-4">
+                    <input
+                    class="form-control form-control__input"
+                    type="text"
+                    id="language"
+                    name="book[language]"
+                    placeholder="Language"
+                    value="<%= book.language %>"
+                    />
+                    <label class="form-control__label" for="language">Language</label>
+                  </div>
+          
+                  <div class="mb-4">
+                    <input
+                    class="form-control form-control__input"
+                    type="number"
+                    id="pages"
+                    name="book[pages]"
+                    placeholder="Number of pages"
+                    value="<%= book.pages %>"
+                    />
+                    <label class="form-control__label" for="pages">Number of Pages</label>
+                  </div>
+                          
+                  <div class="mb-4">
+                    <textarea
+                        class="form-control form-control__input custom-scrollbar--medium"
+                        type="text"
+                        id="description"
+                        name="book[description]"
+                        placeholder="Tell us about the book"
+                        style="height: 12rem; resize: none;"
+                        required
+                    ><%= book.description %></textarea>
+                    <label class="form-control__label" for="description">Description</label>
+                  </div>
                 <!-- Below we set up an input for multiple image upload - note the 'multiple' attribute -->
-                <div class="mb-3">
+                <div class="mb-4 mt-2 form-file-container">
                     <div class="form-file custom-file">
-                        <input type="file" class="form-file-input" id="image" name="image" multiple>
-                        <label class="form-file-label" for="image">
-                            <span class="form-file-text custom-file-label">Add image(s)...</span>
-                            <span class="form-file-button">Browse</span>
-                        </label>
+                      <input
+                        type="file"
+                        class="form-file-input mb-3"
+                        id="image"
+                        name="image"
+                        multiple
+                      />
+                      <label class="form-file-label" for="image">
+                        <span class="form-file-text custom-file-label"
+                          >Upload your image(s) here</span
+                        >
+                      </label>
                     </div>
-                </div>
+                  </div>
                 <!-- The div below describes how we will show existing images and allow for their deletion note that we use the array index to link the label with the input and we use the image.filename as the value for the input to help us delete the image from cloudinary - note that the deleteImages[] in the name field will hold all/any of the deleted image paths in an array which we can then use to delete them from cloudinary, also note that we had to add the deleteImages array to the Joi Schema for book - Note that image.thumbnail uses a virtual property (defined in the book model file)-->
                 <div class="mb-3">
                     <% if (book.images) { %> 
