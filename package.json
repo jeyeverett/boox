@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm-run-all --parallel start-server start-sass",
+    "start": "node index.js",
+    "start-all": "npm-run-all --parallel start-server start-sass",
     "start-server": "nodemon index.js",
     "start-sass": "nodemon sass/sass.js -e js,scss,ejs"
   },
