@@ -40,15 +40,33 @@
     g {
       fill: $color-black;
     }
+    &:hover {
+      g {
+        fill: rgba($color-black, 0.5);
+      }
+    }
   }
 
   .custom-delete-button {
     g {
       fill: $color-black;
     }
+    &:hover {
+      g {
+        fill: rgba($color-black, 0.5);
+      }
+    }
   }
 
   &__img-top {
     width: 100%;
+  }
+}
+
+#cardOwner {
+  text-decoration: none;
+  color: $color-primary;
+  &:hover {
+    color: rgba($color-black, 0.75);
   }
 }

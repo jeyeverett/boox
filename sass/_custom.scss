@@ -194,3 +194,15 @@
     @include custom-scrollbar(15px);
   }
 }
+
+.custom-util-button {
+  transition: all 0.2s;
+  g {
+    fill: $color-black;
+  }
+  &:hover {
+    g {
+      fill: rgba($color-black, 0.5);
+    }
+  }
+}

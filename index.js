@@ -68,6 +68,7 @@ const connectSrcUrls = [
   'https://api.mapbox.com/',
   'https://*.tiles.mapbox.com/',
   'https://events.mapbox.com/',
+  'https://booxapp.herokuapp.com/',
 ];
 const fontSrcUrls = [
   'https://fonts.googleapis.com',

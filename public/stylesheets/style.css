@@ -338,6 +338,10 @@ a.active {
   background-color: transparent;
 }
 
+.indexPage__description {
+  width: 100%;
+}
+
 .card {
   transition: box-shadow 0.2s;
 }
@@ -379,11 +383,25 @@ a.active {
 .card .custom-edit-button g {
   fill: rgba(49, 54, 57, 0.8);
 }
+.card .custom-edit-button:hover g {
+  fill: rgba(49, 54, 57, 0.5);
+}
 .card .custom-delete-button g {
   fill: rgba(49, 54, 57, 0.8);
 }
+.card .custom-delete-button:hover g {
+  fill: rgba(49, 54, 57, 0.5);
+}
 .card__img-top {
   width: 100%;
+}
+
+#cardOwner {
+  text-decoration: none;
+  color: #1a4aa0;
+}
+#cardOwner:hover {
+  color: rgba(49, 54, 57, 0.75);
 }
 
 #custom-navbar {
@@ -598,6 +616,16 @@ a.active {
   background-color: rgba(49, 54, 57, 0.5) !important;
   border: 1px solid rgba(49, 54, 57, 0.75) !important;
   border-radius: 0.25rem !important;
+}
+
+.custom-util-button {
+  transition: all 0.2s;
+}
+.custom-util-button g {
+  fill: rgba(49, 54, 57, 0.8);
+}
+.custom-util-button:hover g {
+  fill: rgba(49, 54, 57, 0.5);
 }
 
 .profile-head {

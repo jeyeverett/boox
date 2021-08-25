@@ -26,9 +26,12 @@ if (favArray[0] !== 'no user') {
     let icon = event.srcElement.closest('.custom-fav-icon');
     let parent = icon.closest('a');
     let bookId = parent.firstElementChild.value;
-    let result = await fetch(`http://localhost:3000/favorite/${bookId}`, {
-      method: 'POST',
-    });
+    let result = await fetch(
+      `https://booxapp.herokuapp.com/favorite/${bookId}`,
+      {
+        method: 'POST',
+      }
+    );
 
     result = await result.json();
     let htmlObj = document.createElement('svg');

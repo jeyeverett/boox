@@ -51,7 +51,7 @@
             <div class="card-footer d-flex justify-content-between align-items-center text-muted">
                 <span>Offerred by:</span>
                 <span>
-                    <a href="/profile/<%= book.owner._id %>" style="text-decoration: none;">
+                    <a href="/profile/<%= book.owner._id %>" id="cardOwner">
                         <%= book.owner.username %>
                         <% if (book.owner.profile.images.length) { %> 
                         <img src="<%= book.owner.profile.images.length > 0 ? book.owner.profile.images[0].url : '' %>" alt="book owner selfie" width="32" height="32" class="rounded-circle ms-2">
