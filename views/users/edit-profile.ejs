@@ -2,38 +2,29 @@
 
 <div class="row">
     <div class="card shadow mt-1 mb-1">
-    <h1 class="text-center mt-2 secondary-heading">Edit Profile</h1>
+    <h1 class="text-center mt-2 secondary-heading mb-5">Edit Profile</h1>
         <div class="col-md-6 offset-md-3"> <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side-->
             <form action="/profile/<%= user._id %>/edit?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
-                <div class="mb-2">
-                    <label class="form-label" for="name">Name: </label>
-                    <input class="form-control" type="text" id="name" name="profile[name]" value="<%= user.profile.name %>" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                <div class="mb-4">
+                    <input class="form-control form-control__input" type="text" id="name" name="profile[name]" value="<%= user.profile.name %>" placeholder="Name" required>
+                    <label class="form-control__label" for="name">Name</label>
                 </div>
 
-                <div class="mb-2">
-                    <label class="form-label" for="location">Location: </label>
-                    <input class="form-control" type="text" id="location" name="profile[location]" value="<%= user.profile.location %>" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                <div class="mb-4">
+                    <input class="form-control form-control__input" type="text" id="location" name="profile[location]" value="<%= user.profile.location %>" placeholder="Location" required>
+                    <label class="form-control__label" for="location">Location</label>
                 </div>
                    
                 <div class="mb-3">
-                    <label class="form-label" for="bio">Bio: </label>
-                    <textarea class="form-control" type="text" id="bio" name="profile[bio]" required><%= user.profile.bio %></textarea>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                    <textarea class="form-control form-control__input" type="text" id="bio" name="profile[bio]" placeholder="Bio" required><%= user.profile.bio %></textarea>
+                    <label class="form-control__label" for="bio">Bio</label>
                 </div>
                 <!-- Below we set up an input for multiple image upload - note the 'multiple' attribute -->
                 <div class="mb-3">
                     <div class="form-file custom-file">
                         <input type="file" class="form-file-input" id="image" name="image" multiple>
                         <label class="form-file-label" for="image">
-                            <span class="form-file-text custom-file-label">Add image(s)...</span>
+                            <span class="form-file-text custom-file-label">Add profile image...</span>
                             <span class="form-file-button">Browse</span>
                         </label>
                     </div>
