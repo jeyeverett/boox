@@ -30,6 +30,14 @@ const helmet = require('helmet'); //Helps to secure express apps
 //UTILITIES
 const ExpressError = require('./utilities/ExpressError');
 
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`);
+    else next();
+  });
+}
+
 //EJS SETUP
 app.engine('ejs', ejsMate); //ejs-mate lets use use a boilerplate.ejs for all our templates
 app.set('view engine', 'ejs'); //
@@ -144,7 +152,7 @@ const sessionConfig = {
   //We can customize the cookie that gets sent with the session id to the client
   cookie: {
     httpOnly: true, //this protects our cookies from being accessed through javascript
-    //secure: true, //we need this when we deploy to make sure our cookies can only be configured over https, but right now our dev server local host is not secure so we comment it out
+    secure: true, //we need this when we deploy to make sure our cookies can only be configured over https, but right now our dev server local host is not secure so we comment it out
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //we set it to expire 1 week from when it is created
     maxAge: 1000 * 60 * 60 * 24 * 7, //max age is 1 week
   },
