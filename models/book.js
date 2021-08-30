@@ -55,7 +55,6 @@ const BookSchema = new Schema(
         required: true,
       },
     },
-    //We create an entry for reviews - in this case it is an array if 'Review' ObjectIds
     reviews: [
       {
         type: Schema.Types.ObjectId,

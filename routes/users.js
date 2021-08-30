@@ -14,7 +14,6 @@ const multer = require('multer');
 const { storage } = require('../cloudinary');
 const upload = multer({ storage });
 
-//Here we use the router.route method to group our routes
 router
   .route('/register')
   .get(users.renderNewForm)

@@ -1,10 +1,8 @@
-//Our controller file essentially consists of all the logic that would be within the route, but separated for cleaner code
 const Book = require('../models/book');
 const { isValidObjectId } = require('mongoose');
 
 //SERVICES
 const { cloudinary } = require('../cloudinary');
-//Setting up Mapbox (note that we choose what services we want, in this case we want geocoding)
 const mbxStyles = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxStyles({ accessToken: mapBoxToken });
@@ -84,7 +82,6 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.renderEditForm = async (req, res, next) => {
   const book = await Book.findById(req.params.id);
   if (!book) {
-    //If we can't find the book (i.e. it was deleted or the id is wrong then we have to deal with the error)
     req.flash('error', 'Book not found.');
     res.redirect('/books');
   }
@@ -100,13 +97,12 @@ module.exports.update = async (req, res) => {
     runValidators: true,
     new: true,
   });
-  //We take any added images and add them to the book's images array
   const images = req.files.map((file) => ({
     url: file.path,
     filename: file.filename,
   }));
   book.images.push(...images);
-  //If there are any images to be deleted first we delete them from cloudinary and then we query the database and use the $pull operator to remove from the book images array all items with a filename shown $in request.body.deleteImages
+
   if (req.body.deleteImages) {
     for (let filename of req.body.deleteImages) {
       await cloudinary.uploader.destroy(filename);
@@ -127,9 +123,7 @@ module.exports.show = async (req, res) => {
     res.redirect('/books');
   }
 
-  //Note that below we use the populate method to add the information for fields where we are referencing other model instances using an objectID
   const book = await Book.findById(req.params.id)
-    //Below we are trying to populate the owner info on the review instance, since it is nested we need to use the approach shown:
     .populate({
       path: 'reviews',
       populate: {
@@ -138,7 +132,6 @@ module.exports.show = async (req, res) => {
     })
     .populate('owner');
   if (!book) {
-    //If we can't find the book (i.e. it was deleted or the id is wrong then we have to deal with the error)
     req.flash('error', 'Book not found.');
     res.redirect('/books');
   }

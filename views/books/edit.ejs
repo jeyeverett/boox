@@ -4,7 +4,7 @@
     <div class="card shadow mt-1 mb-4">
     <h1 class="text-center mt-4 mb-2 primary-heading">Edit Book</h1>
     <h5 class="text-center mt-2 mb-5 secondary-heading">Update the details of your book</h5>
-        <div class="col-md-6 offset-md-3"> <!--note that offset-3 essentially centers the column, because it offsets it 3 units from the side, and the column is 6 units wide, leaving 3 units on the other side-->
+        <div class="col-md-6 offset-md-3">
             <form action="/books/<%= book._id %>?_method=PUT" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
                 <div class="mb-4">
                     <input
@@ -110,7 +110,6 @@
                       </label>
                     </div>
                   </div>
-                <!-- The div below describes how we will show existing images and allow for their deletion note that we use the array index to link the label with the input and we use the image.filename as the value for the input to help us delete the image from cloudinary - note that the deleteImages[] in the name field will hold all/any of the deleted image paths in an array which we can then use to delete them from cloudinary, also note that we had to add the deleteImages array to the Joi Schema for book - Note that image.thumbnail uses a virtual property (defined in the book model file)-->
                 <div class="mb-3">
                     <% if (book.images) { %> 
                     <% book.images.forEach((image, index) => { %> 

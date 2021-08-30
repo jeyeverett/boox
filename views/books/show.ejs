@@ -1,11 +1,8 @@
 <% layout('layouts/boilerplate') %>
-<!-- We should probably put this link tag in the head of the boilerplate, but this will work ok -->
 <link rel="stylesheet" href="/stylesheets/stars.css">
 
-<!-- Note that the default card from bootstrap sets a fixed width, whereas we are using a grid system -->
 <div class="row mb-4 d-flex justify-content-center">
     <div class="col-lg-5 me-lg-4">
-        <!-- Below we insert our mapbox map -->
         <div id="bookCarousel" class="carousel carousel-dark slide" data-ride="carousel" data-interval="false">
             <% if (book.images.length) { %> 
             <div class="carousel-inner pb-3">
@@ -59,7 +56,6 @@
                     </a>
                 </span>
             </div>
-            <!--Below we use the .equals method to compare the book author with the current user-->
             <% if (currentUser && book.owner.equals(currentUser._id)) { %>
                 <div class="card-body d-flex justify-content-between">
                     <a class="card-link btn p-0" href="/books/<%= book._id %>/edit" aria-label="edit" title="edit">
@@ -149,12 +145,10 @@
                 </div>
                 <% if (currentUser && review.author.equals(currentUser._id)) { %>
                     <div class="card-body pt-0 d-flex justify-content-end">
-                        <!-- <a class="card-link btn btn-sm btn-dark" href="#">Edit</a> -->
                         <form class="d-inline" action="/books/<%= book._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
                             <a class="btn p-0" data-toggle="modal" data-target="#deleteReviewModal">                 
                                 <%- include('../partials/svg/delete-button') %>
                             </a>
-                            <!-- Modal -->
                             <div class="modal fade" id="deleteReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -188,13 +182,11 @@
 
 
 
-<!-- We need to use the script below so we can access the mapToken in the showPageMap.js file -->
 <script>
     const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
     const book = <%- JSON.stringify(book) %>;
     const favArray = "<%= currentUser ? currentUser.profile.favorites : 'no user' %>".split(',');
 </script>
-<!-- Note, the book declaration in the script above was causing issues so I had to add the following to the JSON.settings file: "html.validate.scripts": false -->
 
 <script src="/javascripts/showPageMap.js"></script>
 

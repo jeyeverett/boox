@@ -26,14 +26,11 @@
     <title>BOILERPLATE</title>
   </head>
   <body class="d-flex flex-column vh-100">
-    <!--We want the body to display flex, use columns, and take up at least 100% of the viewport (otherwise it will shrink to the height of the content) -->
 
     <%- include('../partials/navbar') %>
-    <!-- we are using partials within our boilerplate -->
 
     <main class="container mt-4">
       <%- include('../partials/flash') %>
-      <!--This is from our middleware for dealing with flash messages-->
       <%- body %>
     </main>
 

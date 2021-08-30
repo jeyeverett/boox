@@ -10,7 +10,7 @@ const {
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
-    req.session.returnTo = req.originalUrl; //returnTo is a custom field we created to store a url we may need to redirect to (i.e. if a user tries to access a page they need to be logged in for, they will be redirected to that page after logging in)
+    req.session.returnTo = req.originalUrl;
     req.flash('error', 'You need to be signed in to do this.');
     return res.redirect('/login');
   }
@@ -20,7 +20,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.validateBook = (req, res, next) => {
   const { error } = bookSchema.validate(req.body);
   if (error) {
-    //error.details is formatted as an array so we do the following to make it a string
     let msg = error.details.map((el) => el.message).join('');
     msg = msg.replace(/\./, ' ').replace(/\"/, '');
     req.flash('error', msg);
@@ -36,7 +35,7 @@ module.exports.isAuthor = async (req, res, next) => {
 
   if (!book.owner.equals(req.user._id)) {
     req.flash('error', 'You do not have permission to do that.');
-    return res.redirect(`/books/${book._id}`); //need to return here or the code below may be executed
+    return res.redirect(`/books/${book._id}`);
   }
   next();
 };
@@ -47,7 +46,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
   if (!review.author.equals(req.user._id)) {
     req.flash('error', 'You do not have permission to do that.');
-    return res.redirect(`/books/${id}`); //need to return here or the code below may be executed
+    return res.redirect(`/books/${id}`);
   }
   next();
 };

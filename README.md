@@ -8,13 +8,14 @@ The project is built with [NodeJS](https://nodejs.org/en/) and [ExpressJS](https
 
 - Maps integration with MapBoxGL
 - Authentication handled by PassportJS (integrated with MongooseJS)
+- Sessions are created with express-session and stored on MongoDB
 - Custom middleware for authorization and validation
 - Validation and custom HTML sanitization with Joi
 - MongoDB NoSQL database with MongooseJS for schema definitions
 - Real-time chat with WebSockets and socket.io
 - Content Security Policy provided by HelmetJS
 - User file uploads are stored on Cloudinary with the help of Multer and the Cloudinary-Multer extension
-- Views are generated using EmbeddedJS and the EJS-Mate helper library for creating partials/includes
+- Views are generated using EmbeddedJS and the EJS-Mate helper library for creating a boilerplate
 - Boostrap components complemented with custom CSS written in SASS
 - Method-override for form submissions other than POST type
 - Custom front-end JavaScript scripts for asynchronous API requests
