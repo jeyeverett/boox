@@ -1,3 +1,5 @@
 node_modules
 .env
 /seeds
+/stylesheets/style.comp.css
+/stylesheets/style.prefix.css
