@@ -92,8 +92,8 @@ app.use(
 );
 
 const mongoose = require("mongoose");
-const dbURL = "mongodb://localhost:27017/boox";
-// const dbURL = process.env.MONGO_URL || "mongodb://localhost:27017/boox";
+const dbURL = process.env.MONGO_URL;
+// || "mongodb://localhost:27017/boox"
 
 mongoose
   .connect(dbURL, {
@@ -150,10 +150,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
-app.use("*", async (req, res, next) => {
-  const users = await User.find({});
-  next();
-});
 
 const bookRoutes = require("./routes/books");
 app.use("/", bookRoutes);
@@ -174,7 +170,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
-  console.log(`WWC Server Initiated on Port ${port}`);
+  console.log(`Boox Server Initiated on Port ${port}`);
 });
 
 const io = require("./socket").init(server);

@@ -4,24 +4,24 @@ socket.connect();
 
 let connectedUsers;
 
-socket.on('users', (users) => {
+socket.on("users", (users) => {
   connectedUsers = users;
 });
 
-socket.on('private message', ({ content, from }) => {
+socket.on("private message", ({ content, from }) => {
   pushMessage(content, from);
 });
 
 // Modify this error to be more useful at a later time
-socket.on('connect_error', (err) => {
-  if (err.message === 'invalid username') {
-    console.log('You must be signed in to use chat.');
+socket.on("connect_error", (err) => {
+  if (err.message === "invalid username") {
+    console.log("You must be signed in to use chat.");
   }
 });
 
 function pushMessage(message, from, to) {
-  const inbox = document.getElementById('inboxMessages');
-  const chatContainer = document.getElementById('messagesModal__chatContainer');
+  const inbox = document.getElementById("inboxMessages");
+  const chatContainer = document.getElementById("messagesModal__chatContainer");
   const ids = [];
 
   //See if a chat exists from this user in the inbox
@@ -38,14 +38,14 @@ function pushMessage(message, from, to) {
   //     profileMsgAlert();
   //     return;
   // }
-  if (jQuery('#messagesModal').data('bs.modal')?._isShown) {
+  if (jQuery("#messagesModal").data("bs.modal")?._isShown) {
     const parent = chatContainer.firstElementChild;
     // If the chat is open append the message
     if (
       connectedUsers[String(message._id)] === String(from) ||
       from === currentUsername
     ) {
-      let htmlObj = document.createElement('div');
+      let htmlObj = document.createElement("div");
       htmlObj.innerHTML = getMsgTemplate(message);
       parent.appendChild(htmlObj.children[0]);
       parent.scrollTop = parent.scrollHeight;
@@ -64,7 +64,7 @@ function getInboxMessageTemplate(message) {
       <div class="d-flex w-100 align-items-center justify-content-between">
           <strong class="mb-1" id="${message.username.trim()}">${message.username.trim()}<span class="badge badge-secondary custom-badge ms-2">New</span></strong>
           <small id="${message._id}-date">
-              ${message.timestamp.slice(0, 10).replace('T', ' ')}
+              ${message.timestamp.slice(0, 10).replace("T", " ")}
           </small>
       </div>
       <div class="col-10 mb-1 small mt-2">
@@ -72,7 +72,7 @@ function getInboxMessageTemplate(message) {
           <span id="${message.username.trim()}-message">
               ${
                 message.message.length > 51
-                  ? message.message.slice(0, 50) + '...'
+                  ? message.message.slice(0, 50) + "..."
                   : message.message
               }
           </span>
@@ -94,7 +94,7 @@ function updateInbox(message, from, to) {
     }
   }
 
-  username.textContent = message.username + ':';
+  username.textContent = message.username + ":";
   newMessage.textContent =
     message.message.length > 51
       ? `${message.message.slice(0, 50)}...`
@@ -104,46 +104,46 @@ function updateInbox(message, from, to) {
 
 function profileMsgAlert() {
   if (profileBtn.childElementCount === 0) {
-    profileBtn.appendChild(getNewMsgIcon('white'));
+    profileBtn.appendChild(getNewMsgIcon("white"));
   }
   if (profileLink.childElementCount === 0) {
-    profileLink.appendChild(getNewMsgIcon('white'));
+    profileLink.appendChild(getNewMsgIcon("white"));
   }
 }
 
-const inbox = document.getElementById('inboxMessages');
+const inbox = document.getElementById("inboxMessages");
 const inboxChildren = inbox.children;
 
-const sendMsgBtn = document.getElementById('sendMessageButton');
-sendMsgBtn.addEventListener('click', sendMessage);
+const sendMsgBtn = document.getElementById("sendMessageButton");
+sendMsgBtn.addEventListener("click", sendMessage);
 
 const profileBtn = document.getElementById(`${currentUserId}-profileBtn`);
 const profileLink = document.getElementById(`${currentUserId}-profileLink`);
 
-if (inbox.children[0].textContent.slice(0, 11) !== 'No messages') {
+if (inbox.children[0].textContent.slice(0, 11) !== "No messages") {
   for (let message of inboxChildren) {
-    message.addEventListener('click', openMessage);
+    message.addEventListener("click", openMessage);
   }
 }
 
 window.onload = () => {
-  jQuery('#messagesModal').on('show.bs.modal', () => {
-    const textarea = document.getElementById('messagesModal__messageText');
-    textarea.addEventListener('keypress', sendMessage);
+  jQuery("#messagesModal").on("show.bs.modal", () => {
+    const textarea = document.getElementById("messagesModal__messageText");
+    textarea.addEventListener("keypress", sendMessage);
   });
 
-  jQuery('#messagesModal').on('hide.bs.modal', () => {
-    const textarea = document.getElementById('messagesModal__messageText');
-    textarea.removeEventListener('keypress', sendMessage);
+  jQuery("#messagesModal").on("hide.bs.modal", () => {
+    const textarea = document.getElementById("messagesModal__messageText");
+    textarea.removeEventListener("keypress", sendMessage);
   });
 };
 
 function getNewMsgIcon(color) {
-  const newMessageIcon = document.createElement('span');
+  const newMessageIcon = document.createElement("span");
   newMessageIcon.className = `badge badge-secondary custom-badge ${
-    color ? 'custom-badge--' + color : ''
+    color ? "custom-badge--" + color : ""
   } ms-2`;
-  newMessageIcon.textContent = 'New';
+  newMessageIcon.textContent = "New";
   return newMessageIcon;
 }
 
@@ -151,19 +151,19 @@ function getMsgTemplate(message) {
   return `
           <span name=${message.username} class="d-flex ${
     currentUsername === message.username
-      ? 'justify-content-end'
-      : 'justify-content-start'
+      ? "justify-content-end"
+      : "justify-content-start"
   } px-3">
               <span class="d-flex flex-column w-100 ${
                 currentUsername === message.username
-                  ? 'align-items-end'
-                  : 'align-items-start'
+                  ? "align-items-end"
+                  : "align-items-start"
               }"">
                   <div class="mb-1"><strong>${message.username}</strong></div>
                   <div class="small ${
                     currentUsername === message.username
-                      ? 'message__user'
-                      : 'message__chatPartner'
+                      ? "message__user"
+                      : "message__chatPartner"
                   }">
                       ${message.message}<br>
                   </div>
@@ -173,26 +173,26 @@ function getMsgTemplate(message) {
 }
 
 async function openMessage(event) {
-  const messageModalButton = document.getElementById('messageModalButton');
-  const chatBox = event.target.closest('a');
+  const messageModalButton = document.getElementById("messageModalButton");
+  const chatBox = event.target.closest("a");
   const partnerId = chatBox.id;
   const partnerUsername = chatBox.children[0].children[0].textContent.replace(
-    'New',
-    ''
+    "New",
+    ""
   );
   const newBadge = document.getElementById(partnerUsername).lastElementChild;
 
-  let htmlTemplate = '';
+  let htmlTemplate = "";
 
-  const htmlObj = document.createElement('div');
-  htmlObj.className = 'overflow-auto custom-scrollbar--medium';
-  htmlObj.style = 'height: 200px;';
+  const htmlObj = document.createElement("div");
+  htmlObj.className = "overflow-auto custom-scrollbar--medium";
+  htmlObj.style = "height: 200px;";
   htmlObj.id = `${partnerId}-chatbox`;
-  htmlObj.setAttribute('name', `${partnerUsername}-chatbox`);
+  htmlObj.setAttribute("name", `${partnerUsername}-chatbox`);
 
   try {
-    const data = await fetch(`http://localhost:3000/message/${partnerId}`, {
-      method: 'GET',
+    const data = await fetch(`/message/${partnerId}`, {
+      method: "GET",
     });
 
     const result = await data.json();
@@ -204,7 +204,7 @@ async function openMessage(event) {
     htmlObj.innerHTML = htmlTemplate;
 
     const chatContainer = document.getElementById(
-      'messagesModal__chatContainer'
+      "messagesModal__chatContainer"
     );
     if (chatContainer.children.length)
       chatContainer.removeChild(chatContainer.firstElementChild);
@@ -227,25 +227,25 @@ async function openMessage(event) {
 }
 
 async function sendMessage(event) {
-  const textarea = document.getElementById('messagesModal__messageText');
+  const textarea = document.getElementById("messagesModal__messageText");
   const content = textarea.value;
 
-  if (content === '') return;
+  if (content === "") return;
 
-  if (event.key && event.key !== 'Enter') return;
+  if (event.key && event.key !== "Enter") return;
 
   const chatContainer = document.getElementById(
-    'messagesModal__chatContainer'
+    "messagesModal__chatContainer"
   ).firstElementChild;
   const partnerId = chatContainer.id.slice(0, 24);
-  const partnerUsername = chatContainer.getAttribute('name').split('-')[0];
+  const partnerUsername = chatContainer.getAttribute("name").split("-")[0];
   const chatbox = document.getElementById(`${partnerId}-chatbox`);
 
   try {
-    const data = await fetch(`http://localhost:3000/message/${partnerId}`, {
-      method: 'POST',
+    const data = await fetch(`/message/${partnerId}`, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         message: {
@@ -261,13 +261,13 @@ async function sendMessage(event) {
     if (result.success) {
       //If user is online
       if (connectedUsers[String(partnerId)]) {
-        socket.emit('private message', {
+        socket.emit("private message", {
           content: result.message,
           to: connectedUsers[String(partnerId)],
         });
       }
       pushMessage(result.message, currentUsername, partnerUsername);
-      textarea.value = '';
+      textarea.value = "";
       chatbox.scrollTop = chatbox.scrollHeight;
     }
   } catch (err) {

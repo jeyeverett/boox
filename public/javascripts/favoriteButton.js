@@ -26,7 +26,7 @@ if (favArray[0] !== "no user") {
     let icon = event.srcElement.closest(".custom-fav-icon");
     let parent = icon.closest("a");
     let bookId = parent.firstElementChild.value;
-    let result = await fetch(`http://localhost:3000/favorite/${bookId}`, {
+    let result = await fetch(`/favorite/${bookId}`, {
       method: "POST",
     });
 

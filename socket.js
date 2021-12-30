@@ -2,17 +2,17 @@ let io;
 
 module.exports = {
   init: (httpServer) => {
-    io = require('socket.io')(httpServer, {
+    io = require("socket.io")(httpServer, {
       cors: {
-        origin: process.env.ORIGIN_URL,
-        methods: ['GET', 'POST'],
+        origin: "https://booxapp.herokuapp.com/",
+        methods: ["GET", "POST"],
       },
     });
     return io;
   },
   getIO: () => {
     if (!io) {
-      throw new Error('Socket.io not initialized');
+      throw new Error("Socket.io not initialized");
     }
     return io;
   },
