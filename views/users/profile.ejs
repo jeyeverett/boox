@@ -176,7 +176,7 @@
 
   <script src="/socket.io/socket.io.js"></script>
   <script>
-      const currentUserId = "<%= currentUser._id %>";
-      const currentUsername = "<%= currentUser.username %>";
+    const currentUserId = "<%= currentUser && currentUser._id %>";
+    const currentUsername = "<%= currentUser && currentUser.username %>";
   </script>
   <script src="/javascripts/chat.js"></script>

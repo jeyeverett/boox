@@ -92,7 +92,8 @@ app.use(
 );
 
 const mongoose = require("mongoose");
-const dbURL = process.env.MONGO_URL || "mongodb://localhost:27017/boox";
+const dbURL = "mongodb://localhost:27017/boox";
+// const dbURL = process.env.MONGO_URL || "mongodb://localhost:27017/boox";
 
 mongoose
   .connect(dbURL, {
@@ -144,7 +145,6 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  console.log("User: ", req.user);
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -152,7 +152,6 @@ app.use((req, res, next) => {
 });
 app.use("*", async (req, res, next) => {
   const users = await User.find({});
-  console.log(users);
   next();
 });
 

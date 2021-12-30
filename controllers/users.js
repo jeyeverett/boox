@@ -1,11 +1,11 @@
-const User = require('../models/user');
-const Book = require('../models/book');
-const { isValidObjectId } = require('mongoose');
-const { cloudinary } = require('../cloudinary');
+const User = require("../models/user");
+const Book = require("../models/book");
+const { isValidObjectId } = require("mongoose");
+const { cloudinary } = require("../cloudinary");
 
 //NEW FORM
 module.exports.renderNewForm = (req, res) => {
-  res.render('users/register');
+  res.render("users/register");
 };
 
 //CREATE
@@ -19,23 +19,23 @@ module.exports.create = async (req, res, next) => {
       if (err) return next(err);
     });
     // req.flash('success', `Welcome to Yelp Came ${username}!`);
-    req.flash('success', 'Welcome to boox!');
-    res.redirect('/books');
+    req.flash("success", "Welcome to boox!");
+    res.redirect("/books");
   } catch (e) {
-    req.flash('error', e.message);
-    res.redirect('/register');
+    req.flash("error", e.message);
+    res.redirect("/register");
   }
 };
 
 //LOGIN FORM
 module.exports.renderLoginForm = (req, res) => {
-  res.render('users/login');
+  res.render("users/login");
 };
 
 //LOGIN AUTHENTICATE
 module.exports.authenticateUser = (req, res) => {
-  // req.flash('success', 'Welcome back!');
-  const redirectURL = req.session.returnTo || '/books';
+  req.flash("success", "Welcome back!");
+  const redirectURL = req.session.returnTo || "/books";
   delete req.session.returnTo; //this is how we delete something from an object - we don't need it after the line above so we delete it
   res.redirect(redirectURL);
 };
@@ -44,22 +44,22 @@ module.exports.authenticateUser = (req, res) => {
 module.exports.logout = (req, res) => {
   req.logout();
   // req.flash('success', 'Logged out.');
-  res.redirect('/');
+  res.redirect("/");
 };
 
 // PROFILE
 module.exports.getProfile = async (req, res) => {
   const { id } = req.params;
   if (!isValidObjectId(id)) {
-    req.flash('error', 'Invalid user ID.');
-    res.redirect('/books');
+    req.flash("error", "Invalid user ID.");
+    res.redirect("/books");
   }
 
-  const user = await User.findById(id).populate('profile.favorites').exec();
+  const user = await User.findById(id).populate("profile.favorites").exec();
 
   if (!user) {
-    req.flash('error', 'User not found.');
-    res.status(404).redirect('/books');
+    req.flash("error", "User not found.");
+    res.status(404).redirect("/books");
   }
 
   const booksOffered = await Book.find({ owner: id }).countDocuments();
@@ -73,26 +73,24 @@ module.exports.getProfile = async (req, res) => {
     },
   };
 
-  console.log(returnedUser);
-
-  res.render('users/profile', { user: returnedUser, books, booksOffered });
+  res.render("users/profile", { user: returnedUser, books, booksOffered });
 };
 
 module.exports.getEditProfile = async (req, res) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) {
-    req.flash('error', 'Invalid user ID.');
-    res.status(400).redirect('/books');
+    req.flash("error", "Invalid user ID.");
+    res.status(400).redirect("/books");
   }
   const user = await User.findById(id);
 
   if (!user) {
-    req.flash('error', 'User not found.');
-    res.status(404).redirect('/books');
+    req.flash("error", "User not found.");
+    res.status(404).redirect("/books");
   }
 
-  res.render('users/edit-profile', { user });
+  res.render("users/edit-profile", { user });
 };
 
 module.exports.editProfile = async (req, res) => {
@@ -117,12 +115,12 @@ module.exports.editProfile = async (req, res) => {
     }
     await user.updateOne({
       $pull: {
-        'profile.images': { filename: { $in: req.body.deleteImages } },
+        "profile.images": { filename: { $in: req.body.deleteImages } },
       },
     });
   }
   await user.save();
-  req.flash('success', 'Profile updated successfully!');
+  req.flash("success", "Profile updated successfully!");
   res.redirect(`/profile/${id}`);
 };
 
@@ -131,31 +129,31 @@ module.exports.favorite = async (req, res) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) {
-    req.flash('error', 'Invalid book ID.');
-    res.redirect('/books');
+    req.flash("error", "Invalid book ID.");
+    res.redirect("/books");
   }
 
   const book = await Book.findById(req.params.id)
     .populate({
-      path: 'reviews',
+      path: "reviews",
       populate: {
-        path: 'owner',
+        path: "owner",
       },
     })
-    .populate('owner');
+    .populate("owner");
 
   if (!book) {
-    req.flash('error', 'No book found with this id.');
-    res.status(404).redirect('/books');
+    req.flash("error", "No book found with this id.");
+    res.status(404).redirect("/books");
   }
 
   const user = await User.findById(req.user._id);
   if (user.profile.favorites.includes(id)) {
     user.profile.favorites.pull(id);
-    res.status(200).json({ message: 'success', removed: true });
+    res.status(200).json({ message: "success", removed: true });
   } else {
     user.profile.favorites.push(id);
-    res.status(200).json({ message: 'success', removed: false });
+    res.status(200).json({ message: "success", removed: false });
   }
   await user.save();
 };
@@ -167,8 +165,8 @@ module.exports.getMessage = async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (!user) {
-    req.flash('error', 'User not found.');
-    res.status(404).redirect('/books');
+    req.flash("error", "User not found.");
+    res.status(404).redirect("/books");
   }
 
   let messages;
@@ -190,7 +188,7 @@ module.exports.sendMessage = async (req, res) => {
   const { content, async = false } = req.body.message;
 
   if (!isValidObjectId(id)) {
-    req.flash('error', 'Invalid user ID.');
+    req.flash("error", "Invalid user ID.");
     res.redirect(`/profile/${id}`);
   }
 
