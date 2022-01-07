@@ -27,7 +27,7 @@
         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false" title="menu">
         <% if (currentUser) { %> 
           <% if (currentUser.profile.images[0]) { %> 
-          <img id="custom-dropdown-toggle" src="<%= currentUser.profile.images[0].url %> " alt="mdo" width="32" height="32" class="rounded-circle">
+          <img id="custom-dropdown-toggle" src="<%= currentUser.profile.images[0].url %>" alt="mdo" width="32" height="32" class="rounded-circle">
           <% } else { %> 
             <%- include('../partials/svg/unknown-avatar-small') %>
           <% } %> 

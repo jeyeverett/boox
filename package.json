@@ -8,10 +8,10 @@
     "start": "node index.js",
     "start-all": "npm-run-all --parallel start-server start-sass",
     "start-server": "nodemon index.js",
-    "start-sass": "node-sass sass/main.scss stylesheets/style.css -w",
+    "start-sass": "node-sass sass/main.scss public/stylesheets/style.css -w",
     "compile:sass": "node-sass sass/main.scss stylesheets/style.comp.css",
     "prefix:css": "postcss stylesheets/style.comp.css --use autoprefixer -o stylesheets/style.prefix.css",
-    "compress:css": "node-sass stylesheets/style.prefix.css stylesheets/style.css --output-style compressed",
+    "compress:css": "node-sass stylesheets/style.prefix.css public/stylesheets/style.css --output-style compressed",
     "build:css": "npm-run-all compile:sass prefix:css compress:css"
   },
   "keywords": [],

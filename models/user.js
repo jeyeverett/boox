@@ -20,7 +20,10 @@ const UserSchema = new Schema({
     unique: true,
   },
   profile: {
-    name: String,
+    name: {
+      type: String,
+      default: "New User",
+    },
     bio: String,
     images: [ImageSchema],
     inbox: [

@@ -65,6 +65,7 @@
                         <a class="btn p-0" title="delete" data-toggle="modal" data-target="#deleteModal">
                             <%- include('../partials/svg/delete-button') %>
                     </a>
+
                     <!-- Modal -->
                     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -133,7 +134,11 @@
                     <header class="d-flex justify-content-between align-items-center mb-2">
                         <span class="d-flex align-items-center">
                             <a href="/profile/<%= review.author._id %> ">
+                              <% if (review.author.profile && review.author.profile.images.length) { %>
                                 <img src="<%= review.author.profile.images.length ? review.author.profile.images[0].url : ''%> " alt="review author selfie" width="32" height="32" class="rounded-circle">
+                              <% } else { %>
+                                <%- include('../partials/svg/unknown-avatar-small') %>
+                              <% } %>
                             </a>
                             <h5 class="card-title quaternary-heading text-muted mb-0 ms-2"><%= review.author.profile.name %></h5>
                         </span>

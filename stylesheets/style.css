@@ -86,7 +86,11 @@ a.active {
     color: rgba(49, 54, 57, 0.8);
     font-weight: 600; }
   .card-body .card-text {
-    font-size: 0.875rem; }
+    font-size: 0.875rem;
+    color: white; }
+    @media only screen and (max-width: 62em) {
+      .card-body .card-text {
+        font-size: 1rem; } }
 
 #home-page {
   height: 100vh;
